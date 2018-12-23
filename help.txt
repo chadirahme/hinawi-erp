@@ -1,0 +1,7 @@
+npm run build:prod
+
+ng g c vendors-list
+
+git init
+git add README.md
+git remote add origin https://github.com/chadirahme/hinawi-erp.git

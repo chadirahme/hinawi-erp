@@ -10,7 +10,7 @@ export class ApiAuth {
 
     constructor(private http: HttpClient) { }
     baseUrl: string ='http://localhost:8091/api/';
-    baseUrl1: string = 'http://hinawi2.dyndns.org:8091/api/'
+    baseUrl1: string = 'http://hinawi2.dyndns.org:8091/api/';
 
     loginUser(user: User): Observable<ApiResponse> {
         return this.http.post<ApiResponse>(this.baseUrl+'loginUser', user);
@@ -26,5 +26,13 @@ export class ApiAuth {
 
   getVendorsList(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(this.baseUrl+'vendorsList');
+  }
+
+  getCustomersBalance(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'customersBalance');
+  }
+
+  getVendorsBalance(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'vendorsBalance');
   }
 }

@@ -8,6 +8,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
+    title: 'Chart Dashboard',
+    icon: 'nb-bar-chart',
+    link: '/pages/chartdashboard',
+    home: false,
+  },
+  {
+    title: 'School Dashboard',
+    icon: 'nb-e-commerce',
+    link: '/pages/schooldashboard',
+    home: false,
+  },
+  {
     title: 'Lists',
     icon: 'nb-list',
     children: [

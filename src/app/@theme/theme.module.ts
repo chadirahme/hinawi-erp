@@ -32,7 +32,7 @@ import {
   NbSpinnerModule,
   NbRadioModule,
   NbSelectModule,
-  NbTooltipModule,
+  NbTooltipModule, NbBadgeModule,
 } from '@nebular/theme';
 
 import { NbSecurityModule } from '@nebular/security';
@@ -64,6 +64,7 @@ import {
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
+import {NbFormComponent} from "./components/header/header.component";
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -98,6 +99,7 @@ const NB_MODULES = [
   NbRadioModule,
   NbSelectModule,
   NbTooltipModule,
+  NbBadgeModule
 ];
 
 const COMPONENTS = [
@@ -105,6 +107,7 @@ const COMPONENTS = [
   LayoutDirectionSwitcherComponent,
   ThemeSwitcherComponent,
   ThemeSwitcherListComponent,
+  NbFormComponent,
   HeaderComponent,
   FooterComponent,
   SearchInputComponent,
@@ -113,10 +116,12 @@ const COMPONENTS = [
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+
 ];
 
 const ENTRY_COMPONENTS = [
   ThemeSwitcherListComponent,
+  NbFormComponent,
 ];
 
 const PIPES = [

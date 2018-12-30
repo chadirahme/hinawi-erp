@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {ChartdashboardComponent} from "./chartdashboard/chartdashboard.component";
+import {SchooldashboardComponent} from "./schooldashboard/schooldashboard.component";
 
 const routes: Routes = [{
   path: '',
@@ -11,6 +13,14 @@ const routes: Routes = [{
     {
       path: 'dashboard',
       component: DashboardComponent,
+    },
+    {
+      path: 'chartdashboard',
+      component: ChartdashboardComponent,
+    },
+    {
+      path: 'schooldashboard',
+      component: SchooldashboardComponent,
     },
     {
       path: '',

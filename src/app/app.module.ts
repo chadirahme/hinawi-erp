@@ -15,6 +15,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ApiAuth} from "./@core/services/api.auth";
+import {ChartModule} from "angular2-chartjs";
+import {WsTopic} from "./@core/services/ws.topic";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,13 +25,14 @@ import {ApiAuth} from "./@core/services/api.auth";
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    ChartModule,
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [ApiAuth,
+  providers: [ApiAuth,WsTopic,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
 })

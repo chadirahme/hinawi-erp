@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LocalDataSource} from "ng2-smart-table";
 import {ApiAuth} from "../../../@core/services/api.auth";
+import {WsTopic} from "../../../@core/services/ws.topic";
 
 @Component({
   selector: 'ngx-customers-list',
@@ -59,7 +60,7 @@ export class CustomersListComponent implements OnInit {
       },
     },
   };
-  constructor(private apiAuth: ApiAuth) { }
+  constructor(private apiAuth: ApiAuth, private wsTopic: WsTopic) { }
 
   ngOnInit() {
     this.loadData();
@@ -99,6 +100,7 @@ export class CustomersListComponent implements OnInit {
     console.log(event.newData);
     event.confirm.resolve(event.newData);
     //alert('save');
+    this.wsTopic.sendMessage(event.newData.name);
   }
 
   onDeleteConfirm(event): void {

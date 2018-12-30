@@ -5,3 +5,14 @@ ng g c vendors-list
 git init
 git add README.md
 git remote add origin https://github.com/chadirahme/hinawi-erp.git
+
+
+Please follow these steps:
+1) Login to Control Panel
+2) Go to 'Advanced Tools'
+3) Click on  '.htaccess Editor'
+4) Click on 'Direct Editor'.
+5) Please add this code:
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*) https://hinawi.com/$1 [R,L]

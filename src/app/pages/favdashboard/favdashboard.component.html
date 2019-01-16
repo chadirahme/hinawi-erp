@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-6" *ngIf="isNatFav">
     <nb-card>
       <nb-card-header>Nationality
         <i class="ion-heart" *ngIf="isNatFav" (click)="addNatFav()" style="color:red"></i>
@@ -12,7 +12,7 @@
     </nb-card>
   </div>
 
-  <div class="col-lg-6">
+  <div class="col-lg-6" *ngIf="isReligionFav">
     <nb-card>
       <nb-card-header>Religion
         <i class="ion-heart" *ngIf="isReligionFav" (click)="addReligionFav()" style="color:red"></i>

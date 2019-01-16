@@ -24,6 +24,7 @@ import {EchartsPieComponent} from "./schooldashboard/echarts-pie.component";
 import {ReligionPieComponent} from "./schooldashboard/religion-pie.component";
 import {EchartsBarComponent} from "./schooldashboard/echarts-bar.component";
 import {NbBadgeModule} from "@nebular/theme";
+import { FavdashboardComponent } from './favdashboard/favdashboard.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -52,6 +53,7 @@ const PAGES_COMPONENTS = [
     ...PAGES_COMPONENTS,
     ChartdashboardComponent,
     SchooldashboardComponent,
+    FavdashboardComponent,
   ],
   providers: [OrdersChartService,OrdersProfitChartService,ProfitChartService,PeriodsService,
     LayoutService]

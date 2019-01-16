@@ -13,11 +13,14 @@ import { ProspectiveListComponent } from './prospective-list/prospective-list.co
 import {Ng2SmartTableModule} from "ng2-smart-table";
 import {ThemeModule} from "../../@theme/theme.module";
 import { VendorsListComponent } from './vendors-list/vendors-list.component';
+import { StudetnsListComponent } from './studetns-list/studetns-list.component';
 
 const COMPONENTS = [
     ListsComponent,
     CustomersListComponent,
-  ProspectiveListComponent,
+    ProspectiveListComponent,
+    VendorsListComponent,
+    StudetnsListComponent
 ];
 
 // const SERVICES = [
@@ -38,7 +41,6 @@ const MODULES = [
     ],
     declarations: [
         ...COMPONENTS,
-        VendorsListComponent,
     ],
     providers: [
         //...SERVICES,

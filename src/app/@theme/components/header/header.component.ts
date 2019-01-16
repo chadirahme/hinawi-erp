@@ -1,22 +1,32 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import {NbMenuService, NbSidebarService, NbSearchService, NbWindowService, NbWindowRef} from '@nebular/theme';
+import {
+  NbMenuService, NbSidebarService, NbSearchService, NbWindowService, NbWindowRef,
+  NbDialogService, NbDialogRef
+} from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 // import {Stomp} from "@stomp/stompjs";
 // import * as SockJS from 'sockjs-client';
 import {WsTopic} from "../../../@core/services/ws.topic";
+import {ApiAuth} from "../../../@core/services/api.auth";
 
+//https://www.trycatchclasses.com/how-to-make-facebook-like-notification-popup-tutorial/
 @Component({
   //templateUrl: '././chartdashboard.component.html',
   template: `
-    <form class="form">
-      <label for="subject">Subject:</label>
-      <input nbInput id="subject" type="text">
+    <!--<form class="form">-->
+      <!--<label for="subject">Subject:</label>-->
+      <!--<input nbInput id="subject" type="text">-->
 
-      <label class="text-label" for="text">Text:</label>
-      <textarea nbInput id="text"></textarea>
-    </form>
+      <!--<label class="text-label" for="text">Text:</label>-->
+      <!--<textarea nbInput id="text"></textarea>-->
+    <!--</form>-->
+    <div id="notificationContainer">
+<div id="notificationTitle">Notifications</div>
+<div id="notificationsBody" class="notifications"></div>
+<div id="notificationFooter"><a href="#">See All</a></div>
+</div>
   `,
 })
 export class NbFormComponent {
@@ -24,6 +34,39 @@ export class NbFormComponent {
 
   close() {
     this.windowRef.close();
+  }
+}
+
+@Component({
+  selector: 'nb-dialog',
+  template: `
+    <nb-card [style.width.px]="600" [style.height.px]="500">
+      <nb-card-header>{{ title }}</nb-card-header>
+      <nb-card-body>
+         <nb-list>
+        <nb-list-item *ngFor="let message of messages">
+          {{ message.userName }} :  {{ message.message }}
+        </nb-list-item>
+      </nb-list>
+      </nb-card-body>
+      <nb-card-footer>
+        <button nbButton hero status="primary" (click)="dismiss()">Close</button>
+      </nb-card-footer>
+    </nb-card>
+  `,
+})
+export class NbShowcaseDialogComponent {
+  @Input() title: string;
+  messages: any[];
+
+  constructor(protected ref: NbDialogRef<NbShowcaseDialogComponent> , private apiAuth: ApiAuth) {
+    this.apiAuth.getmessagesList().subscribe(data => {
+      this.messages=data.result;
+    });
+  }
+
+  dismiss() {
+    this.ref.close();
   }
 }
 
@@ -39,6 +82,7 @@ export class HeaderComponent implements OnInit {
 
   user: any;
   battleInit: number;
+  customers: any[];
 
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
@@ -46,7 +90,8 @@ export class HeaderComponent implements OnInit {
               private menuService: NbMenuService,
               private userService: UserService,private windowService: NbWindowService,
               private analyticsService: AnalyticsService,private search: NbSearchService,
-              private wsTopic: WsTopic) {
+              private dialogService: NbDialogService,
+              private wsTopic: WsTopic, private apiAuth: ApiAuth) {
 
     search.onSearchSubmit().subscribe(data => this.sendName(data.term));
   }
@@ -64,11 +109,15 @@ export class HeaderComponent implements OnInit {
     // this.userService.getUsers()
      // .subscribe((users: any) => this.user = users.nick);
 
+    //get message count
+    this.apiAuth.getmessagesList().subscribe(data => {
+      this.battleInit=data.result.length;
+    });
 
-
-    this.wsTopic.change.subscribe(isOpen => {
+    this.wsTopic.change.subscribe(count => {
+      this.battleInit = count;
       //this.isOpen = isOpen;
-      this.user.name=isOpen;
+      //this.user.name=isOpen;
     });
   }
 
@@ -97,10 +146,34 @@ export class HeaderComponent implements OnInit {
     this.battleInit++;
   }
 
-  openWindow() {
+  //(click)="openWindow()"
+  openWindow1() {
     this.windowService.open(NbFormComponent, { title: `Window` });
   }
 
+  openWindow() {
+    //this.loadData();
+    this.dialogService.open(NbShowcaseDialogComponent, {
+      context: {
+        title: 'Messages List',
+        //customers: this.customers,
+      },
+    });
+  }
+
+  loadData(): void {
+    try
+    {
+      // console.log("grade>> "+ this.apiParam.grade);
+      this.apiAuth.getCustomersList().subscribe(data => {
+        this.customers=data.result;
+      });
+
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
   // greetings: string[] = [];
   // disabled = true;
   // name: string;

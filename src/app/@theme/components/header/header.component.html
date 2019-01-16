@@ -21,19 +21,19 @@
     <nb-action class="control-item" disabled icon="nb-notifications"></nb-action>
 
     <nb-action class="control-item" icon="nb-email" badgeText="{{battleInit}}" badgeStatus="warning" (click)="openWindow()">
-      <nb-badge text="99+" status="danger" position="top left"></nb-badge>
     </nb-action>
 
 
     <nb-action class="control-item">
-      <nb-search type="rotate-layout" (click)="startSearch()"></nb-search>
+      <nb-search  type="rotate-layout" (click)="startSearch()"
+                 ngx-tooltip="Send message" hint="Send Message" placeholder="Send a message.."></nb-search>
     </nb-action>
 
-    <nb-action class="control-item" icon="nb-notifications" (click)="connect()">
-    </nb-action>
+    <!--<nb-action class="control-item" icon="nb-compose" (click)="startSearch()">-->
+    <!--</nb-action>-->
 
-    <nb-action class="control-item" icon="nb-notifications" (click)="sendName()">
-    </nb-action>
+    <!--<nb-action class="control-item" icon="nb-notifications" (click)="sendName()">-->
+    <!--</nb-action>-->
 
   </nb-actions>
 </div>

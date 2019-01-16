@@ -160,7 +160,7 @@
     }
 
     .control-item {
-      display: none;
+      display: flex;
     }
 
     .toggle-layout {
@@ -208,5 +208,9 @@
     .right /deep/ {
       display: none;
     }
+  }
+
+    .input.search-input {
+    font-size: 4vw;
   }
 }

@@ -54,17 +54,18 @@
 
 <nb-card class="list-card" size="small">
   <nb-tabset fullWidth>
-    <nb-tab tabTitle="Contacts">
+    <nb-tab tabTitle="Customers">
       <div class="contact" *ngFor="let c of customers">
         <nb-user  [name]="c.name" [title]="c.balance" size="large"></nb-user>
-        <a href="tel:22222222"> <i class="i-contact nb-phone" (click)="goToHome(c)"></i></a>
+        <!--<a href="tel:22222222"> <i class="i-contact nb-phone" (click)="goToHome(c)"></i></a>-->
       </div>
     </nb-tab>
-    <nb-tab tabTitle="Recent">
-      <div class="contact" *ngFor="let c of customers">
+    <nb-tab tabTitle="Vendors">
+      <div class="contact" *ngFor="let c of vendors">
         <nb-user [name]="c.name" [title]="c.balance" size="large"></nb-user>
         <span class="time">{{ c.balance }}</span>
       </div>
     </nb-tab>
   </nb-tabset>
+
 </nb-card>

@@ -2,10 +2,16 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Dashboard',
+    title: 'My Dashboard',
+    icon: 'ion-heart',
+    link: '/pages/favdashboard',
+    home: true,
+  },
+  {
+    title: 'Balances Dashboard',
     icon: 'nb-home',
     link: '/pages/dashboard',
-    home: true,
+    home: false,
   },
   {
     title: 'Chart Dashboard',
@@ -35,33 +41,38 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Vendors List',
         link: '/pages/lists/vendors-list',
       },
+      {
+        title: 'Students List',
+        link: '/pages/lists/students-list',
+      },
     ]
   },
 
-  {
-    title: 'FEATURES',
-    group: true,
-  },
-  {
-    title: 'Auth',
-    icon: 'nb-locked',
-    children: [
-      {
-        title: 'Login',
-        link: '/auth/login',
-      },
-      {
-        title: 'Register',
-        link: '/auth/register',
-      },
-      {
-        title: 'Request Password',
-        link: '/auth/request-password',
-      },
-      {
-        title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
-    ],
-  },
+  // {
+  //   title: 'FEATURES',
+  //   group: true,
+  // },
+  // {
+  //   title: 'Auth',
+  //   icon: 'nb-locked',
+  //   children: [
+  //     {
+  //       title: 'Login',
+  //       link: '/auth/login',
+  //     },
+  //     {
+  //       title: 'Register',
+  //       link: '/auth/register',
+  //     },
+  //     {
+  //       title: 'Request Password',
+  //       link: '/auth/request-password',
+  //     },
+  //     {
+  //       title: 'Reset Password',
+  //       link: '/auth/reset-password',
+  //     },
+  //   ],
+  // },
+
 ];

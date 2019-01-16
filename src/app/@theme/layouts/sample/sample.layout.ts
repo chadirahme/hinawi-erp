@@ -26,7 +26,7 @@ import { StateService } from '../../../@core/data/state.service';
                    responsive
                    [end]="sidebar.id === 'end'">
         <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
-          <a href="#" class="btn btn-hero-success main-btn">
+          <a href="#/pages/favdashboard" class="btn btn-hero-success main-btn">
             <i class="ion ion-social-github"></i> <span>Hinawi ERP</span>
           </a>
         </nb-sidebar-header>

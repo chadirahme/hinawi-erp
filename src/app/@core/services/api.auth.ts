@@ -3,14 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import {Observable} from "rxjs/index";
 import {ApiResponse} from "../domains/api.response";
 import {User} from "../domains/user.model";
+import {WebDashboard} from "../domains/webdashboard.model";
 
 
 @Injectable()
 export class ApiAuth {
 
-    constructor(private http: HttpClient) { }
-    baseUrl: string ='http://localhost:8091/api/';
-    baseUrl1: string = 'http://hinawi2.dyndns.org:8091/api/';
+    constructor(private http: HttpClient) {
+      //this.baseUrl = baseUrl;
+    }
+      baseUrl: string ='http://localhost:8091/api/';
+    //baseUrl: string = 'http://hinawi2.dyndns.org:8091/api/';
+    //baseUrl: string;
 
     loginUser(user: User): Observable<ApiResponse> {
         return this.http.post<ApiResponse>(this.baseUrl+'loginUser', user);
@@ -34,5 +38,26 @@ export class ApiAuth {
 
   getVendorsBalance(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(this.baseUrl+'vendorsBalance');
+  }
+
+  getmessagesList(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'messagesList');
+  }
+
+  getstudentsList(): Observable<ApiResponse>{
+      return this.http.get<ApiResponse>(this.baseUrl+'studentsList');
+  }
+
+
+  getUserDashboards(userId): Observable<ApiResponse>{
+    return this.http.get<ApiResponse>(this.baseUrl+'getUserDashboards?userId='+userId);
+  }
+
+  addWebDashboard(webDashboard: WebDashboard): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.baseUrl+'addWebDashBoard',webDashboard);
+  }
+
+  deleteWebDashBoard(webDashboard: WebDashboard): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.baseUrl+'deleteWebDashBoard',webDashboard);
   }
 }

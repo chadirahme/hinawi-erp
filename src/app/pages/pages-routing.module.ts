@@ -5,11 +5,17 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {ChartdashboardComponent} from "./chartdashboard/chartdashboard.component";
 import {SchooldashboardComponent} from "./schooldashboard/schooldashboard.component";
+import {FavdashboardComponent} from "./favdashboard/favdashboard.component";
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    {
+      path: 'favdashboard',
+      component:FavdashboardComponent,
+    },
+
     {
       path: 'dashboard',
       component: DashboardComponent,

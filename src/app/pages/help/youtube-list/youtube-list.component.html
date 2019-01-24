@@ -1,0 +1,14 @@
+<div cdkDropList class="row" (cdkDropListDropped)="drop($event)" >
+
+  <div class="col-lg-12" [cdkDragData]="item" cdkDrag *ngFor="let item of videos" (cdkDragEnded)="dragEnded($event)">
+    <nb-card>
+
+      <nb-card-header>{{item.dashName}}
+      </nb-card-header>
+
+      <nb-card-body>
+        <iframe [src]="item.safeURL" frameborder="0" allowfullscreen width="100%" height="315"></iframe>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

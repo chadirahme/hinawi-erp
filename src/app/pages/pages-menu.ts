@@ -48,6 +48,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
 
+  {
+    title: 'Help & Support',
+    icon: 'nb-audio',
+    children: [
+      {
+        title: 'YouTube',
+        link: '/pages/help/youtube-list',
+      },
+    ]
+  },
+
   // {
   //   title: 'FEATURES',
   //   group: true,

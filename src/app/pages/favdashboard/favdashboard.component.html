@@ -1,37 +1,87 @@
-<div class="row">
-  <div class="col-lg-6" *ngIf="isNatFav">
-    <nb-card>
-      <nb-card-header>Nationality
-        <i class="ion-heart" *ngIf="isNatFav" (click)="addNatFav()" style="color:red"></i>
-        <i class="ion-heart" *ngIf="!isNatFav" (click)="addNatFav()" style="color:black"></i>
+ <div cdkDropList class="row" (cdkDropListDropped)="drop($event)" >
+
+   <div class="col-lg-6" [cdkDragData]="item" cdkDrag *ngFor="let item of items" (cdkDragEnded)="dragEnded($event)">
+      <nb-card>
+        <nb-card-header *ngIf="item=='nat'">Nationality
+          <i class="ion-heart" *ngIf="isNatFav" (click)="addNatFav()" style="color:red"></i>
+          <i class="ion-heart" *ngIf="!isNatFav" (click)="addNatFav()" style="color:black"></i>
+        </nb-card-header>
+
+        <nb-card-header *ngIf="item=='religion'">Religion
+          <i class="ion-heart" *ngIf="isReligionFav" (click)="addReligionFav()" style="color:red"></i>
+          <i class="ion-heart" *ngIf="!isReligionFav" (click)="addReligionFav()" style="color:black"></i>
+        </nb-card-header>
+
+        <nb-card-header *ngIf="item=='profit'">Profit
+        <i class="ion-heart" *ngIf="isProfitFav" (click)="addProfitFav()" style="color:red"></i>
+        <i class="ion-heart" *ngIf="!isProfitFav" (click)="addProfitFav()" style="color:black"></i>
       </nb-card-header>
-      <nb-card-body>
-        <ngx-echarts-pie></ngx-echarts-pie>
 
-      </nb-card-body>
-    </nb-card>
+        <nb-card-header *ngIf="item=='fixedassets'">Fixed Assets
+          <i class="ion-heart" *ngIf="isFixedAssetFav" (click)="addFixedAssetFav()" style="color:red"></i>
+          <i class="ion-heart" *ngIf="!isFixedAssetFav" (click)="addFixedAssetFav()" style="color:black"></i>
+        </nb-card-header>
+
+
+        <nb-card-body *ngIf="item=='nat'">
+          <ngx-echarts-pie></ngx-echarts-pie>
+        </nb-card-body>
+        <nb-card-body *ngIf="item=='religion'">
+          <ngx-religion-pie></ngx-religion-pie>
+        </nb-card-body>
+        <nb-card-body *ngIf="item=='profit'">
+          <ngx-profit-bar></ngx-profit-bar>
+        </nb-card-body>
+        <nb-card-body *ngIf="item=='fixedassets'">
+          <ngx-fixedasset-bar></ngx-fixedasset-bar>
+        </nb-card-body>
+      </nb-card>
+    </div>
   </div>
 
-  <div class="col-lg-6" *ngIf="isReligionFav">
-    <nb-card>
-      <nb-card-header>Religion
-        <i class="ion-heart" *ngIf="isReligionFav" (click)="addReligionFav()" style="color:red"></i>
-        <i class="ion-heart" *ngIf="!isReligionFav" (click)="addReligionFav()" style="color:black"></i>
-      </nb-card-header>
-      <nb-card-body>
-        <ngx-religion-pie></ngx-religion-pie>
-      </nb-card-body>
-    </nb-card>
-  </div>
+
+<!--<div  class="row" (cdkDropListDropped)="drop($event)">-->
+    <!--<div class="col-lg-6" *ngIf="isNatFav" cdkDrag>-->
+      <!--<nb-card>-->
+        <!--<nb-card-header>Nationality-->
+          <!--<i class="ion-heart" *ngIf="isNatFav" (click)="addNatFav()" style="color:red"></i>-->
+          <!--<i class="ion-heart" *ngIf="!isNatFav" (click)="addNatFav()" style="color:black"></i>-->
+        <!--</nb-card-header>-->
+        <!--<nb-card-body>-->
+          <!--<ngx-echarts-pie></ngx-echarts-pie>-->
+
+        <!--</nb-card-body>-->
+      <!--</nb-card>-->
+    <!--</div>-->
+
+    <!--<div class="col-lg-6" *ngIf="isReligionFav" cdkDrag>-->
+      <!--<nb-card>-->
+        <!--<nb-card-header>Religion-->
+          <!--<i class="ion-heart" *ngIf="isReligionFav" (click)="addReligionFav()" style="color:red"></i>-->
+          <!--<i class="ion-heart" *ngIf="!isReligionFav" (click)="addReligionFav()" style="color:black"></i>-->
+        <!--</nb-card-header>-->
+        <!--<nb-card-body>-->
+          <!--<ngx-religion-pie></ngx-religion-pie>-->
+        <!--</nb-card-body>-->
+      <!--</nb-card>-->
+    <!--</div>-->
+  <!---->
+  <!--</div>-->
 
 
-  <div class="col-lg-12">
-    <nb-card>
-      <nb-card-header>Grades</nb-card-header>
-      <nb-card-body>
-        <ngx-echarts-bar></ngx-echarts-bar>
-      </nb-card-body>
-    </nb-card>
-  </div>
+<!--<div class="row" cdkDrag>-->
 
-</div>
+<!--</div>-->
+
+  <!--<div class="row">-->
+
+  <!--<div class="col-lg-12">-->
+    <!--<nb-card>-->
+      <!--<nb-card-header>Grades</nb-card-header>-->
+      <!--<nb-card-body>-->
+        <!--<ngx-echarts-bar></ngx-echarts-bar>-->
+      <!--</nb-card-body>-->
+    <!--</nb-card>-->
+  <!--</div>-->
+
+<!--</div>-->

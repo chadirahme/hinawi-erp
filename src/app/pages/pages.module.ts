@@ -25,6 +25,9 @@ import {ReligionPieComponent} from "./schooldashboard/religion-pie.component";
 import {EchartsBarComponent} from "./schooldashboard/echarts-bar.component";
 import {NbBadgeModule} from "@nebular/theme";
 import { FavdashboardComponent } from './favdashboard/favdashboard.component';
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import {ProfitBarComponent} from "./chartdashboard/profit-bar.component";
+import {FixedAssetBarComponent} from "./chartdashboard/fixedasset-bar.component";
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -36,6 +39,8 @@ const PAGES_COMPONENTS = [
   EchartsPieComponent,
   ReligionPieComponent,
   EchartsBarComponent,
+  ProfitBarComponent,
+  FixedAssetBarComponent
 ];
 
 @NgModule({
@@ -47,7 +52,8 @@ const PAGES_COMPONENTS = [
     ChartModule,
     NgxEchartsModule,
     NgxChartsModule,
-    NbBadgeModule
+    NbBadgeModule,
+    DragDropModule
   ],
   declarations: [
     ...PAGES_COMPONENTS,

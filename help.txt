@@ -1,10 +1,16 @@
 npm run build:prod
 
+make pakage and run
+C:\tomcat\erp>java -jar -Dspring.profiles.active=test demo-0.0.1-SNAPSHOT.jar
+
 ng g c vendors-list
 
 git init
 git add README.md
 git remote add origin https://github.com/chadirahme/hinawi-erp.git
+
+
+ssh -i dockerkey.pem ec2-user@ec2-18-221-165-162.us-east-2.compute.amazonaws.com
 
 
 Please follow these steps:
@@ -16,3 +22,55 @@ Please follow these steps:
 RewriteEngine On
 RewriteCond %{HTTPS} !=on
 RewriteRule ^(.*) https://hinawi.com/$1 [R,L]
+
+
+https://medium.com/@rijoalvi/setting-up-an-amazon-ec2-aws-server-with-tomcat7-running-on-ports-80-443-mysql-oracle-jdk-1-68bcc42bdb94
+
+iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
+
+from mansour:
+check table
+netstat -ntl
+
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+for https
+$ sudo /sbin/iptables -t nat -I PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8443
+
+
+iptables -t nat -L
+
+to remove
+iptables -t nat -D PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+Elastic IP: 18.219.66.62
+
+A record was :18.221.165.162 i return back to 66.96.162.136(domain.com)
+
+sh startup.sh
+
+<Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
+
+          <Host name="beorganized.ca"  appBase="anas"
+	            unpackWARs="true" autoDeploy="true" xmlValidation="false" xmlNamespaceAware="false">
+	            <Alias>www.beorganized.ca</Alias>
+	           	      </Host>
+
+(1) Another program may be editing the same file.  If this is the case,
+    be careful not to end up with two different instances of the same
+    file when making changes.  Quit, or continue with caution.
+(2) An edit session for this file crashed.
+    If this is the case, use ":recover" or "vim -r server.xml"
+    to recover the changes (see ":help recovery").
+    If you did this already, delete the swap file ".server.xml.swp"
+    to avoid this message.
+"server.xml" [New File]
+
+Using swap file ".server.xml.swp"
+"/home/ec2-user/server.xml" [New File]
+Recovery completed. Buffer contents equals file contents.
+You may want to delete the .swp file now.
+
+
+
+CCIBC..chadi.rahme....canada@2019

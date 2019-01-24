@@ -12,8 +12,8 @@ export class ApiAuth {
     constructor(private http: HttpClient) {
       //this.baseUrl = baseUrl;
     }
-      baseUrl: string ='http://localhost:8091/api/';
-    //baseUrl: string = 'http://hinawi2.dyndns.org:8091/api/';
+     // baseUrl: string ='http://localhost:8091/api/';
+      baseUrl: string = 'http://hinawi2.dyndns.org:8091/api/';
     //baseUrl: string;
 
     loginUser(user: User): Observable<ApiResponse> {

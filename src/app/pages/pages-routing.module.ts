@@ -30,12 +30,16 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'favdashboard',
       pathMatch: 'full',
     },
     {
       path: 'lists',
       loadChildren: './lists/lists.module#ListsModule',
+    },
+    {
+      path: 'help',
+      loadChildren: './help/help.module#HelpModule',
     },
   ],
 }];

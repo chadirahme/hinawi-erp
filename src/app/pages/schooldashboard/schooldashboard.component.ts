@@ -55,6 +55,7 @@ export class SchooldashboardComponent implements OnInit {
       this.webDashboard =new WebDashboard();
       this.webDashboard.userId=1;
       this.webDashboard.dashName=dashname;
+      this.webDashboard.dashOrder=0;
 
       if(!isDelete) {
         this.apiAuth.addWebDashboard(this.webDashboard).subscribe(data => {

@@ -17,9 +17,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ApiAuth} from "./@core/services/api.auth";
 import {ChartModule} from "angular2-chartjs";
 import {WsTopic} from "./@core/services/ws.topic";
+import {AuthGuard} from "./auth-guard.service";
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -32,7 +34,7 @@ import {WsTopic} from "./@core/services/ws.topic";
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [ApiAuth,WsTopic,
+  providers: [ApiAuth,WsTopic,AuthGuard,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
 })

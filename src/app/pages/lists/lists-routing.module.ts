@@ -5,6 +5,7 @@ import {ListsComponent} from "./lists.component";
 import {ProspectiveListComponent} from "./prospective-list/prospective-list.component";
 import {VendorsListComponent} from "./vendors-list/vendors-list.component";
 import {StudetnsListComponent} from "./studetns-list/studetns-list.component";
+import {MobileAttendanceComponent} from "./mobile-attendance/mobile-attendance.component";
 
 const routes: Routes = [{
     path: '',
@@ -26,6 +27,11 @@ const routes: Routes = [{
         path: 'students-list',
         component: StudetnsListComponent,
       },
+      {
+        path: 'mobile-attendance',
+        component: MobileAttendanceComponent,
+      },
+      //Mobile Attendance
     ],
 }];
 

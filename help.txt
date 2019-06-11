@@ -74,3 +74,8 @@ You may want to delete the .swp file now.
 
 
 CCIBC..chadi.rahme....canada@2019
+
+
+npm install --save ng2-smart-table
+npm i rxjs-compat --save
+npm i ng2-completer --save

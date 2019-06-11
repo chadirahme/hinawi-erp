@@ -4,3 +4,10 @@ export class User {
     lastName: string;
     editMode: boolean;
 }
+
+export class UserModel {
+  userid:any;
+  email: string;
+  username:string;
+  password: string;
+}

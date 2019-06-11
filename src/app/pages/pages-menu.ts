@@ -45,6 +45,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Students List',
         link: '/pages/lists/students-list',
       },
+      {
+        title: 'Mobile Attendance',
+        link: '/pages/lists/mobile-attendance',
+      },
     ]
   },
 

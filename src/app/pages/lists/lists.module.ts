@@ -14,6 +14,7 @@ import {Ng2SmartTableModule} from "ng2-smart-table";
 import {ThemeModule} from "../../@theme/theme.module";
 import { VendorsListComponent } from './vendors-list/vendors-list.component';
 import { StudetnsListComponent } from './studetns-list/studetns-list.component';
+import { MobileAttendanceComponent } from './mobile-attendance/mobile-attendance.component';
 
 const COMPONENTS = [
     ListsComponent,
@@ -41,6 +42,7 @@ const MODULES = [
     ],
     declarations: [
         ...COMPONENTS,
+        MobileAttendanceComponent,
     ],
     providers: [
         //...SERVICES,

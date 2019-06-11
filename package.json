@@ -52,6 +52,7 @@
     "@ng-bootstrap/ng-bootstrap": "^4.0.0",
     "@stomp/stompjs": "^5.1.0",
     "@swimlane/ngx-charts": "^10.0.0",
+    "@types/googlemaps": "^3.36.2",
     "angular2-chartjs": "^0.5.1",
     "bootstrap": "4.0.0",
     "classlist.js": "1.1.20150312",

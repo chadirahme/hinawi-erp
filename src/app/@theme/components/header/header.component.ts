@@ -10,23 +10,28 @@ import { AnalyticsService } from '../../../@core/utils/analytics.service';
 // import * as SockJS from 'sockjs-client';
 import {WsTopic} from "../../../@core/services/ws.topic";
 import {ApiAuth} from "../../../@core/services/api.auth";
+import {Router} from "@angular/router";
+import {AddAttendanceComponent} from "../add-attendance/add-attendance.component";
 
 //https://www.trycatchclasses.com/how-to-make-facebook-like-notification-popup-tutorial/
 @Component({
   //templateUrl: '././chartdashboard.component.html',
   template: `
-    <!--<form class="form">-->
-      <!--<label for="subject">Subject:</label>-->
-      <!--<input nbInput id="subject" type="text">-->
+    <form class="form">
+      <label for="subject">Subject:</label>
+      <input nbInput id="subject" type="text">
 
-      <!--<label class="text-label" for="text">Text:</label>-->
-      <!--<textarea nbInput id="text"></textarea>-->
-    <!--</form>-->
-    <div id="notificationContainer">
-<div id="notificationTitle">Notifications</div>
-<div id="notificationsBody" class="notifications"></div>
-<div id="notificationFooter"><a href="#">See All</a></div>
-</div>
+      <label class="text-label" for="text">Text:</label>
+      <textarea nbInput id="text"></textarea>
+    </form>
+    
+    
+    <!--<div id="notificationContainer">-->
+<!--<div id="notificationTitle">Notifications</div>-->
+<!--<div id="notificationsBody" class="notifications">111111111111</div>-->
+<!--<div id="notificationFooter"><a href="/pages/lists/mobile-attendance">See All</a>222222222</div>-->
+<!--</div>-->
+
   `,
 })
 export class NbFormComponent {
@@ -81,17 +86,18 @@ export class HeaderComponent implements OnInit {
   @Input() position = 'normal';
 
   user: any;
+  userName:string;
   battleInit: number;
   customers: any[];
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [{ title: 'Attendance' }, { title: 'Log out' }];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private userService: UserService,private windowService: NbWindowService,
               private analyticsService: AnalyticsService,private search: NbSearchService,
               private dialogService: NbDialogService,
-              private wsTopic: WsTopic, private apiAuth: ApiAuth) {
+              private wsTopic: WsTopic, private apiAuth: ApiAuth,private router: Router) {
 
     search.onSearchSubmit().subscribe(data => this.sendName(data.term));
   }
@@ -119,6 +125,11 @@ export class HeaderComponent implements OnInit {
       //this.isOpen = isOpen;
       //this.user.name=isOpen;
     });
+
+    this.user.name =localStorage.getItem('username');
+    this.menuService.onItemClick().subscribe(( event ) => {
+      this.onItemSelection(event.item.title);
+    })
   }
 
   toggleSidebar(): boolean {
@@ -148,7 +159,17 @@ export class HeaderComponent implements OnInit {
 
   //(click)="openWindow()"
   openWindow1() {
-    this.windowService.open(NbFormComponent, { title: `Window` });
+   // this.windowService.open(NbFormComponent, { title: `Attendance` });
+    //this.windowService.open(AddAttendanceComponent, { title: `Attendance` });
+    this.dialogService.open(AddAttendanceComponent, {
+      context: {
+        title: 'Add Attendance: ',
+      },
+    }).onClose.subscribe (name => name && this.attDone(name));
+  }
+
+  attDone(name){
+    alert('done '+ name);
   }
 
   openWindow() {
@@ -174,6 +195,21 @@ export class HeaderComponent implements OnInit {
       console.log(e);
     }
   }
+
+  onItemSelection( title ) {
+    if ( title === 'Log out' ) {
+      // Do something on Log out
+      console.log('Log out Clicked ');
+      localStorage.removeItem('token');
+      this.router.navigate(['auth/login']);
+
+    } else if ( title === 'Attendance' ) {
+      // Do something on Profile
+      //console.log('Profile Clicked ')
+      this.openWindow1();
+    }
+  }
+
   // greetings: string[] = [];
   // disabled = true;
   // name: string;

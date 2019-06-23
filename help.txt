@@ -1,6 +1,10 @@
 npm run build:prod
+ng build --prod
+/Users/chadirahme/IdeaProjects/hinawi-erp/dist/
 
 make pakage and run
+/Users/chadirahme/IdeaProjects/hinawi-api/target/
+/tomcat/webapps/erp
 C:\tomcat\erp>java -jar -Dspring.profiles.active=test demo-0.0.1-SNAPSHOT.jar
 
 ng g c vendors-list

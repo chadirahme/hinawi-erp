@@ -1,0 +1,8 @@
+<nb-card status="success">
+<nb-card-header>Approve Purchase Orders</nb-card-header>
+<nb-card-body>
+  <ng2-smart-table [settings]="settings" [source]="source"
+                   (edit)="editRow($event)"   >
+  </ng2-smart-table>
+</nb-card-body>
+</nb-card>

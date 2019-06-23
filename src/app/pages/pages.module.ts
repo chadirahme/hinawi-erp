@@ -28,6 +28,7 @@ import { FavdashboardComponent } from './favdashboard/favdashboard.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {ProfitBarComponent} from "./chartdashboard/profit-bar.component";
 import {FixedAssetBarComponent} from "./chartdashboard/fixedasset-bar.component";
+import { CucComponent } from './accounting/cuc/cuc.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -60,6 +61,7 @@ const PAGES_COMPONENTS = [
     ChartdashboardComponent,
     SchooldashboardComponent,
     FavdashboardComponent,
+    //CucComponent,
   ],
   providers: [OrdersChartService,OrdersProfitChartService,ProfitChartService,PeriodsService,
     LayoutService]

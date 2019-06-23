@@ -1,0 +1,38 @@
+<nb-card status="success">
+  <nb-card-header> Petty Cash List</nb-card-header>
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source"
+                     (edit)="editRow($event)"   >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<!--<nb-flip-card>-->
+  <!--<nb-card-front>-->
+
+    <!--<nb-card status="danger">-->
+      <!--<nb-card-header>Petty Cash Chart</nb-card-header>-->
+      <!--<nb-card-body>-->
+        <!--<pettycash-echarts-bar></pettycash-echarts-bar>-->
+      <!--</nb-card-body>-->
+      <!--<nb-card-footer> Flip to show Data</nb-card-footer>-->
+    <!--</nb-card>-->
+
+  <!--</nb-card-front>-->
+
+
+  <!--<nb-card-back>-->
+
+    <!--<nb-card status="success">-->
+      <!--<nb-card-header> Petty Cash List</nb-card-header>-->
+      <!--<nb-card-body>-->
+        <!--<ng2-smart-table [settings]="settings" [source]="source"-->
+                         <!--(edit)="editRow($event)"   >-->
+        <!--</ng2-smart-table>-->
+      <!--</nb-card-body>-->
+      <!--<nb-card-footer> Flip to show Chart</nb-card-footer>-->
+    <!--</nb-card>-->
+
+  <!--</nb-card-back>-->
+
+<!--</nb-flip-card>-->

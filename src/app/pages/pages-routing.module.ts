@@ -38,6 +38,10 @@ const routes: Routes = [{
       loadChildren: './lists/lists.module#ListsModule',
     },
     {
+      path: 'accounting',
+      loadChildren: './accounting/accounting.module#AccountingModule',
+    },
+    {
       path: 'help',
       loadChildren: './help/help.module#HelpModule',
     },

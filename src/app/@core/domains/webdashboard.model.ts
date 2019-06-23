@@ -16,5 +16,8 @@ export class MobileAttendance {
   checkinNote: string;
   checkinLatitude: number;
   checkinLongitude: number;
+}
 
+export class ChequeModel {
+  id: number;
 }

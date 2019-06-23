@@ -1,0 +1,159 @@
+<nb-card accent="primary" status="info" size="large">
+  <nb-card-header>{{title}}</nb-card-header>
+  <nb-card-body>
+
+
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="txtRvNO">RV No.</label>
+          <input type="text" [(ngModel)]="payment.rvno" class="form-control" id="txtRvNO" placeholder="RV No."
+                 value="{{payment.rvno}}" [disabled]="disabled">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="txtRvDate">RV Date</label>
+          <input type="text" [(ngModel)]="payment.rvdate" class="form-control" id="txtRvDate" placeholder="RV Date"
+                 value="{{payment.rvdate}}" [disabled]="disabled">
+        </div>
+      </div>
+
+
+
+      <!--<div class="col-sm-6">-->
+        <!--<div class="form-group">-->
+          <!--<label for="inputStatus">RV Date , Payee Name , A.R.Account , Pmt. Method, Bank, Cheque No, Cheue date, Deposit to, amount, post to QB by, Status</label>-->
+          <!--<select class="form-control" id="inputStatus" [(ngModel)]="payment.paidby">-->
+            <!--<option >Visa Card</option>-->
+            <!--<option >Master Card</option>-->
+            <!--<option >Cash</option>-->
+            <!--<option >Cheque</option>-->
+          <!--</select>-->
+        <!--</div>-->
+      <!--</div>-->
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="txtCustomerName">Payee Name</label>
+          <input type="text" [(ngModel)]="payment.customerName" class="form-control" id="txtCustomerName" placeholder="Payee Name"
+                 value="{{payment.customerName}}" [disabled]="disabled">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="txtARAccount">A.R.Account</label>
+          <input type="text" [(ngModel)]="payment.accountName" class="form-control" id="txtARAccount" placeholder="A.R.Account"
+                 value="{{payment.accountName}}" [disabled]="disabled">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="txtPaymentMethod">Payment Method</label>
+          <input type="text" [(ngModel)]="payment.paymentmethod" class="form-control" id="txtPaymentMethod" placeholder="Payment Method"
+                 value="{{payment.paymentmethod}}" [disabled]="disabled">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="txtBank">Bank</label>
+          <input type="text" [(ngModel)]="payment.bankName" class="form-control" id="txtBank" placeholder="Bank"
+                 value="{{payment.bankName}}" [disabled]="disabled">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="txtChequeNo">Cheque No</label>
+          <input type="text" [(ngModel)]="payment.chequeNo" class="form-control" id="txtChequeNo" placeholder="Cheque No"
+                 value="{{payment.chequeNo}}" [disabled]="disabled">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="txtChequeDate">Cheque Date</label>
+          <input type="text" [(ngModel)]="payment.chequeDate" class="form-control" id="txtChequeDate" placeholder="Cheque Date"
+                 value="{{payment.chequeDate}}" [disabled]="disabled">
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="txtDepositTo">Deposit To</label>
+          <input type="text" [(ngModel)]="payment.depositToAccountName" class="form-control" id="txtDepositTo" placeholder="Deposit To"
+                 value="{{payment.depositToAccountName}}" [disabled]="disabled">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputhourrate">Amount</label>
+          <input type="number" [(ngModel)]="payment.amount" class="form-control" id="inputhourrate" placeholder="Amount"
+                 value="{{payment.amount}}" [disabled]="disabled">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="txtPostToQB">Post to QB by</label>
+          <input type="text" [(ngModel)]="payment.postToQBBy" class="form-control" id="txtPostToQB" placeholder="Deposit To"
+                 value="{{payment.postToQBBy}}" [disabled]="disabled">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="txtStatus">Status</label>
+          <input type="text" [(ngModel)]="payment.status" class="form-control" id="txtStatus" placeholder="Amount"
+                 value="{{payment.status}}" [disabled]="disabled">
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="txtMemo">Memo</label>
+          <textarea shape="round" fullWidth [(ngModel)]="payment.memo" type="text"
+                    class="form-control" id="txtMemo" placeholder="Memo"
+                    value="{{payment.memo}}" [disabled]="disabled"></textarea>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary" (click)="submit()">Close</button>
+    </div>
+  </nb-card-body>
+</nb-card>

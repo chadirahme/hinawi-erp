@@ -4,10 +4,10 @@ import * as SockJS from 'sockjs-client';
 @Injectable()
 export class WsTopic {
 
-   baseUrl: string ='http://localhost:8091/gkz-stomp-endpoint';
-  // baseUrl: string = 'http://hinawi2.dyndns.org:8091/gkz-stomp-endpoint';
+   //baseUrl: string ='http://localhost:8091/gkz-stomp-endpoint';
+   //baseUrl: string = 'http://hinawi2.dyndns.org:8091/gkz-stomp-endpoint';
   private stompClient = null;
-  //baseUrl: string;
+  baseUrl: string;
 
 
   @Output() change: EventEmitter<string> = new EventEmitter();

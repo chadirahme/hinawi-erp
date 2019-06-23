@@ -7,24 +7,25 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/favdashboard',
     home: true,
   },
-  {
-    title: 'Balances Dashboard',
-    icon: 'nb-home',
-    link: '/pages/dashboard',
-    home: false,
-  },
-  {
-    title: 'Chart Dashboard',
-    icon: 'nb-bar-chart',
-    link: '/pages/chartdashboard',
-    home: false,
-  },
-  {
-    title: 'School Dashboard',
-    icon: 'nb-e-commerce',
-    link: '/pages/schooldashboard',
-    home: false,
-  },
+
+  // {
+  //   title: 'Balances Dashboard',
+  //   icon: 'nb-home',
+  //   link: '/pages/dashboard',
+  //   home: false,
+  // },
+  // {
+  //   title: 'Chart Dashboard',
+  //   icon: 'nb-bar-chart',
+  //   link: '/pages/chartdashboard',
+  //   home: false,
+  // },
+  // {
+  //   title: 'School Dashboard',
+  //   icon: 'nb-e-commerce',
+  //   link: '/pages/schooldashboard',
+  //   home: false,
+  // },
   {
     title: 'Lists',
     icon: 'nb-list',
@@ -48,6 +49,49 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Mobile Attendance',
         link: '/pages/lists/mobile-attendance',
+      },
+    ]
+  },
+
+  {
+    title: 'Accounting',
+    icon: 'nb-list',
+    children: [
+      {
+        title: 'Petty Cash Chart',
+        link: '/pages/accounting/pettycashchart',
+      },
+      {
+        title: 'Petty Cash Report',
+        link: '/pages/accounting/pettycash',
+      },
+
+      {
+        title: 'Approve Purchase Orders',
+        link: '/pages/accounting/po',
+      },
+      // {
+      //   title: 'Approve Cheques Issued',
+      //   link: '/pages/lists/vendors-list',
+      // },
+    ]
+  },
+
+  {
+    title: 'Reports',
+    icon: 'nb-list',
+    children: [
+      {
+        title: 'Cheques Under Collection',
+        link: '/pages/accounting/cuc',
+      },
+      {
+        title: 'Cheque Payment Report',
+        link: '/pages/lists/prospective-list',
+      },
+      {
+        title: 'All Payments Report',
+        link: '/pages/lists/vendors-list',
       },
     ]
   },

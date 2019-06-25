@@ -28,7 +28,9 @@ import { FavdashboardComponent } from './favdashboard/favdashboard.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {ProfitBarComponent} from "./chartdashboard/profit-bar.component";
 import {FixedAssetBarComponent} from "./chartdashboard/fixedasset-bar.component";
-import { CucComponent } from './accounting/cuc/cuc.component';
+import {PagesSharedModule} from "./pages-shared.module";
+import {PettycashEchartsBarComponent} from "./accounting/pettycash-echarts-bar/pettycash-echarts-bar.component";
+import {PettycashLegendChartComponentComponent} from "./accounting/pettycash-legend-chart-component/pettycash-legend-chart-component.component";
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -41,7 +43,9 @@ const PAGES_COMPONENTS = [
   ReligionPieComponent,
   EchartsBarComponent,
   ProfitBarComponent,
-  FixedAssetBarComponent
+  FixedAssetBarComponent,
+  //PettycashEchartsBarComponent,
+  //PettycashLegendChartComponentComponent
 ];
 
 @NgModule({
@@ -54,13 +58,18 @@ const PAGES_COMPONENTS = [
     NgxEchartsModule,
     NgxChartsModule,
     NbBadgeModule,
-    DragDropModule
+    DragDropModule,
+    PagesSharedModule,
+    //PettycashEchartsBarComponent,
+   // PagesSharedComponent
   ],
   declarations: [
     ...PAGES_COMPONENTS,
     ChartdashboardComponent,
     SchooldashboardComponent,
     FavdashboardComponent,
+   // PettycashEchartsBarComponent,
+    //PettycashLegendChartComponentComponent,
     //CucComponent,
   ],
   providers: [OrdersChartService,OrdersProfitChartService,ProfitChartService,PeriodsService,

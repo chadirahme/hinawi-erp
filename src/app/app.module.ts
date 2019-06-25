@@ -19,9 +19,14 @@ import {ChartModule} from "angular2-chartjs";
 import {WsTopic} from "./@core/services/ws.topic";
 import {AuthGuard} from "./auth-guard.service";
 import { LoginComponent } from './login/login.component';
+import {PettycashLegendChartComponentComponent} from "./pages/accounting/pettycash-legend-chart-component/pettycash-legend-chart-component.component";
+import {PettycashEchartsBarComponent} from "./pages/accounting/pettycash-echarts-bar/pettycash-echarts-bar.component";
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent,
+    //PettycashEchartsBarComponent,
+    //PettycashLegendChartComponentComponent
+    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

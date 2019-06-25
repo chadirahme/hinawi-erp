@@ -9,7 +9,7 @@ import {WebDashboard, MobileAttendance, ChequeModel} from "../domains/webdashboa
 @Injectable()
 export class ApiAuth {
 
-  baseUrl: string ='http://localhost:8091/api/';
+    baseUrl: string ='http://localhost:8091/api/';
    //baseUrl: string = 'http://hinawi2.dyndns.org:8091/api/';
   //baseUrl: string;
 

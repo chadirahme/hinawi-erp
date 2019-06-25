@@ -16,6 +16,7 @@ export class FavdashboardComponent implements OnInit {
   isReligionFav = false;
   isProfitFav = false;
   isFixedAssetFav = false;
+  isPettyCashFav = false;
   //items = ["nat","religion"];
 
   items:any[]; //= ['profit','nat','rel'];
@@ -51,7 +52,7 @@ export class FavdashboardComponent implements OnInit {
   loadData(): void {
     try {
       const that = this;
-      this.apiAuth.getUserDashboards(1).subscribe(data => {
+      this.apiAuth.getUserDashboards(localStorage.getItem('userid')).subscribe(data => {
         data.result.forEach(function (value) {
           that.items.push(value.dashName);
           if(value.dashName=='nat')
@@ -62,7 +63,8 @@ export class FavdashboardComponent implements OnInit {
             that.isProfitFav=true;
           if(value.dashName=='fixedassets')
             that.isFixedAssetFav=true;
-
+          if(value.dashName=='pettycash')
+            that.isPettyCashFav = true;
           //console.log(value);
         });
       });
@@ -92,6 +94,10 @@ export class FavdashboardComponent implements OnInit {
     this.deleteMsg("fixedassets");
    //this.saveData("fixedassets" , !this.isFixedAssetFav);
   }
+  removePettyCashFav(){
+    this.deleteMsg("pettycash");
+    //this.saveData("fixedassets" , !this.isFixedAssetFav);
+  }
 
   deleteMsg(msg:string) {
     this.saveData(msg,true,0);
@@ -106,7 +112,7 @@ export class FavdashboardComponent implements OnInit {
     {
       // console.log("grade>> "+ this.apiParam.grade);
       this.webDashboard =new WebDashboard();
-      this.webDashboard.userId=1;
+      this.webDashboard.userId=+localStorage.getItem('userid');
       this.webDashboard.dashName=dashname;
       this.webDashboard.dashOrder=dashOrder;
 

@@ -1,7 +1,14 @@
  <div cdkDropList class="row" (cdkDropListDropped)="drop($event)" >
 
-   <div class="col-lg-6" [cdkDragData]="item" cdkDrag *ngFor="let item of items" (cdkDragEnded)="dragEnded($event)">
+   <div class="col-lg-12" [cdkDragData]="item" cdkDrag *ngFor="let item of items" (cdkDragEnded)="dragEnded($event)">
       <nb-card>
+
+        <nb-card-header *ngIf="item=='pettycash'">Petty Cash
+          <i class="ion-heart" *ngIf="isPettyCashFav" (click)="removePettyCashFav()" style="color:red"></i>
+          <i class="ion-heart" *ngIf="!isPettyCashFav" (click)="removePettyCashFav()" style="color:black"></i>
+        </nb-card-header>
+
+
         <nb-card-header *ngIf="item=='nat'">Nationality
           <i class="ion-heart" *ngIf="isNatFav" (click)="addNatFav()" style="color:red"></i>
           <i class="ion-heart" *ngIf="!isNatFav" (click)="addNatFav()" style="color:black"></i>
@@ -23,6 +30,10 @@
         </nb-card-header>
 
 
+
+        <nb-card-body *ngIf="item=='pettycash'">
+          <pettycash-echarts-bar></pettycash-echarts-bar>
+        </nb-card-body>
         <nb-card-body *ngIf="item=='nat'">
           <ngx-echarts-pie></ngx-echarts-pie>
         </nb-card-body>
@@ -33,7 +44,7 @@
           <ngx-profit-bar></ngx-profit-bar>
         </nb-card-body>
         <nb-card-body *ngIf="item=='fixedassets'">
-          <ngx-fixedasset-bar></ngx-fixedasset-bar>
+          <!--<ngx-fixedasset-bar></ngx-fixedasset-bar>-->
         </nb-card-body>
       </nb-card>
     </div>

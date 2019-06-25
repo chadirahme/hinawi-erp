@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy, AfterViewInit} from '@angular/core';
 import {NbThemeService} from "@nebular/theme";
 import {ApiAuth} from "../../../@core/services/api.auth";
 import { takeWhile } from 'rxjs/operators';
+import {WebDashboard} from "../../../@core/domains/webdashboard.model";
 @Component({
   selector: 'pettycash-echarts-bar',
 //   template: `
@@ -19,7 +20,8 @@ export class PettycashEchartsBarComponent implements AfterViewInit, OnDestroy {
   currentTheme: string;
   year2018:any[];
   year2019:any[];
-
+  webDashboard : WebDashboard;
+  isPettyCashFav = false;
 
   constructor(private themeService: NbThemeService,private apiAuth: ApiAuth) {
     this.themeService.getJsTheme()
@@ -36,6 +38,7 @@ export class PettycashEchartsBarComponent implements AfterViewInit, OnDestroy {
   ngOnInit() {
     console.log("onlint");
     this.loadData();
+    this.loadDashBoardData();
     console.log("onlint1");
   }
 
@@ -198,4 +201,52 @@ export class PettycashEchartsBarComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
   }
+
+  addPettyCashFav(){
+    this.isPettyCashFav=!this.isPettyCashFav;
+    this.saveData("pettycash" , !this.isPettyCashFav);
+  }
+
+  loadDashBoardData(): void {
+    try {
+      const that = this;
+      this.apiAuth.getUserDashboards(localStorage.getItem('userid')).subscribe(data => {
+        data.result.forEach(function (value) {
+          if(value.dashName=='pettycash')
+            that.isPettyCashFav=true;
+          //console.log(value);
+        });
+      });
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+  saveData(dashname , isDelete): void {
+    try
+    {
+      // console.log("grade>> "+ this.apiParam.grade);
+      this.webDashboard =new WebDashboard();
+      this.webDashboard.userId=+localStorage.getItem('userid');
+      this.webDashboard.dashName=dashname;
+      this.webDashboard.dashOrder=0;
+
+      if(!isDelete) {
+        this.apiAuth.addWebDashboard(this.webDashboard).subscribe(data => {
+          console.log(data);
+        });
+      }
+      else {
+        this.apiAuth.deleteWebDashBoard(this.webDashboard).subscribe(data => {
+          console.log(data);
+        });
+      }
+    }
+
+    catch (e) {
+      console.log(e);
+    }
+  }
+
 }

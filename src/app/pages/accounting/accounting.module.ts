@@ -11,11 +11,11 @@ import { PoComponent } from './po/po.component';
 import { EditPoComponent } from './edit-po/edit-po.component';
 import { PettycashComponent } from './pettycash/pettycash.component';
 import { EditPettycashComponent } from './edit-pettycash/edit-pettycash.component';
-import { PettycashEchartsBarComponent } from './pettycash-echarts-bar/pettycash-echarts-bar.component';
 import {ChartModule} from "angular2-chartjs";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {NgxEchartsModule} from "ngx-echarts";
-import {PettycashLegendChartComponentComponent} from "./pettycash-legend-chart-component/pettycash-legend-chart-component.component";
+import {PagesModule} from "../pages.module";
+import {PagesSharedModule} from "../pages-shared.module";
 
 const COMPONENTS = [
   AccountingComponent,
@@ -40,9 +40,10 @@ const MODULES = [
 @NgModule({
     imports: [
         ...MODULES,
-      ChartModule,
-      NgxEchartsModule,
-      NgxChartsModule,
+      // ChartModule,
+      // NgxEchartsModule,
+      // NgxChartsModule,
+     PagesSharedModule
     ],
     declarations: [
         ...COMPONENTS,
@@ -50,8 +51,9 @@ const MODULES = [
         EditPoComponent,
         PettycashComponent,
         EditPettycashComponent,
-        PettycashEchartsBarComponent,
-       PettycashLegendChartComponentComponent,
+
+        //PettycashEchartsBarComponent,
+        //PettycashLegendChartComponentComponent,
     ],
     providers: [
       CurrencyPipe,

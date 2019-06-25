@@ -22,7 +22,7 @@ export class SchooldashboardComponent implements OnInit {
   loadData(): void {
     try {
       const that = this;
-      this.apiAuth.getUserDashboards(1).subscribe(data => {
+      this.apiAuth.getUserDashboards(localStorage.getItem('userid')).subscribe(data => {
         data.result.forEach(function (value) {
           if(value.dashName=='nat')
             that.isNatFav=true;

@@ -85,14 +85,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Cheques Under Collection',
         link: '/pages/accounting/cuc',
       },
-      {
-        title: 'Cheque Payment Report',
-        link: '/pages/lists/prospective-list',
-      },
-      {
-        title: 'All Payments Report',
-        link: '/pages/lists/vendors-list',
-      },
+      // {
+      //   title: 'Cheque Payment Report',
+      //   link: '/pages/lists/prospective-list',
+      // },
+      // {
+      //   title: 'All Payments Report',
+      //   link: '/pages/lists/vendors-list',
+      // },
     ]
   },
 

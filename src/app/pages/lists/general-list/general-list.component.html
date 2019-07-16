@@ -1,0 +1,54 @@
+<nb-card status="success">
+  <nb-card-header>General List</nb-card-header>
+  <nb-card-body>
+
+    <!--<nb-select id="ddlSupplier" [(ngModel)]="selectedField" shape="semi-round" [size]="large">-->
+      <!--<nb-option value="0">&#45;&#45;Select&#45;&#45;</nb-option>-->
+      <!--<nb-option *ngFor="let item of hrFieldsList" value="item.id">-->
+        <!--{{ item.fieldDescription }}-->
+      <!--</nb-option>-->
+    <!--</nb-select>-->
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+
+          <label for="ddlSupplier">General List</label>
+
+          <!--<nb-select id="ddlSupplier" [(selected)]="selectedField" id="ddlSupplier" #t>-->
+            <!--<nb-option value=0>--Select--</nb-option>-->
+            <!--<nb-option *ngFor="let item of hrFieldsList" value="item.id">-->
+              <!--{{item.fieldDescription}}-->
+            <!--</nb-option>-->
+
+          <!--</nb-select>-->
+
+          <select class="form-control" [(ngModel)]="selectedField" id="ddlSupplier" (change)="callType($event)">
+            <option value="0">--Select--</option>
+            <option *ngFor="let item of hrFieldsList" [ngValue]="item">
+              {{item.fieldDescription}}
+            </option>
+          </select>
+
+          <!--<select class="form-control" [(ngModel)]="selectedField" id="ddlSupplier" #t (change)="callType($event)">-->
+            <!--<option value="0">--Select--</option>-->
+            <!--<option *ngFor="let item of hrFieldsList" [ngValue]="item">-->
+              <!--{{item.suppliername}}-->
+            <!--</option>-->
+          <!--</select>-->
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+    <ng2-smart-table [settings]="settings" [source]="source"
+                     (deleteConfirm)="onDeleteConfirm($event)"
+                     (editConfirm)="onSaveConfirm($event)"
+                     (createConfirm)="onCreateConfirm($event)">
+    </ng2-smart-table>
+      </div>
+    </div>
+
+  </nb-card-body>
+</nb-card>

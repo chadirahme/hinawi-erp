@@ -6,11 +6,16 @@ import {ProspectiveListComponent} from "./prospective-list/prospective-list.comp
 import {VendorsListComponent} from "./vendors-list/vendors-list.component";
 import {StudetnsListComponent} from "./studetns-list/studetns-list.component";
 import {MobileAttendanceComponent} from "./mobile-attendance/mobile-attendance.component";
+import {GeneralListComponent} from "./general-list/general-list.component";
 
 const routes: Routes = [{
     path: '',
     component: ListsComponent,
     children: [
+      {
+        path: 'general-list',
+        component: GeneralListComponent,
+      },
         {
             path: 'customers-list',
             component: CustomersListComponent,

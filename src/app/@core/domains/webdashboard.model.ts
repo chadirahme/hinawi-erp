@@ -21,3 +21,17 @@ export class MobileAttendance {
 export class ChequeModel {
   id: number;
 }
+
+export class HRListValues {
+  id: number;
+  fieldId: number;
+  fieldName: string;
+  description: string;
+  arDescription: string;
+  subId: number;
+  defaultValue: string;
+  required: string;
+  priorityId: number;
+  isEdit: string;
+  notes: string;
+}

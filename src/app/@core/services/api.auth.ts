@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {Observable} from "rxjs/index";
 import {ApiResponse} from "../domains/api.response";
 import {User} from "../domains/user.model";
-import {WebDashboard, MobileAttendance, ChequeModel} from "../domains/webdashboard.model";
+import {WebDashboard, MobileAttendance, ChequeModel, HRListValues} from "../domains/webdashboard.model";
 
 
 @Injectable()
@@ -24,7 +24,9 @@ export class ApiAuth {
     return false;
   }
      getIsAuthenticated(user: any):Observable<any>{
-       return this.http.post<ApiResponse>(this.baseUrl+'loginUser', user);
+      // authenticate
+       return this.http.post<ApiResponse>(this.baseUrl+'authenticate', user);
+      //return this.http.post<ApiResponse>(this.baseUrl+'loginUser', user);
       //return this.http.post<ApiResponse>(this.baseUrl+'rest-employees/getLoginUser',user);
   }
 
@@ -99,5 +101,17 @@ export class ApiAuth {
 
   getPettyCashChart(): Observable<any[]> {
     return this.http.get<any[]>(this.baseUrl+'accounting/pettycashchart');
+  }
+
+
+  getHRListFields(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'list/hrListFields');
+  }
+
+  getHRListValues(fieldId): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'list/hrListValues?fieldId='+fieldId);
+  }
+   saveHRListValues(hrListValues: HRListValues): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.baseUrl+'list/saveHRListValues',hrListValues);
   }
 }

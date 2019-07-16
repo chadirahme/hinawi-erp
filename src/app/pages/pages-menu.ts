@@ -31,6 +31,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-list',
     children: [
       {
+        title: 'General List',
+        link: '/pages/lists/general-list',
+      },
+      {
         title: 'Customers List',
         link: '/pages/lists/customers-list',
       },

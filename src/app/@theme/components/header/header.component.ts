@@ -201,6 +201,8 @@ export class HeaderComponent implements OnInit {
       // Do something on Log out
       console.log('Log out Clicked ');
       localStorage.removeItem('token');
+      localStorage.removeItem('userid');
+      localStorage.removeItem('username');
       this.router.navigate(['auth/login']);
 
     } else if ( title === 'Attendance' ) {

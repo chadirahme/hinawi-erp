@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule, ErrorHandler} from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -31,6 +31,7 @@ import {FixedAssetBarComponent} from "./chartdashboard/fixedasset-bar.component"
 import {PagesSharedModule} from "./pages-shared.module";
 import {PettycashEchartsBarComponent} from "./accounting/pettycash-echarts-bar/pettycash-echarts-bar.component";
 import {PettycashLegendChartComponentComponent} from "./accounting/pettycash-legend-chart-component/pettycash-legend-chart-component.component";
+import {AuthErrorHandler} from "../auth-error-handler";
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -73,7 +74,9 @@ const PAGES_COMPONENTS = [
     //CucComponent,
   ],
   providers: [OrdersChartService,OrdersProfitChartService,ProfitChartService,PeriodsService,
-    LayoutService]
+    LayoutService,
+    //{provide: ErrorHandler, useClass: AuthErrorHandler},
+  ]
 })
 export class PagesModule {
 }

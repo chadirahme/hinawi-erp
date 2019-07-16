@@ -83,3 +83,17 @@ CCIBC..chadi.rahme....canada@2019
 npm install --save ng2-smart-table
 npm i rxjs-compat --save
 npm i ng2-completer --save
+
+
+change version in package then run
+ "@nebular/theme": "3.3.0"
+nmp update
+
+try a new datatable
+https://swimlane.gitbook.io/ngx-datatable/demos
+
+https://www.npmjs.com/package/ngx-export-as
+
+logs error like papertrail
+https://scotch.io/bar-talk/error-handling-with-angular-6-tips-and-best-practices192
+

@@ -15,6 +15,9 @@ import {ThemeModule} from "../../@theme/theme.module";
 import { VendorsListComponent } from './vendors-list/vendors-list.component';
 import { StudetnsListComponent } from './studetns-list/studetns-list.component';
 import { MobileAttendanceComponent } from './mobile-attendance/mobile-attendance.component';
+import { GeneralListComponent } from './general-list/general-list.component';
+import {NbSelectModule} from "@nebular/theme";
+import {CommonModule} from "@angular/common";
 
 const COMPONENTS = [
     ListsComponent,
@@ -29,10 +32,12 @@ const COMPONENTS = [
 // ];
 
 const MODULES = [
+    CommonModule,
     ThemeModule,
     ListsRoutingModule,
     //TreeModule,
     Ng2SmartTableModule,
+    NbSelectModule,
     //ToasterModule.forRoot(),
 ];
 
@@ -43,6 +48,7 @@ const MODULES = [
     declarations: [
         ...COMPONENTS,
         MobileAttendanceComponent,
+        GeneralListComponent,
     ],
     providers: [
         //...SERVICES,

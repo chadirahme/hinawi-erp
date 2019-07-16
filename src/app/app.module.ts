@@ -6,7 +6,7 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import {NgModule, ErrorHandler} from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 
@@ -21,6 +21,9 @@ import {AuthGuard} from "./auth-guard.service";
 import { LoginComponent } from './login/login.component';
 import {PettycashLegendChartComponentComponent} from "./pages/accounting/pettycash-legend-chart-component/pettycash-legend-chart-component.component";
 import {PettycashEchartsBarComponent} from "./pages/accounting/pettycash-echarts-bar/pettycash-echarts-bar.component";
+import {BasicAuthHtppInterceptorService} from "./basic-auth-htpp-interceptor-service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthErrorHandler} from "./auth-error-handler";
 
 @NgModule({
   declarations: [AppComponent, LoginComponent,
@@ -41,7 +44,10 @@ import {PettycashEchartsBarComponent} from "./pages/accounting/pettycash-echarts
   bootstrap: [AppComponent],
   providers: [ApiAuth,WsTopic,AuthGuard,
     { provide: APP_BASE_HREF, useValue: '/' },
-  ],
+    {provide: ErrorHandler, useClass: AuthErrorHandler},
+    {provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true},
+
+],
 })
 export class AppModule {
 }

@@ -40,11 +40,15 @@ export class LoginComponent implements OnInit{
           //console.log(data.message);
           alert('Connection problem at this time !!');
           //this.errors.push("Invalid User");
-        }else if(data.success==false){
-          alert('Invalid User');
+        }else if(data.success!=null && data.success===false){ //(data.success==false){
+          alert(data.message);
         }
         else {
-          localStorage.setItem('token',data.result.userId);
+          let tokenStr= 'Bearer '+data.result.token;
+          localStorage.setItem('token', tokenStr);
+          //localStorage.setItem('username',this.user.username);
+
+         // localStorage.setItem('token',data.result.userId);
           localStorage.setItem('userid',data.result.userId);
           localStorage.setItem('username',data.result.userName);
           this.router.navigate(['/dashboard']);
@@ -53,6 +57,7 @@ export class LoginComponent implements OnInit{
     }
     catch (e) {
       console.log(e);
+      alert('Invalid authentication');
     }
 
   }

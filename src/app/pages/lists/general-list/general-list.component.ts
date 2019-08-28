@@ -12,8 +12,13 @@ export class GeneralListComponent implements OnInit {
 
   hrFieldsList: any[];
   selectedField: any;
+  hrMainFieldsList: any[];
+  selectedMainField: any;
+
   source: LocalDataSource = new LocalDataSource();
   hrListValues: HRListValues;
+  showMainList:boolean;
+  lastModified: any;
 
   settings = {
     //selectMode: 'multi', // just add this
@@ -35,17 +40,17 @@ export class GeneralListComponent implements OnInit {
     },
     columns: {
       description: {
-        title: 'Description',
+        title: 'Name in English',
         type: 'string',
       },
       arDescription: {
-        title: 'Arabic Description',
+        title: 'Name in Arabic',
         type: 'string',
       },
-      defaultValue: {
-        title: 'Default Value',
-        type: 'string',
-      },
+      // defaultValue: {
+      //   title: 'Default Value',
+      //   type: 'string',
+      // },
       // required: {
       //   title: 'Required',
       //   type: 'string',
@@ -74,19 +79,19 @@ export class GeneralListComponent implements OnInit {
       //     resetText: 'clear',
       //   }
       // },
-      required:{
-        title: 'required checked',
-        type: 'html',
-        valuePrepareFunction: (data) => { return '<input type="checkbox" checked>' }
-      },
+      // required:{
+      //   title: 'required checked',
+      //   type: 'html',
+      //   valuePrepareFunction: (data) => { return '<input type="checkbox" checked>' }
+      // },
       priorityId: {
         title: 'Priority',
         type: 'number',
       },
-      isEdit: {
-        title: 'Is Edit',
-        type: 'string',
-      },
+      // isEdit: {
+      //   title: 'Is Edit',
+      //   type: 'string',
+      // },
       notes: {
         title: 'Notes',
         type: 'string',
@@ -101,6 +106,8 @@ export class GeneralListComponent implements OnInit {
     // setTimeout(() => {
     //   this.dynamicItems = [{title: 'dItem1'}, {title: 'dItem2'}];
     // }, 1000);
+    this.showMainList=false;
+    this.lastModified="";
     this.loadHRListFieldsData();
   }
 
@@ -116,10 +123,43 @@ export class GeneralListComponent implements OnInit {
     }
   }
 
+  loadMainHRListFieldsData(): void {
+    try {
+      this.apiAuth.getHRListValues(this.selectedField.parentListId).subscribe(data => {
+        this.hrMainFieldsList = data.result;
+        this.selectedMainField=0;
+      });
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+  loadMainHRListFieldsData1(): void {
+    try {
+      this.apiAuth.getHRSubListValues(this.selectedField.parentListId,this.selectedField.fieldId).subscribe(data => {
+        this.hrMainFieldsList = data.result;
+        this.selectedMainField=0;
+      });
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
   callType(value){
     //if(value==null)
     console.log(this.selectedField);
+    this.lastModified = this.selectedField.lastModified;
+    this.showMainList = this.selectedField.parentListId>0;
+
+    if(this.selectedField.parentListId==0)
     this.loadData(this.selectedField.fieldId);
+    else {
+      //load the parent list
+      this.source=new LocalDataSource();
+      this.loadMainHRListFieldsData();
+    }
     // if(this.selectedSupplier==0){
     //   this.source.load(this.alldata);
     //   this.filterAmount=0;
@@ -129,20 +169,32 @@ export class GeneralListComponent implements OnInit {
     // this.source.load(this.filterData);
     // this.source.refresh();
     // this.calTotalSupplierPayments(this.selectedSupplier.suppliername);
+  }
 
+  callSubType(value){
+      this.loadData(this.selectedField.fieldId);
   }
 
   loadData(fieldId): void {
     try {
-      this.apiAuth.getHRListValues(fieldId).subscribe(data => {
-        this.source.load(data.result);
-        //this.dataSource = new MatTableDataSource(data);
-        //this.dataSource.paginator = this.paginator;
-        // this.fileUploads =data;
-        // this.student=data;
-        //this.dataSource = new MatTableDataSource(data);
-        // this.loadStudentData(); getHRListValues(fieldId)
-      });
+      if(this.selectedField.parentListId==0){
+        this.apiAuth.getHRListValues(fieldId).subscribe(data => {
+          this.source.load(data.result);
+          //this.dataSource = new MatTableDataSource(data);
+          //this.dataSource.paginator = this.paginator;
+          // this.fileUploads =data;
+          // this.student=data;
+          //this.dataSource = new MatTableDataSource(data);
+          // this.loadStudentData(); getHRListValues(fieldId)
+        });
+      }
+      else {
+        this.apiAuth.getHRSubListValues(this.selectedField.fieldId,this.selectedMainField.id).subscribe(data => {
+          this.source.load(data.result);
+        });
+      }
+
+
     }
     catch (e) {
       console.log(e);
@@ -156,7 +208,10 @@ export class GeneralListComponent implements OnInit {
       this.hrListValues=new HRListValues();
       this.hrListValues = event.newData;
       this.hrListValues.id=0;
+      if(this.selectedField.parentListId==0)
       this.hrListValues.subId=0;
+      else
+        this.hrListValues.subId=this.selectedMainField.id;
       this.hrListValues.priorityId=1;
       this.hrListValues.fieldId=this.selectedField.fieldId;
       this.hrListValues.fieldName=this.selectedField.fieldName;
@@ -179,14 +234,28 @@ export class GeneralListComponent implements OnInit {
 
     this.apiAuth.saveHRListValues(this.hrListValues).subscribe(data => {
       console.log(data);
+      if(data.status == 204)
+      alert('Error !!');
+      else
       alert('save');
     });
 
   }
 
   onDeleteConfirm(event): void {
+    console.log(event.data);
     if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
+      if(event.data.qbListID=="NOTPOSTED1"){
+        alert("You can't delete this value. Value is used!!");
+        event.confirm.reject();
+        return;
+      }else {
+        this.apiAuth.deleteHRListValues(event.data).subscribe(data => {
+          console.log(data);
+          alert(data.message);
+        });
+        event.confirm.resolve();
+      }
     } else {
       event.confirm.reject();
     }

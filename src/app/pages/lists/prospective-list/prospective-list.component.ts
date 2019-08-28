@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LocalDataSource} from "ng2-smart-table";
 import {ApiAuth} from "../../../@core/services/api.auth";
+import {NbDialogService} from "@nebular/theme";
+import {EditProspectiveComponent} from "../edit-prospective/edit-prospective.component";
 
 @Component({
   selector: 'ngx-prospective-list',
@@ -9,9 +11,15 @@ import {ApiAuth} from "../../../@core/services/api.auth";
 })
 export class ProspectiveListComponent implements OnInit {
 
+
   customers: any[];
+  contacts: any[];
+
   source: LocalDataSource = new LocalDataSource();
+  contactSource: LocalDataSource = new LocalDataSource();
+
   settings = {
+    mode: 'external',
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -29,10 +37,10 @@ export class ProspectiveListComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
-      recNo: {
-        title: 'ID',
-        type: 'number',
-      },
+      // recNo: {
+      //   title: 'ID',
+      //   type: 'number',
+      // },
       name: {
         title: 'Name',
         type: 'string',
@@ -53,22 +61,29 @@ export class ProspectiveListComponent implements OnInit {
         title: 'Telephone',
         type: 'string',
       },
-      telephone2: {
-        title: 'Mobile',
-        type: 'string',
-      },
-      note: {
-        title: 'Note',
-        type: 'string',
-      },
+      // telephone2: {
+      //   title: 'Mobile',
+      //   type: 'string',
+      // },
+      // note: {
+      //   title: 'Note',
+      //   type: 'string',
+      // },
 
       active: {
         title: 'Active',
         type: 'string',
       },
     },
+    actions: {
+      position: 'right',
+      add: true,
+      edit:true,
+      editable:false,
+      columnTitle: '',
+    },
   };
-  constructor(private apiAuth: ApiAuth) { }
+  constructor(private apiAuth: ApiAuth,private dialogService: NbDialogService) { }
 
   ngOnInit() {
     this.loadData();
@@ -95,6 +110,8 @@ export class ProspectiveListComponent implements OnInit {
     }
   }
 
+
+
   onCreateConfirm(event):void {
     if (window.confirm('Are you sure you want to create?')) {
       event.newData['name'] += ' + added in code';
@@ -117,5 +134,37 @@ export class ProspectiveListComponent implements OnInit {
       event.confirm.reject();
     }
   }
+
+  createRow(event: any) {
+    // console.log('on add event: ', event);
+    this.dialogService.open(EditProspectiveComponent, {
+      context: {
+        title: 'Add New Prospective',
+        prospective: null,
+      },
+    }).onClose.subscribe (name => name && this.checkResult(name));
+  }
+
+  checkResult(msg){
+    alert('done '+ msg);
+    console.log(msg);
+    this.loadData();
+  }
+
+  editRow(event) {
+    console.log('event: ', event.data);
+    // this.windowService.open(VendorsListComponent, { title: `Window` });
+    //this.windowService.open(EditEmployeeComponent, { title: `Window` });
+
+    this.dialogService.open(EditProspectiveComponent, {
+      context: {
+        title: 'Edit Prospective: '+ event.data.name,
+        prospective: event.data,
+      },
+    }).onClose.subscribe (name => name && this.checkResult(name));
+    //(name => this.result && console.log(name));
+
+  }
+
 
 }

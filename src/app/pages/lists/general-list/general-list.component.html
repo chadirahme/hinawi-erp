@@ -13,7 +13,7 @@
       <div class="col-sm-6">
         <div class="form-group">
 
-          <label for="ddlSupplier">General List</label>
+          <label for="ddlSupplier">Select List Field </label>
 
           <!--<nb-select id="ddlSupplier" [(selected)]="selectedField" id="ddlSupplier" #t>-->
             <!--<nb-option value=0>--Select--</nb-option>-->
@@ -37,6 +37,27 @@
             <!--</option>-->
           <!--</select>-->
         </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="showMainList">
+        <div class="form-group">
+          <label for="ddlMainList">Select Main List Field</label>
+          <select class="form-control" [(ngModel)]="selectedMainField" id="ddlMainList" (change)="callSubType($event)">
+            <option value="0">--Select--</option>
+            <option *ngFor="let item of hrMainFieldsList" [ngValue]="item">
+              {{item.description}}
+            </option>
+          </select>
+
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="row" *ngIf="lastModified!='' ">
+      <div class="col-sm-6 bold">
+        Last Modified : {{lastModified | date}}
       </div>
     </div>
 

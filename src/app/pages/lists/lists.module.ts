@@ -16,8 +16,9 @@ import { VendorsListComponent } from './vendors-list/vendors-list.component';
 import { StudetnsListComponent } from './studetns-list/studetns-list.component';
 import { MobileAttendanceComponent } from './mobile-attendance/mobile-attendance.component';
 import { GeneralListComponent } from './general-list/general-list.component';
-import {NbSelectModule} from "@nebular/theme";
+import {NbSelectModule, NbDatepickerModule, NbWindowModule, NbDialogModule, NbTabsetModule} from "@nebular/theme";
 import {CommonModule} from "@angular/common";
+import { EditProspectiveComponent } from './edit-prospective/edit-prospective.component';
 
 const COMPONENTS = [
     ListsComponent,
@@ -38,6 +39,10 @@ const MODULES = [
     //TreeModule,
     Ng2SmartTableModule,
     NbSelectModule,
+  NbTabsetModule,
+  NbDialogModule.forChild(),
+  NbWindowModule.forChild(),
+  NbDatepickerModule.forRoot(),
     //ToasterModule.forRoot(),
 ];
 
@@ -49,9 +54,11 @@ const MODULES = [
         ...COMPONENTS,
         MobileAttendanceComponent,
         GeneralListComponent,
+        EditProspectiveComponent,
     ],
     providers: [
         //...SERVICES,
     ],
+    entryComponents: [EditProspectiveComponent]
 })
 export class ListsModule { }

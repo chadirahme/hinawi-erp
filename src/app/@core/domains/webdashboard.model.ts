@@ -34,4 +34,5 @@ export class HRListValues {
   priorityId: number;
   isEdit: string;
   notes: string;
+  qbListID: string;
 }

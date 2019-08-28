@@ -9,8 +9,8 @@ import {WebDashboard, MobileAttendance, ChequeModel, HRListValues} from "../doma
 @Injectable()
 export class ApiAuth {
 
-    baseUrl: string ='http://localhost:8091/api/';
-   //baseUrl: string = 'http://hinawi2.dyndns.org:8091/api/';
+   //baseUrl: string ='http://localhost:8091/api/';
+   baseUrl: string = 'http://hinawi2.dyndns.org:8091/api/';
   //baseUrl: string;
 
     constructor(private http: HttpClient) {
@@ -25,7 +25,11 @@ export class ApiAuth {
   }
      getIsAuthenticated(user: any):Observable<any>{
       // authenticate
-       return this.http.post<ApiResponse>(this.baseUrl+'authenticate', user);
+         return this.http.post<ApiResponse>(this.baseUrl + 'authenticate', user);
+           // .catch((err) => {
+           //   alert(err);
+           //   return Observable.throw(err)
+           // });
       //return this.http.post<ApiResponse>(this.baseUrl+'loginUser', user);
       //return this.http.post<ApiResponse>(this.baseUrl+'rest-employees/getLoginUser',user);
   }
@@ -41,6 +45,15 @@ export class ApiAuth {
     getProspectiveList(): Observable<ApiResponse> {
         return this.http.get<ApiResponse>(this.baseUrl+'prospectiveList');
     }
+
+   getProspectiveContactsList(recNo:any): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'prospectiveContactsList?recNo='+recNo);
+  }
+
+
+   saveProspectives(prospective: any): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.baseUrl+'saveProspectives',prospective);
+  }
 
   getVendorsList(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(this.baseUrl+'vendorsList');
@@ -111,7 +124,18 @@ export class ApiAuth {
   getHRListValues(fieldId): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(this.baseUrl+'list/hrListValues?fieldId='+fieldId);
   }
+  getHRSubListValues(fieldId,subId): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'list/hrSubListValues?fieldId='+fieldId+'&subId='+subId);
+  }
    saveHRListValues(hrListValues: HRListValues): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(this.baseUrl+'list/saveHRListValues',hrListValues);
   }
+  deleteHRListValues(hrListValues: HRListValues): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.baseUrl+'list/deleteHRListValues',hrListValues);
+  }
+
+  saveProspectiveContact(prospectiveCotact: any): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.baseUrl+'saveProspectiveContact',prospectiveCotact);
+  }
+
 }

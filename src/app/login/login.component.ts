@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit{
         }else if(data.success!=null && data.success===false){ //(data.success==false){
           alert(data.message);
         }
-        else {
+        else if(data.success===true) {
           let tokenStr= 'Bearer '+data.result.token;
           localStorage.setItem('token', tokenStr);
           //localStorage.setItem('username',this.user.username);
@@ -53,11 +53,14 @@ export class LoginComponent implements OnInit{
           localStorage.setItem('username',data.result.userName);
           this.router.navigate(['/dashboard']);
         }
-      });
+        else {
+          alert('Connection problem at this time !');
+        }
+      }),error => alert('Connection problem at this time'); // error path;
     }
     catch (e) {
-      console.log(e);
-      alert('Invalid authentication');
+      //console.log(e);
+      alert('Connection problem at this time !!');
     }
 
   }

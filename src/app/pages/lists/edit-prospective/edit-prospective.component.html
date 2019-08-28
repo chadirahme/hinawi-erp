@@ -1,0 +1,276 @@
+<nb-card>
+  <nb-card-header>{{title}}</nb-card-header>
+  <nb-card-body>
+  <nb-tabset fullWidth>
+    <nb-tab tabTitle="Company Information" style="margin-top: 1.25rem;">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>English Name</label>
+            <input [(ngModel)]="prospective.name" type="text" class="form-control" placeholder="English Name"
+                   value="{{prospective.name}}">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="chkPriority">Priority</label>
+            <input type="checkbox" class="form-control" id="chkPriority"
+                   [checked]="prospective.priorityID === 1"
+                   (change)="prospective.priorityID = $event.target.checked ? 1 : 0"
+                   >
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="chkActive">Active</label>
+            <input type="checkbox" class="form-control" id="chkActive"
+                   [checked]="prospective.active === 'Y'"
+                   (change)="prospective.active = $event.target.checked ? 'Y' : 'N'">
+          </div>
+        </div>
+      </div>
+
+      <!--{"fullName":"ABC test Co1","active":"Y","companyName":"","email":"","cc":"","note":"test change date","contact":"","altContact":"",
+      "telephone1":"","telephone2":"","webSite":"","printChequeAs":"","skypeId":"","timeCreated":"2014-10-15T16:56:59.610+0000","sublevel":0,
+      "companyTypeRefKey":0,"fax":"","shipto":"Abu Dhabi\r\nUnited Arab Emirates\r\n","altphone":""}-->
+
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Arabic Name</label>
+            <input [(ngModel)]="prospective.arName" type="text" class="form-control" placeholder="Arabic Name"
+                   value="{{prospective.arName}}">
+          </div>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Print Cheque As</label>
+            <input [(ngModel)]="prospective.printChequeAs" type="text" class="form-control" placeholder="Print Cheque As"
+                   value="{{prospective.printChequeAs}}">
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Company</label>
+            <input [(ngModel)]="prospective.companyName" type="email" class="form-control" placeholder="Company"
+                   value="{{prospective.companyName}}">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Sub of</label>
+            <input [(ngModel)]="prospective.phone" type="text" class="form-control" placeholder="Sub of"
+                   value="{{prospective.phone}}">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Contact Person</label>
+            <input [(ngModel)]="prospective.contact" type="email" class="form-control"  placeholder="Contact Person"
+                   value="{{prospective.contact}}">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Phone</label>
+            <input [(ngModel)]="prospective.telephone1" type="text" class="form-control" placeholder="Phone"
+                   value="{{prospective.telephone1}}">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Alt. Contact</label>
+            <input [(ngModel)]="prospective.altContact" type="text" class="form-control" placeholder="Alt. Contact"
+                   value="{{prospective.altContact}}">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Alt. Phone </label>
+            <input [(ngModel)]="prospective.telephone2" type="text" class="form-control" placeholder="Alt. Phone"
+                   value="{{prospective.telephone2}}">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="ddlCountry">Country</label>
+            <country-list id="ddlCountry" [(ngModel)]="prospective.countryRefKey" disabled="false"
+                          (clickEvent)='displayCounter($event)'></country-list>
+            <!--<select class="form-control" [(ngModel)]="prospective.status">-->
+              <!--<option>Active</option>-->
+              <!--<option>InActive</option>-->
+              <!--<option>Terminate</option>-->
+            <!--</select>-->
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>City</label>
+            <select class="form-control" [(ngModel)]="prospective.cityRefKey" (change)="changeCity($event)">
+              <!--<option value="0">&#45;&#45;All&#45;&#45;</option>-->
+              <option value="0">--Select--</option>
+              <option *ngFor="let city of cityFieldsList" [ngValue]="city.id">
+                {{city.description}}
+              </option>
+            </select>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Street</label>
+            <select class="form-control" [(ngModel)]="prospective.streeRefKey">
+              <!--<option value="0">&#45;&#45;All&#45;&#45;</option>-->
+              <option value="0">--Select--</option>
+              <option *ngFor="let item of streetFieldsList" [ngValue]="item.id">
+                {{item.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Fax</label>
+            <input [(ngModel)]="prospective.fax" type="text" class="form-control" placeholder="Fax"
+                   value="{{prospective.fax}}">
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Zip Code </label>
+            <input [(ngModel)]="prospective.hourRate" type="text" class="form-control" placeholder="Zip Code"
+                   value="{{prospective.hourRate}}">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>P.O. Box </label>
+            <input [(ngModel)]="prospective.hourRate" type="text" class="form-control" placeholder="P.O. Box"
+                   value="{{prospective.hourRate}}">
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Email </label>
+            <input [(ngModel)]="prospective.email" type="email" class="form-control" placeholder="Email"
+                   value="{{prospective.email}}">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>CC </label>
+            <input [(ngModel)]="prospective.cc" type="email" class="form-control" placeholder="CC"
+                   value="{{prospective.cc}}">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Website </label>
+            <input [(ngModel)]="prospective.website" type="text" class="form-control" placeholder="Website"
+                   value="{{prospective.website}}">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Skype ID </label>
+            <input [(ngModel)]="prospective.skypeId" type="text" class="form-control" placeholder="Skype ID"
+                   value="{{prospective.skypeId}}">
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>How Did You Know About Us </label>
+            <select class="form-control" [(ngModel)]="prospective.howKnowRefKey">
+              <option value="0">--Select--</option>
+              <option *ngFor="let item of howYouKnowFieldsList" [ngValue]="item.id">
+                {{item.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Level Of interest </label>
+            <input [(ngModel)]="prospective.hourRate" type="text" class="form-control" placeholder="Level Of interest"
+                   value="{{prospective.hourRate}}">
+
+          </div>
+        </div>
+      </div>
+
+
+
+    </nb-tab>
+
+
+    <nb-tab tabTitle="Contact Information">
+      <ng2-smart-table [settings]="settings" [source]="contactSource"
+                       (deleteConfirm)="onDeleteConfirm($event)"
+                       (editConfirm)="onSaveConfirm($event)"
+                       (createConfirm)="onCreateConfirm($event)"
+      >
+      </ng2-smart-table>
+
+    </nb-tab>
+
+
+    <nb-tab tabTitle="Additional Information">
+      Tab content 3
+    </nb-tab>
+
+    <nb-tab tabTitle="Status History">
+      Tab content 4
+    </nb-tab>
+    <nb-tab tabTitle="Notes">
+      Tab content 5
+    </nb-tab>
+
+
+
+  </nb-tabset>
+
+
+
+
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+    </div>
+  </nb-card-body>
+</nb-card>

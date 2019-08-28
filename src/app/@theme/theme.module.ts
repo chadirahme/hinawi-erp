@@ -66,6 +66,7 @@ import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import {NbFormComponent, NbShowcaseDialogComponent} from "./components/header/header.component";
 import { AddAttendanceComponent } from './components/add-attendance/add-attendance.component';
+import { CountryListComponent } from './components/country-list/country-list.component';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -117,7 +118,8 @@ const COMPONENTS = [
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
-  NbShowcaseDialogComponent
+  NbShowcaseDialogComponent,
+  CountryListComponent
 
 ];
 

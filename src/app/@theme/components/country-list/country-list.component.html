@@ -1,0 +1,7 @@
+<select class="form-control" [id]="id" (change)="callType($event)"
+        [(ngModel)]="selectValue">
+  <option value="0">--Select--</option>
+  <option *ngFor="let item of hrFieldsList" [ngValue]="item.id">
+    {{item.description}}
+  </option>
+</select>

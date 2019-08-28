@@ -1,0 +1,13 @@
+nb-card {
+  max-width: 900px;
+  max-height: 500px;
+}
+
+/deep/ .form {
+  display: flex;
+  flex-direction: column;
+
+  .text-label {
+    margin-top: 1.5rem;
+  }
+}

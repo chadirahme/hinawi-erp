@@ -11,3 +11,42 @@ export class UserModel {
   username:string;
   password: string;
 }
+
+export class ProspectiveModel {
+
+  recNo:any;
+  name:string;
+  arName: string;
+  fullName:string;
+  active:string;
+  companyName: string;
+  email: string;
+  note:string;
+  contact: string;
+  telephone1: string;
+  telephone2: string; //not null
+  countryRefKey: number;
+  cityRefKey: number;
+  streeRefKey: number;
+  howKnowRefKey: number;
+
+  lstProspectiveCotact: ProspectiveCotact[];
+
+}
+
+export class ProspectiveCotactId{
+  recNo: number;
+  lineNo: number;
+}
+
+export class ProspectiveCotact {
+  prospectiveCotactId: ProspectiveCotactId;
+
+  name: string;
+  telephone1: string;
+  fax: string;
+  mobile1: string;
+
+  email: string;
+  position: string;
+}

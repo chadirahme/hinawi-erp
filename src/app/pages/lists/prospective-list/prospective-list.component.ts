@@ -146,7 +146,7 @@ export class ProspectiveListComponent implements OnInit {
   }
 
   checkResult(msg){
-    alert('done '+ msg);
+    alert(msg);
     console.log(msg);
     this.loadData();
   }

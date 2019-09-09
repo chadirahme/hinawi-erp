@@ -9,8 +9,8 @@ import {WebDashboard, MobileAttendance, ChequeModel, HRListValues} from "../doma
 @Injectable()
 export class ApiAuth {
 
-   //baseUrl: string ='http://localhost:8091/api/';
-   baseUrl: string = 'http://hinawi2.dyndns.org:8091/api/';
+   baseUrl: string ='http://localhost:8091/api/';
+   //baseUrl: string = 'http://hinawi2.dyndns.org:8091/api/';
   //baseUrl: string;
 
     constructor(private http: HttpClient) {
@@ -18,6 +18,9 @@ export class ApiAuth {
     }
      isAuthenticated(): boolean {
     return localStorage.getItem('token') != null && !this.isTokenExpired();
+  }
+    getUserRole(): String {
+    return localStorage.getItem('role');
   }
 
   isTokenExpired(): boolean {
@@ -116,6 +119,9 @@ export class ApiAuth {
     return this.http.get<any[]>(this.baseUrl+'accounting/pettycashchart');
   }
 
+  getFlatsByStatusChart(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl+'realestate/flatsByStatus');
+  }
 
   getHRListFields(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(this.baseUrl+'list/hrListFields');
@@ -137,5 +143,13 @@ export class ApiAuth {
   saveProspectiveContact(prospectiveCotact: any): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(this.baseUrl+'saveProspectiveContact',prospectiveCotact);
   }
+
+  getSalesRepList(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'list/salesRepList');
+  }
+  getProspectiveStatusHistory(custKey): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'list/prospectiveStatusHistory?custKey='+custKey);
+  }
+
 
 }

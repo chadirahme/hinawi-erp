@@ -12,6 +12,7 @@ export class AuthGuard implements CanActivate {
                 private myauthService: ApiAuth) {
     }
     canActivate(): Observable<boolean> | Promise<boolean> | boolean {
+
         console.log(this.myauthService.isAuthenticated());
         if (this.myauthService.isAuthenticated()) {
             return true;

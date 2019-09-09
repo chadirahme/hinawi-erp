@@ -1,0 +1,10 @@
+<nb-card status="success">
+  <nb-card-header> Real Estate Status Chart
+    <i class="ion-heart" *ngIf="isPettyCashFav" (click)="addPettyCashFav()" style="color:red"></i>
+    <i class="ion-heart" *ngIf="!isPettyCashFav" (click)="addPettyCashFav()" style="color:black"></i>
+  </nb-card-header>
+  <nb-card-body>
+    <!--<pettycash-legend-chart-component [legendItems]="chartLegend"></pettycash-legend-chart-component>-->
+    <div echarts [options]="options" class="echart"></div>
+  </nb-card-body>
+</nb-card>

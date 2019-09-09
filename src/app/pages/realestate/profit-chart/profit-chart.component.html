@@ -1,0 +1,10 @@
+<nb-card status="success">
+  <nb-card-header> Profit Data Chart
+    <!--<i class="ion-heart" *ngIf="isPettyCashFav" (click)="addPettyCashFav()" style="color:red"></i>-->
+    <!--<i class="ion-heart" *ngIf="!isPettyCashFav" (click)="addPettyCashFav()" style="color:black"></i>-->
+  </nb-card-header>
+  <nb-card-body>
+    <!--<div echarts [options]="options" class="echart"></div>-->
+    <chart type="line" [data]="data" [options]="options"></chart>
+  </nb-card-body>
+</nb-card>

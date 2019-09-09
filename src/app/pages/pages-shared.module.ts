@@ -5,9 +5,16 @@ import {ThemeModule} from "../@theme/theme.module";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {NgxEchartsModule} from "ngx-echarts";
 import {ChartModule} from "angular2-chartjs";
+import {StatusChartComponent} from "./realestate/status-chart/status-chart.component";
+import {FlattypeChartComponent} from "./realestate/flattype-chart/flattype-chart.component";
+import {SalesChartComponent} from "./realestate/sales-chart/sales-chart.component";
+import {ProfitChartComponent} from "./realestate/profit-chart/profit-chart.component";
+import {MonthlySalesChartComponent} from "./realestate/monthly-sales-chart/monthly-sales-chart.component";
 @NgModule({
-  declarations: [ PettycashEchartsBarComponent,PettycashLegendChartComponentComponent ],
-  exports: [ PettycashEchartsBarComponent,PettycashLegendChartComponentComponent ],
+  declarations: [ PettycashEchartsBarComponent,PettycashLegendChartComponentComponent,StatusChartComponent,FlattypeChartComponent,
+    SalesChartComponent,ProfitChartComponent,MonthlySalesChartComponent ],
+  exports: [ PettycashEchartsBarComponent,PettycashLegendChartComponentComponent,StatusChartComponent,FlattypeChartComponent,
+    SalesChartComponent,ProfitChartComponent,MonthlySalesChartComponent ],
   imports:[ThemeModule, ChartModule,
     NgxEchartsModule,
     NgxChartsModule,]

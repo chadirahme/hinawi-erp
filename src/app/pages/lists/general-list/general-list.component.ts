@@ -218,7 +218,7 @@ export class GeneralListComponent implements OnInit {
 
       this.apiAuth.saveHRListValues(this.hrListValues).subscribe(data => {
         console.log(data);
-        alert('save');
+        alert('Data saved..');
       });
 
     } else {
@@ -237,7 +237,7 @@ export class GeneralListComponent implements OnInit {
       if(data.status == 204)
       alert('Error !!');
       else
-      alert('save');
+        alert('Data saved..');
     });
 
   }

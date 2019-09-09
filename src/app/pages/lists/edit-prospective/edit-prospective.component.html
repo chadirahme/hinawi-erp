@@ -64,8 +64,14 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label>Sub of</label>
-            <input [(ngModel)]="prospective.phone" type="text" class="form-control" placeholder="Sub of"
-                   value="{{prospective.phone}}">
+            <input type="checkbox" class="form-control" (change)="checkValue(hasSub?'A':'B')"
+                   [(ngModel)]="hasSub">
+            <select class="form-control" [(ngModel)]="prospective.parentRefKey" [disabled]="!hasSub">
+              <option value="0">--Select--</option>
+              <option *ngFor="let item of subProspectiveList" [ngValue]="item.recNo">
+                {{item.name}}
+              </option>
+            </select>
           </div>
         </div>
       </div>
@@ -161,15 +167,15 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label>Zip Code </label>
-            <input [(ngModel)]="prospective.hourRate" type="text" class="form-control" placeholder="Zip Code"
-                   value="{{prospective.hourRate}}">
+            <input [(ngModel)]="prospective.zipCode" type="text" class="form-control" placeholder="Zip Code"
+                   value="{{prospective.zipCode}}">
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
             <label>P.O. Box </label>
-            <input [(ngModel)]="prospective.hourRate" type="text" class="form-control" placeholder="P.O. Box"
-                   value="{{prospective.hourRate}}">
+            <input [(ngModel)]="prospective.poBox" type="text" class="form-control" placeholder="P.O. Box"
+                   value="{{prospective.poBox}}">
 
           </div>
         </div>
@@ -227,8 +233,8 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label>Level Of interest </label>
-            <input [(ngModel)]="prospective.hourRate" type="text" class="form-control" placeholder="Level Of interest"
-                   value="{{prospective.hourRate}}">
+            <input [(ngModel)]="prospective.interestLevel" type="text" class="form-control" placeholder="Level Of interest"
+                   value="{{prospective.interestLevel}}">
 
           </div>
         </div>
@@ -250,15 +256,141 @@
     </nb-tab>
 
 
-    <nb-tab tabTitle="Additional Information">
-      Tab content 3
+    <nb-tab tabTitle="Additional Information" style="margin-top: 1.25rem;">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Company Type  </label>
+            <select class="form-control" [(ngModel)]="prospective.companyTypeRefKey">
+              <option value="0">--Select--</option>
+              <option *ngFor="let item of companyTypeList" [ngValue]="item.id">
+                {{item.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Company Size  </label>
+            <select class="form-control" [(ngModel)]="prospective.companySizeRefKey">
+              <option value="0">--Select--</option>
+              <option *ngFor="let item of companySizeList" [ngValue]="item.id">
+                {{item.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Current Software  </label>
+            <select class="form-control" [(ngModel)]="prospective.softwareRefKey">
+              <option value="0">--Select--</option>
+              <option *ngFor="let item of currentSoftwareList" [ngValue]="item.id">
+                {{item.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Sales Rep.  </label>
+            <select class="form-control" [(ngModel)]="prospective.salesRepKey">
+              <option value="0">--Select--</option>
+              <option *ngFor="let item of salesRepList" [ngValue]="item.salesRepKey">
+                {{item.qbLists.fullName}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Number Of Users </label>
+            <input [(ngModel)]="prospective.userNos" type="text" class="form-control" placeholder="Number Of Users"
+                   value="{{prospective.userNos}}">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Number Of Employees </label>
+            <input [(ngModel)]="prospective.empNos" type="text" class="form-control" placeholder="Number Of Employees"
+                   value="{{prospective.empNos}}">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Owner Name  </label>
+            <input [(ngModel)]="prospective.ownername" type="text" class="form-control" placeholder="Owner Name"
+                   value="{{prospective.ownername}}">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Manager Name  </label>
+            <input [(ngModel)]="prospective.managerName" type="text" class="form-control" placeholder="Manager Name"
+                   value="{{prospective.managerName}}">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Last Trial Balance </label>
+            <input [nbDatepicker]="datepicker"  class="form-control" [(ngModel)]="prospective.lastTrialBalance">
+            <nb-datepicker #datepicker></nb-datepicker>
+            <!--<input [(ngModel)]="prospective.lastTrialBalance" type="text" class="form-control" placeholder="Last Trial Balance"-->
+                   <!--value="{{prospective.lastTrialBalance}}">-->
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Auditor Name  </label>
+            <input [(ngModel)]="prospective.auditorName" type="text" class="form-control" placeholder="Auditor Name"
+                   value="{{prospective.auditorName}}">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Working Hours </label>
+            <input [(ngModel)]="prospective.workingHrs" type="text" class="form-control" placeholder="Working Hours"
+                   value="{{prospective.workingHrs}}">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Accountant Name  </label>
+            <input [(ngModel)]="prospective.accountantName" type="text" class="form-control" placeholder="Accountant Name"
+                   value="{{prospective.accountantName}}">
+          </div>
+        </div>
+      </div>
+
     </nb-tab>
 
     <nb-tab tabTitle="Status History">
-      Tab content 4
+      <ng2-smart-table [settings]="statusSettings" [source]="statusHistorySource">
+      </ng2-smart-table>
+
     </nb-tab>
+
+
     <nb-tab tabTitle="Notes">
-      Tab content 5
+      <textarea shape="round" fullWidth [(ngModel)]="prospective.note" type="text" rows="5"
+                class="form-control" id="txtMemo" placeholder="Notes"
+                value="{{prospective.note}}"></textarea>
     </nb-tab>
 
 

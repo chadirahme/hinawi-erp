@@ -1,5 +1,10 @@
 import { NbMenuItem } from '@nebular/theme';
 
+const userRole = localStorage.getItem('role');
+function findRole(allowedRole) {
+return userRole === allowedRole;
+}
+
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'My Dashboard',
@@ -8,6 +13,40 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
 
+  {
+    title: 'Charts',
+    icon: 'nb-bar-chart',
+    children: [
+      {
+        title: 'Sales Data',
+        link: '/pages/realestate/sales-chart',
+      },
+      {
+        title: 'Profit Data',
+        link: '/pages/realestate/profit-chart',
+      },
+      {
+        title: 'Company Data',
+        link: '/pages/chartdashboard',
+      },
+      {
+        title: 'Realestate Status',
+        link: '/pages/realestate/status-chart',
+      },
+      {
+        title: 'Realestate Flat Type',
+        link: '/pages/realestate/flattype-chart',
+      },
+      {
+        title: 'Realestate Monthly Sales',
+        link: '/pages/realestate/monthly-sales-chart',
+      },
+      {
+        title: 'School',
+        link: '/pages/schooldashboard',
+      },
+    ]
+  },
   // {
   //   title: 'Balances Dashboard',
   //   icon: 'nb-home',
@@ -59,7 +98,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
   {
     title: 'Accounting',
-    icon: 'nb-list',
+    icon: 'nb-e-commerce',
     children: [
       {
         title: 'Petty Cash Chart',
@@ -81,9 +120,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
 
+  //realestate
+
   {
     title: 'Reports',
-    icon: 'nb-list',
+    icon: 'nb-tables',
     children: [
       {
         title: 'Cheques Under Collection',
@@ -103,6 +144,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Help & Support',
     icon: 'nb-audio',
+    hidden:!findRole('Admin'),
     children: [
       {
         title: 'YouTube',

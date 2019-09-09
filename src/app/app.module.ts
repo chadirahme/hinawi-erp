@@ -24,6 +24,8 @@ import {PettycashEchartsBarComponent} from "./pages/accounting/pettycash-echarts
 import {BasicAuthHtppInterceptorService} from "./basic-auth-htpp-interceptor-service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthErrorHandler} from "./auth-error-handler";
+import {RoleGuard} from "./role-guard.service";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [AppComponent, LoginComponent,
@@ -36,13 +38,13 @@ import {AuthErrorHandler} from "./auth-error-handler";
     HttpClientModule,
     AppRoutingModule,
     ChartModule,
-
+    //ReactiveFormsModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [ApiAuth,WsTopic,AuthGuard,
+  providers: [ApiAuth,WsTopic,AuthGuard,RoleGuard,
     { provide: APP_BASE_HREF, useValue: '/' },
     {provide: ErrorHandler, useClass: AuthErrorHandler},
     {provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true},

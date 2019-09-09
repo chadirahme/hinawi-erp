@@ -30,9 +30,16 @@ export class BasicAuthHtppInterceptorService implements HttpInterceptor {
           if (error.error instanceof ErrorEvent) {
             // client-side error
             errorMessage = `Error: ${error.error.message}`;
+            console.error(errorMessage);
           } else {
             // server-side error
             errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+            console.error(errorMessage);
+            //alert('API Connection problem at this time !');
+            if(error.status==0){
+              throwError(error);
+              //alert('API Connection problem at this time 123!');
+            }
           }
           //window.alert(errorMessage);
           //return throwError(errorMessage);

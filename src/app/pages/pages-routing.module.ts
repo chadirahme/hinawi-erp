@@ -6,6 +6,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {ChartdashboardComponent} from "./chartdashboard/chartdashboard.component";
 import {SchooldashboardComponent} from "./schooldashboard/schooldashboard.component";
 import {FavdashboardComponent} from "./favdashboard/favdashboard.component";
+import {Role} from "../@core/domains/user.model";
+import {AuthGuard} from "../auth-guard.service";
+import {RoleGuard} from "../role-guard.service";
 
 const routes: Routes = [{
   path: '',
@@ -42,8 +45,14 @@ const routes: Routes = [{
       loadChildren: './accounting/accounting.module#AccountingModule',
     },
     {
+      path: 'realestate',
+      loadChildren: './realestate/realestate.module#RealestateModule',
+    },
+    {
       path: 'help',
       loadChildren: './help/help.module#HelpModule',
+      canActivate: [RoleGuard],
+      data: { roles: [Role.Admin] }
     },
   ],
 }];

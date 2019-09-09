@@ -43,10 +43,11 @@ export class FavdashboardComponent implements OnInit {
 
   ngOnInit() {
     this.items =new Array();
-    //this.items.push("profit");
+    this.items.push("profit");
     //this.items.push("nat");
     //this.items.push("rel");
     this.loadData();
+    this.isProfitFav=true;
   }
 
   loadData(): void {

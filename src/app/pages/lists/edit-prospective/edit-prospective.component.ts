@@ -23,9 +23,16 @@ export class EditProspectiveComponent implements OnInit {
   streetFieldsList: any[];
   selectedStreet: any;
   howYouKnowFieldsList: any[];
+  companyTypeList: any[];
+  companySizeList: any[];
+  currentSoftwareList: any[];
+  salesRepList: any[];
+  statusHistoryList: any[];
+  subProspectiveList: any[];
   prospectiveCotact: ProspectiveCotact;
   prospectiveCotactId: ProspectiveCotactId;
   contacts: ProspectiveCotact[];
+  hasSub: boolean = false;
 
   //contacts: any[];
   contactSource: LocalDataSource = new LocalDataSource();
@@ -90,6 +97,36 @@ export class EditProspectiveComponent implements OnInit {
     },
   };
 
+  statusHistorySource: LocalDataSource = new LocalDataSource();
+  statusSettings = {
+    columns: {
+      // recNo: {
+      //   title: 'ID',
+      //   type: 'number',
+      // },
+      actionDate: {
+        title: 'Date',
+        type: 'string',
+      },
+      statusDescription: {
+        title: 'Status Description',
+        type: 'string',
+      },
+      createdfrom: {
+        title: 'Created From',
+        type: 'string',
+      },
+    },
+    actions: {
+      position: 'right',
+      add: false,
+      edit:false,
+      editable:false,
+      delete:false,
+      columnTitle: '',
+    },
+  };
+
   constructor(protected dialogRef: NbDialogRef<EditProspectiveComponent>,
               private apiAuth: ApiAuth) {
   }
@@ -113,6 +150,8 @@ export class EditProspectiveComponent implements OnInit {
 
     if(this.prospective.recNo>0){
       this.loadContactsData(this.prospective.recNo);
+      this.hasSub=this.prospective.parentRefKey>0;
+      this.loadProspectiveStatusHistory();
     }
     if(this.prospective.countryRefKey>0){
       this.loadCityListFieldsData();
@@ -121,6 +160,11 @@ export class EditProspectiveComponent implements OnInit {
       this.loadStreetListFieldsData();
     }
     this.loadHowYouKnowtListFieldsData();
+    this.loadCompnayTypeListFieldsData();
+    this.loadCompnaySizeListFieldsData();
+    this.loadCurrentSoftwareListFieldsData();
+    this.loadSalesRepData();
+    this.loadSubProspectiveData();
 
 
     //this.value = this.prospective.countryRefKey;
@@ -183,6 +227,65 @@ export class EditProspectiveComponent implements OnInit {
     }
   }
 
+  loadCompnayTypeListFieldsData(): void {
+    try {
+      this.apiAuth.getHRListValues(23).subscribe(data => {
+        this.companyTypeList = data.result;
+        //this.selectedStreet=0;
+      });
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+  loadCompnaySizeListFieldsData(): void {
+    try {
+      this.apiAuth.getHRListValues(145).subscribe(data => {
+        this.companySizeList = data.result;
+        //this.selectedStreet=0;
+      });
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+  loadCurrentSoftwareListFieldsData(): void {
+  try {
+    this.apiAuth.getHRListValues(146).subscribe(data => {
+      this.currentSoftwareList = data.result;
+      //this.selectedStreet=0;
+    });
+  }
+  catch (e) {
+    console.log(e);
+  }
+}
+
+  loadSalesRepData(): void {
+    try {
+      this.apiAuth.getSalesRepList().subscribe(data => {
+        this.salesRepList = data.result;
+        //this.selectedStreet=0;
+      });
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+
+  loadProspectiveStatusHistory(): void {
+    try {
+      this.apiAuth.getProspectiveStatusHistory(this.prospective.recNo).subscribe(data => {
+        //this.statusHistoryList = data.result;
+        this.statusHistorySource.load(data.result);
+      });
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
 
   changeCity(value){
     this.loadStreetListFieldsData();
@@ -203,7 +306,7 @@ export class EditProspectiveComponent implements OnInit {
     console.log('save');
     this.apiAuth.saveProspectives(this.prospective).subscribe(data => {
       console.log(data);
-      this.dialogRef.close('done');
+      this.dialogRef.close('Prospective data saved..');
     });
 
 
@@ -269,4 +372,20 @@ export class EditProspectiveComponent implements OnInit {
     console.log(event.data);
   }
 
+  checkValue(event: any){
+    this.prospective.parentRefKey=0;
+    console.log(event);
+  }
+
+  loadSubProspectiveData(): void {
+    try
+    {
+      this.apiAuth.getProspectiveList().subscribe(data => {
+        this.subProspectiveList=data.result;
+      });
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
 }

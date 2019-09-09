@@ -12,6 +12,11 @@ export class UserModel {
   password: string;
 }
 
+export enum Role {
+  User = 'User',
+  Admin = 'Admin'
+}
+
 export class ProspectiveModel {
 
   recNo:any;

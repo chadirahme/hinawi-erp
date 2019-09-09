@@ -5,7 +5,7 @@ ng build --prod
 make pakage and run
 /Users/chadirahme/IdeaProjects/hinawi-api/target/
 /tomcat/webapps/erp
-C:\tomcat\erp>java -jar -Dspring.profiles.active=test demo-0.0.1-SNAPSHOT.jar
+C:\tomcat\erp>java -jar -Dspring.profiles.active=prod demo-0.0.1-SNAPSHOT.jar
 
 ng g c vendors-list
 
@@ -97,3 +97,23 @@ https://www.npmjs.com/package/ngx-export-as
 logs error like papertrail
 https://scotch.io/bar-talk/error-handling-with-angular-6-tips-and-best-practices192
 
+log exception
+https://www.loggly.com/blog/angular-exception-logging-made-simple/
+
+
+ng g module realestate --routing
+cd realestate
+ng g c status-chart
+
+icons found in
+nebular-icons.scss
+
+
+apply role to menu
+https://loiane.com/2017/08/angular-hide-navbar-login-page/
+https://stackblitz.com/edit/angular-login-hide-navbar-ngif?file=src%2Fapp%2Fheader%2Fheader.component.html
+
+charts sample
+https://medium.com/codingthesmartway-com-blog/angular-chart-js-with-ng2-charts-e21c8262777f
+https://github.com/akveo/ngx-admin/blob/master/src/app/pages/charts/chartjs/chartjs-line.component.ts
+https://canvasjs.com/jquery-charts/column-line-area-chart/

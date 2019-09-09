@@ -12,22 +12,19 @@ export class AuthErrorHandler implements ErrorHandler {
     });
   }
   handleError(error) {
-    console.log('Hio');
+    console.log('AuthErrorHandler >> Hio');
     console.log(error.status);
-    if (error.status === 401 || error.status === 403 || error.status===0) {
+    if (error.status === 401 || error.status === 403 || error.status === 0) {
       //router.navigate(['auth/login']);
      // setTimeout(() => this.router.navigate(['auth/login', { error: error }], { skipLocationChange: true}));
       this.ngZone.run(() => {
         this.router.navigate(['auth/login']);
       });
-
      // this.ngZone.run(() => { console.log('Outside Done!'); });
-
     }
     // IMPORTANT: Rethrow the error otherwise it gets swallowed
     throw error;
   }
-
 
   //constructor(private injector: Injector,private router1: Router) { }
 

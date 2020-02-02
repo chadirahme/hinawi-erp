@@ -2,28 +2,24 @@ import {Component, OnInit, OnDestroy, AfterViewInit} from '@angular/core';
 import {NbThemeService} from "@nebular/theme";
 import {ApiAuth} from "../../../@core/services/api.auth";
 import { takeWhile } from 'rxjs/operators';
-import {WebDashboard} from "../../../@core/domains/webdashboard.model";
+
 @Component({
-  selector: 'pettycash-echarts-bar',
-//   template: `
-// <pettycash-legend-chart-component [legendItems]="chartLegend"></pettycash-legend-chart-component>
-//     <div echarts [options]="options" class="echart"></div>
-//   `,
-   templateUrl: './pettycash-echarts-bar.component.html',
-   styleUrls: ['./pettycash-echarts-bar.component.scss']
+  selector: 'quotation-chart',
+  templateUrl: './quotation-chart.component.html',
+  styleUrls: ['./quotation-chart.component.scss']
 })
-export class PettycashEchartsBarComponent implements AfterViewInit, OnDestroy {
+export class QuotationChartComponent implements AfterViewInit, OnDestroy {
   private alive = true;
   options: any = {};
   themeSubscription: any;
   chartLegend: {iconColor: string; title: string}[];
   currentTheme: string;
-  year2018:any[];
-  year2019:any[];
-  webDashboard : WebDashboard;
+  year2018: any[];
+  year2019: any[];
+ // webDashboard: WebDashboard;
   isPettyCashFav = false;
 
-  constructor(private themeService: NbThemeService,private apiAuth: ApiAuth) {
+  constructor(private themeService: NbThemeService, private apiAuth: ApiAuth) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
@@ -38,29 +34,28 @@ export class PettycashEchartsBarComponent implements AfterViewInit, OnDestroy {
   ngOnInit() {
     console.log("onlint");
     this.loadData();
-    this.loadDashBoardData();
+   // this.loadDashBoardData();
     console.log("onlint1");
   }
 
   loadData(): void {
-    try
-    {
-      this.year2018=[];
-      this.year2019=[];
-      this.apiAuth.getPettyCashChart().subscribe(data => {
+    try {
+      this.year2018 = [];
+      this.year2019 = [];
+      this.apiAuth.getQuotationChartByYear().subscribe(data => {
         let payments2018 = data["2018"];
-        for (var j=0; j<12; j++) {
+        for (var j = 0; j < 12; j++) {
           let payment = payments2018[j];
-          if(payment==null)
-          this.year2018.push(0);
+          if (payment == null)
+            this.year2018.push(0);
           else
             this.year2018.push(payment["total"]);
         }
         let payments2019 = data["2019"];
-        for (var j=0; j<12; j++) {
+        for (var j = 0; j < 12; j++) {
           let payment = payments2019[j];
-          if(payment==null)
-          this.year2019.push(0);
+          if (payment == null)
+            this.year2019.push(0);
           else
             this.year2019.push(payment["total"]);
         }
@@ -90,7 +85,8 @@ export class PettycashEchartsBarComponent implements AfterViewInit, OnDestroy {
       // },
     ];
   }
-  ngAfterViewInit(){
+
+  ngAfterViewInit() {
     console.log("ngAfterViewInit");
   }
 
@@ -133,7 +129,7 @@ export class PettycashEchartsBarComponent implements AfterViewInit, OnDestroy {
         xAxis: [
           {
             type: 'category',
-            data: [ 'Jan',
+            data: ['Jan',
               'Feb',
               'Mar',
               'Apr',
@@ -199,55 +195,6 @@ export class PettycashEchartsBarComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.themeSubscription!=null)
     this.themeSubscription.unsubscribe();
   }
-
-  addPettyCashFav(){
-    this.isPettyCashFav=!this.isPettyCashFav;
-    this.saveData("pettycash" , !this.isPettyCashFav);
-  }
-
-  loadDashBoardData(): void {
-    try {
-      const that = this;
-      this.apiAuth.getUserDashboards(localStorage.getItem('userid')).subscribe(data => {
-        data.result.forEach(function (value) {
-          if(value.dashName=='pettycash')
-            that.isPettyCashFav=true;
-          //console.log(value);
-        });
-      });
-    }
-    catch (e) {
-      console.log(e);
-    }
-  }
-
-  saveData(dashname , isDelete): void {
-    try
-    {
-      // console.log("grade>> "+ this.apiParam.grade);
-      this.webDashboard =new WebDashboard();
-      this.webDashboard.userId=+localStorage.getItem('userid');
-      this.webDashboard.dashName=dashname;
-      this.webDashboard.dashOrder=0;
-
-      if(!isDelete) {
-        this.apiAuth.addWebDashboard(this.webDashboard).subscribe(data => {
-          console.log(data);
-        });
-      }
-      else {
-        this.apiAuth.deleteWebDashBoard(this.webDashboard).subscribe(data => {
-          console.log(data);
-        });
-      }
-    }
-
-    catch (e) {
-      console.log(e);
-    }
-  }
-
 }

@@ -46,7 +46,7 @@ import {ReactiveFormsModule} from "@angular/forms";
   bootstrap: [AppComponent],
   providers: [ApiAuth,WsTopic,AuthGuard,RoleGuard,
     { provide: APP_BASE_HREF, useValue: '/' },
-    {provide: ErrorHandler, useClass: AuthErrorHandler},
+    //{provide: ErrorHandler, useClass: AuthErrorHandler},
     {provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true},
 
 ],

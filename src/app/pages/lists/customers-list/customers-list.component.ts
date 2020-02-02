@@ -100,7 +100,7 @@ export class CustomersListComponent implements OnInit {
     console.log(event.newData);
     event.confirm.resolve(event.newData);
     //alert('save');
-    this.wsTopic.sendMessage(event.newData.name);
+    this.wsTopic.sendMessage("Data Updated : "+event.newData.name);
   }
 
   onDeleteConfirm(event): void {

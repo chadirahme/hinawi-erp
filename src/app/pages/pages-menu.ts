@@ -18,6 +18,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-bar-chart',
     children: [
       {
+        title: 'Quotation Chart',
+        link: '/pages/accounting/quotationchart',
+      },
+
+      {
+        title: 'Petty Cash Chart',
+        link: '/pages/accounting/pettycashchart',
+      },
+
+      {
         title: 'Sales Data',
         link: '/pages/realestate/sales-chart',
       },
@@ -65,6 +75,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   //   link: '/pages/schooldashboard',
   //   home: false,
   // },
+
   {
     title: 'Lists',
     icon: 'nb-list',
@@ -96,6 +107,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
 
+
   {
     title: 'Accounting',
     icon: 'nb-e-commerce',
@@ -113,6 +125,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Approve Purchase Orders',
         link: '/pages/accounting/po',
       },
+      {
+        title: 'Quotation Chart',
+        link: '/pages/accounting/quotationchart',
+      },
       // {
       //   title: 'Approve Cheques Issued',
       //   link: '/pages/lists/vendors-list',
@@ -120,7 +136,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
 
-  //realestate
 
   {
     title: 'Reports',

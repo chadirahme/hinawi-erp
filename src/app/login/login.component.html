@@ -1,5 +1,7 @@
 <h1 id="title" class="title">Login</h1>
-<p class="sub-title">Hello! Log in with your email.</p>
+<!--<p class="sub-title">Hello! Log in with your email.</p>-->
+<p class="sub-title" style="color:red ;">Hello! You are using the DEMO file.</p>
+<p class="sub-title" style="color:red ;">You will be automatically logged in shortly...</p>
 
 <nb-alert *ngIf="errors?.length" outline="danger" role="alert">
 <p class="alert-title"><b>Oh snap!</b></p>
@@ -73,12 +75,21 @@
   <!--<a class="forgot-password" routerLink="../request-password">Forgot Password?</a>-->
   <!--</div>    &lt;!&ndash;[disabled]="messages?.length"-->
 
-  <button nbButton
+  <button nbButton *ngIf="!demo"
           fullWidth
           status="success"
           [disabled]="!form.valid"
           [class.btn-pulse]="submitted">
     Log In
+  </button>
+  <p></p>
+
+  <button nbButton *ngIf="!demo"
+          fullWidth
+          status="info"
+          (click)="onNavigate()"
+          [class.btn-pulse]="submitted">
+    Demo
   </button>
 </form>
 

@@ -4,10 +4,10 @@ import * as SockJS from 'sockjs-client';
 @Injectable()
 export class WsTopic {
 
-   //baseUrl: string ='http://localhost:8091/gkz-stomp-endpoint';
-   //baseUrl: string = 'http://hinawi2.dyndns.org:8091/gkz-stomp-endpoint';
+   //baseUrl: string ='http://localhost:8091/ws';
+   baseUrl: string = 'http://hinawi2.dyndns.org:8091/ws';
   private stompClient = null;
-  baseUrl: string;
+  //baseUrl: string;
 
 
   @Output() change: EventEmitter<string> = new EventEmitter();
@@ -33,13 +33,17 @@ export class WsTopic {
 
   sendMessage(message) {
     //this.name="chadi rahme";
+    console.log('sendMessage>> '+message);
     if (this.stompClient == null) {
+      console.log('stompClient = nul');
       this.connect();
     }
+    console.log('stompClient != nul');
     this.stompClient.send(
-      '/gkz/hello',
+      '/app/hello',
       {},
-      JSON.stringify({ 'userName': localStorage.getItem('username') , 'message':message ,'userId': 1 })
+      JSON.stringify({ 'userName': localStorage.getItem('username') ,
+        'message':message ,'userId': localStorage.getItem('userid') })
     );
   }
 

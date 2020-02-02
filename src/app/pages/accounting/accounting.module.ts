@@ -16,6 +16,7 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {NgxEchartsModule} from "ngx-echarts";
 import {PagesModule} from "../pages.module";
 import {PagesSharedModule} from "../pages-shared.module";
+import { QuotationChartComponent } from './quotation-chart/quotation-chart.component';
 
 const COMPONENTS = [
   AccountingComponent,
@@ -51,6 +52,7 @@ const MODULES = [
         EditPoComponent,
         PettycashComponent,
         EditPettycashComponent,
+       // QuotationChartComponent,
 
         //PettycashEchartsBarComponent,
         //PettycashLegendChartComponentComponent,

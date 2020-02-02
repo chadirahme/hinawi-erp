@@ -10,11 +10,12 @@ import {FlattypeChartComponent} from "./realestate/flattype-chart/flattype-chart
 import {SalesChartComponent} from "./realestate/sales-chart/sales-chart.component";
 import {ProfitChartComponent} from "./realestate/profit-chart/profit-chart.component";
 import {MonthlySalesChartComponent} from "./realestate/monthly-sales-chart/monthly-sales-chart.component";
+import {QuotationChartComponent} from "./accounting/quotation-chart/quotation-chart.component";
 @NgModule({
   declarations: [ PettycashEchartsBarComponent,PettycashLegendChartComponentComponent,StatusChartComponent,FlattypeChartComponent,
-    SalesChartComponent,ProfitChartComponent,MonthlySalesChartComponent ],
+    SalesChartComponent,ProfitChartComponent,MonthlySalesChartComponent,QuotationChartComponent ],
   exports: [ PettycashEchartsBarComponent,PettycashLegendChartComponentComponent,StatusChartComponent,FlattypeChartComponent,
-    SalesChartComponent,ProfitChartComponent,MonthlySalesChartComponent ],
+    SalesChartComponent,ProfitChartComponent,MonthlySalesChartComponent,QuotationChartComponent ],
   imports:[ThemeModule, ChartModule,
     NgxEchartsModule,
     NgxChartsModule,]

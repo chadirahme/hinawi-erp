@@ -5,6 +5,7 @@ import {AccountingComponent} from "./accounting.component";
 import {PoComponent} from "./po/po.component";
 import {PettycashComponent} from "./pettycash/pettycash.component";
 import {PettycashEchartsBarComponent} from "./pettycash-echarts-bar/pettycash-echarts-bar.component";
+import {QuotationChartComponent} from "./quotation-chart/quotation-chart.component";
 
 const routes: Routes = [{
     path: '',
@@ -25,7 +26,11 @@ const routes: Routes = [{
       {
         path: 'pettycashchart',
         component: PettycashEchartsBarComponent,
-      }
+      },
+      {
+        path: 'quotationchart',
+        component: QuotationChartComponent,
+      },
 
     ],
 }];

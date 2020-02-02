@@ -9,8 +9,8 @@ import {WebDashboard, MobileAttendance, ChequeModel, HRListValues} from "../doma
 @Injectable()
 export class ApiAuth {
 
-   baseUrl: string ='http://localhost:8091/api/';
-   //baseUrl: string = 'http://hinawi2.dyndns.org:8091/api/';
+   //baseUrl: string ='http://localhost:8091/api/';
+   baseUrl: string = 'http://hinawi2.dyndns.org:8092/api/';
   //baseUrl: string;
 
     constructor(private http: HttpClient) {
@@ -117,6 +117,10 @@ export class ApiAuth {
 
   getPettyCashChart(): Observable<any[]> {
     return this.http.get<any[]>(this.baseUrl+'accounting/pettycashchart');
+  }
+
+  getQuotationChartByYear(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl+'accounting/quotationChartByYear');
   }
 
   getFlatsByStatusChart(): Observable<any[]> {

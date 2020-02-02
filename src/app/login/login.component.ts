@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit{
   messages: string[];
   user: UserModel;
   submitted: boolean;
+  demo: boolean =false;
   //form: FormGroup;
 
   @ViewChild(NgForm) form;
@@ -37,9 +38,13 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit() {
+    let url = window.location.href;
+    this.demo= url.indexOf("demo")>0;
+    console.log("demo="+this.demo);
+
     this.user=new UserModel();
-    this.user.email="";//"eng.chadi@gmail.com";
-    this.user.password="";
+    this.user.email="demo@hinawi.com";//"demo@hinawi.com";
+    this.user.password="Passw0rd!";//"Passw0rd!";
     this.user.username="";
     this.errors= [];
     this.messages= [];
@@ -48,6 +53,10 @@ export class LoginComponent implements OnInit{
     //   password: ['', Validators.required]
     // });
 
+    //for demo purpose call the login automatically
+    if (this.demo==true) {
+       this.login();
+    }
 
   }
 
@@ -108,6 +117,11 @@ export class LoginComponent implements OnInit{
     this.messages= [];
     this.errors.push('Connection problem at this time !');
     //alert(error.message); // error path;
+  }
+
+  onNavigate(){
+    //this.router.navigateByUrl("https://www.google.com");
+    window.location.href="http://hinawi2.dyndns.org:8181/demo/#/auth/login";
   }
 
 }

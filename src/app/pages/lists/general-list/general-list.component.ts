@@ -22,6 +22,11 @@ export class GeneralListComponent implements OnInit {
 
   settings = {
     //selectMode: 'multi', // just add this
+    actions: {
+      add: true,
+      edit: true,
+      delete: false,
+    },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',

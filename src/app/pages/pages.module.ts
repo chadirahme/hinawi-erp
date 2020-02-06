@@ -32,6 +32,7 @@ import {PagesSharedModule} from "./pages-shared.module";
 import {PettycashEchartsBarComponent} from "./accounting/pettycash-echarts-bar/pettycash-echarts-bar.component";
 import {PettycashLegendChartComponentComponent} from "./accounting/pettycash-legend-chart-component/pettycash-legend-chart-component.component";
 import {AuthErrorHandler} from "../auth-error-handler";
+import {SimpleDateComponent} from "../mycomponent/SimpleDateComponent";
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -76,7 +77,8 @@ const PAGES_COMPONENTS = [
   providers: [OrdersChartService,OrdersProfitChartService,ProfitChartService,PeriodsService,
     LayoutService,
     //{provide: ErrorHandler, useClass: AuthErrorHandler},
-  ]
+  ],
+  // entryComponents: [SimpleDateComponent]
 })
 export class PagesModule {
 }

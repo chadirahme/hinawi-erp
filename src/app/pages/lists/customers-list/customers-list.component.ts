@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {LocalDataSource} from "ng2-smart-table";
 import {ApiAuth} from "../../../@core/services/api.auth";
 import {WsTopic} from "../../../@core/services/ws.topic";
+import {DatePipe, DecimalPipe} from "@angular/common";
+import {balance} from "../../../mycomponent/balance.pipe";
 
 @Component({
   selector: 'ngx-customers-list',
@@ -13,6 +15,11 @@ export class CustomersListComponent implements OnInit {
   customers: any[];
   source: LocalDataSource = new LocalDataSource();
   settings = {
+    actions: {
+      add: false,
+      edit: false,
+      delete: false,
+    },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -53,6 +60,19 @@ export class CustomersListComponent implements OnInit {
       balance: {
         title: 'Balance',
         type: 'number',
+        valuePrepareFunction: (amount) => {
+           return this.cp.transform(amount);
+        }
+      },
+      timeCreated:{
+        title: 'Date Created',
+        type: 'date',
+        valuePrepareFunction: (date) => {
+          if (date) {
+            return new DatePipe('en-GB').transform(date, 'dd.MM.yyyy');
+          }
+          return null;
+        }
       },
       active: {
         title: 'Active',
@@ -60,7 +80,8 @@ export class CustomersListComponent implements OnInit {
       },
     },
   };
-  constructor(private apiAuth: ApiAuth, private wsTopic: WsTopic) { }
+  constructor(private apiAuth: ApiAuth, private wsTopic: WsTopic,private cp: DecimalPipe,
+  private balancePie: balance) { }
 
   ngOnInit() {
     this.loadData();

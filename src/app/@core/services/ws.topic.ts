@@ -5,15 +5,24 @@ import * as SockJS from 'sockjs-client';
 export class WsTopic {
 
    //baseUrl: string ='http://localhost:8091/ws';
-   baseUrl: string = 'http://hinawi2.dyndns.org:8091/ws';
+    baseUrl: string = 'http://hinawi2.dyndns.org:8091/ws';
   private stompClient = null;
+  demo: boolean =false;
   //baseUrl: string;
 
 
   @Output() change: EventEmitter<string> = new EventEmitter();
 
   constructor(){
-    //this.baseUrl = baseUrl;
+    let url = window.location.href;
+    this.demo= url.indexOf("demo")>0;
+    if (this.demo==true) {
+      this.baseUrl = 'http://hinawi2.dyndns.org:8092/ws/';
+    }
+    else{
+      //this.baseUrl = 'http://hinawi2.dyndns.org:8091/api/';
+      this.baseUrl = 'http://localhost:8091/ws/';
+    }
   }
 
   connect() {

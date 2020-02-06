@@ -168,8 +168,8 @@ export class HeaderComponent implements OnInit {
     }).onClose.subscribe (name => name && this.attDone(name));
   }
 
-  attDone(name){
-    alert('done '+ name);
+  attDone(msg){
+    alert(msg);
   }
 
   openWindow() {

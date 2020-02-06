@@ -17,8 +17,10 @@ import { StudetnsListComponent } from './studetns-list/studetns-list.component';
 import { MobileAttendanceComponent } from './mobile-attendance/mobile-attendance.component';
 import { GeneralListComponent } from './general-list/general-list.component';
 import {NbSelectModule, NbDatepickerModule, NbWindowModule, NbDialogModule, NbTabsetModule} from "@nebular/theme";
-import {CommonModule} from "@angular/common";
+import {CommonModule, DecimalPipe} from "@angular/common";
 import { EditProspectiveComponent } from './edit-prospective/edit-prospective.component';
+import {SimpleDateComponent} from "../../mycomponent/SimpleDateComponent";
+import {balance} from "../../mycomponent/balance.pipe";
 
 const COMPONENTS = [
     ListsComponent,
@@ -55,8 +57,10 @@ const MODULES = [
         MobileAttendanceComponent,
         GeneralListComponent,
         EditProspectiveComponent,
+        balance
     ],
     providers: [
+      DecimalPipe,balance
         //...SERVICES,
     ],
     entryComponents: [EditProspectiveComponent]

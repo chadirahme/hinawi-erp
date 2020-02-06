@@ -17,11 +17,11 @@ export class MobileAttendanceComponent implements OnInit {
       add: false,
       edit: false,
       delete: false,
-      custom: [
-        { name: 'editrecord', title: '<div class="customformat"><i class="nb-email"></i></div>' }
-      ],
-      position: 'right',
-      class:'action-column'
+      // custom: [
+      //   { name: 'editrecord', title: '<div class="customformat"><i class="nb-email"></i></div>' }
+      // ],
+      // position: 'right',
+      // class:'action-column'
     },
     // actions: false,
     // add: {

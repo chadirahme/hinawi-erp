@@ -3,6 +3,8 @@ import {LocalDataSource} from "ng2-smart-table";
 import {ApiAuth} from "../../../@core/services/api.auth";
 import {NbDialogService} from "@nebular/theme";
 import {EditProspectiveComponent} from "../edit-prospective/edit-prospective.component";
+import {DatePipe} from "@angular/common";
+import {SimpleDateComponent} from "../../../mycomponent/SimpleDateComponent";
 
 @Component({
   selector: 'ngx-prospective-list',
@@ -69,7 +71,17 @@ export class ProspectiveListComponent implements OnInit {
       //   title: 'Note',
       //   type: 'string',
       // },
-
+      timeCreated:{
+        title: 'Date Created',
+        type: 'date',
+       // renderComponent: SimpleDateComponent,
+        valuePrepareFunction: (date) => {
+          if (date) {
+            return new DatePipe('en-GB').transform(date, 'dd.MM.yyyy');
+          }
+          return null;
+        }
+      },
       active: {
         title: 'Active',
         type: 'string',
@@ -79,6 +91,7 @@ export class ProspectiveListComponent implements OnInit {
       position: 'right',
       add: true,
       edit:true,
+      delete:false,
       editable:false,
       columnTitle: '',
     },
@@ -135,6 +148,16 @@ export class ProspectiveListComponent implements OnInit {
     }
   }
 
+  onDelete(event): void {
+    if (window.confirm('Are you sure you want to delete?' + event.data.name)) {
+      //event.confirm.resolve();
+      this.source.remove(event.data);
+     // this.loadData();
+    } else {
+      //event.confirm.reject();
+    }
+  }
+
   createRow(event: any) {
     // console.log('on add event: ', event);
     this.dialogService.open(EditProspectiveComponent, {
@@ -146,9 +169,11 @@ export class ProspectiveListComponent implements OnInit {
   }
 
   checkResult(msg){
-    alert(msg);
-    console.log(msg);
-    this.loadData();
+    if(msg) { //check if closed dialog without save
+      alert(msg);
+      console.log(msg);
+      this.loadData();
+    }
   }
 
   editRow(event) {

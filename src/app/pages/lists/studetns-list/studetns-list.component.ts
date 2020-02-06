@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiAuth} from "../../../@core/services/api.auth";
 import {LocalDataSource} from "ng2-smart-table";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'studetns-list',
@@ -12,6 +13,11 @@ export class StudetnsListComponent implements OnInit {
   students: any[];
   source: LocalDataSource = new LocalDataSource();
   settings = {
+    actions: {
+      add: false,
+      edit: false,
+      delete: false,
+    },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -44,6 +50,16 @@ export class StudetnsListComponent implements OnInit {
       enLastName: {
         title: 'Last Name',
         type: 'string',
+      },
+      timeCreated:{
+        title: 'Date Created',
+        type: 'date',
+        valuePrepareFunction: (date) => {
+          if (date) {
+            return new DatePipe('en-GB').transform(date, 'dd.MM.yyyy');
+          }
+          return null;
+        }
       },
     },
   };

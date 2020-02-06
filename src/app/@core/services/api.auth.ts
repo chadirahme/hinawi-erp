@@ -9,11 +9,21 @@ import {WebDashboard, MobileAttendance, ChequeModel, HRListValues} from "../doma
 @Injectable()
 export class ApiAuth {
 
+  demo: boolean =false;
    //baseUrl: string ='http://localhost:8091/api/';
-   baseUrl: string = 'http://hinawi2.dyndns.org:8092/api/';
+   baseUrl: string = 'http://hinawi2.dyndns.org:8091/api/';
   //baseUrl: string;
 
     constructor(private http: HttpClient) {
+      let url = window.location.href;
+      this.demo= url.indexOf("demo")>0;
+      if (this.demo==true) {
+        this.baseUrl = 'http://hinawi2.dyndns.org:8092/api/';
+      }
+      else{
+        //this.baseUrl = 'http://hinawi2.dyndns.org:8091/api/';
+        this.baseUrl = 'http://localhost:8091/api/';
+      }
       //this.baseUrl = baseUrl;
     }
      isAuthenticated(): boolean {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LocalDataSource} from "ng2-smart-table";
 import {ApiAuth} from "../../../@core/services/api.auth";
+import {DatePipe, DecimalPipe} from "@angular/common";
 
 @Component({
   selector: 'vendors-list',
@@ -12,6 +13,11 @@ export class VendorsListComponent implements OnInit {
   customers: any[];
   source: LocalDataSource = new LocalDataSource();
   settings = {
+    actions: {
+      add: false,
+      edit: false,
+      delete: false,
+    },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -29,10 +35,10 @@ export class VendorsListComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
-      custKey: {
-        title: 'ID',
-        type: 'number',
-      },
+      // custKey: {
+      //   title: 'ID',
+      //   type: 'number',
+      // },
       name: {
         title: 'Name',
         type: 'string',
@@ -52,6 +58,19 @@ export class VendorsListComponent implements OnInit {
       balance: {
         title: 'Balance',
         type: 'number',
+        valuePrepareFunction: (amount) => {
+          return this.cp.transform(amount);
+        }
+      },
+      timeCreated:{
+        title: 'Date Created',
+        type: 'date',
+        valuePrepareFunction: (date) => {
+          if (date) {
+            return new DatePipe('en-GB').transform(date, 'dd.MM.yyyy');
+          }
+          return null;
+        }
       },
       active: {
         title: 'Active',
@@ -60,7 +79,7 @@ export class VendorsListComponent implements OnInit {
     },
   };
 
-  constructor(private apiAuth: ApiAuth) {
+  constructor(private apiAuth: ApiAuth,private cp: DecimalPipe) {
   }
 
   ngOnInit() {

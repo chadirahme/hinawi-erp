@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit{
     console.log("demo="+this.demo);
 
     this.user=new UserModel();
-    this.user.email="demo@hinawi.com";//"demo@hinawi.com";
-    this.user.password="Passw0rd!";//"Passw0rd!";
+    this.user.email="";//"demo@hinawi.com";
+    this.user.password="";//"Passw0rd!";
     this.user.username="";
     this.errors= [];
     this.messages= [];
@@ -55,6 +55,8 @@ export class LoginComponent implements OnInit{
 
     //for demo purpose call the login automatically
     if (this.demo==true) {
+      this.user.email="demo@hinawi.com";//"demo@hinawi.com";
+      this.user.password="Passw0rd!";//"Passw0rd!";
        this.login();
     }
 

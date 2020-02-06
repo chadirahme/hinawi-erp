@@ -3,7 +3,7 @@
 </p>
 
 <nb-card-body>
-  <input #search nbInput fullWidth status="info" type="text" placeholder="Search in all columns..." (keyup)="onSearch(search.value)">
+  <!--<input #search nbInput fullWidth status="info" type="text" placeholder="Search in all columns..." (keyup)="onSearch(search.value)">-->
 
   <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
                    (createConfirm)="onCreateConfirm($event)">

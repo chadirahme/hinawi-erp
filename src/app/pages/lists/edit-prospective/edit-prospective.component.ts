@@ -3,6 +3,7 @@ import {ApiAuth} from "../../../@core/services/api.auth";
 import {NbDialogRef} from "@nebular/theme";
 import {ProspectiveModel, ProspectiveCotact, ProspectiveCotactId} from "../../../@core/domains/user.model";
 import {LocalDataSource} from "ng2-smart-table";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'edit-prospective',
@@ -291,6 +292,9 @@ export class EditProspectiveComponent implements OnInit {
     this.loadStreetListFieldsData();
   }
 
+  closeDialog(){
+    this.dialogRef.close();
+  }
   submit(){
     // this.mobileAttendance=new MobileAttendance();
     // this.mobileAttendance.userId=+localStorage.getItem('userid');
@@ -303,11 +307,23 @@ export class EditProspectiveComponent implements OnInit {
 
    // this.value = 1101;
     //console.log(this.value);
+    if(!this.prospective.name){
+      alert('English Name must be filled !!');
+      return;
+    }
     console.log('save');
     this.apiAuth.saveProspectives(this.prospective).subscribe(data => {
       console.log(data);
       this.dialogRef.close('Prospective data saved..');
+    },(err: HttpErrorResponse) => {
+      if (err.error instanceof Error) {
+        console.log("Client-side error occured.");
+      } else {
+        console.log("Server-side error occured.");
+        alert("Server-side error occured.");
+      }
     });
+    //);
 
 
   }

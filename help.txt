@@ -117,3 +117,6 @@ charts sample
 https://medium.com/codingthesmartway-com-blog/angular-chart-js-with-ng2-charts-e21c8262777f
 https://github.com/akveo/ngx-admin/blob/master/src/app/pages/charts/chartjs/chartjs-line.component.ts
 https://canvasjs.com/jquery-charts/column-line-area-chart/
+
+https://www.mssqltips.com/sqlservertip/4328/access-sql-server-instance-on-azure-vm-using-local-copy-of-management-studio/
+

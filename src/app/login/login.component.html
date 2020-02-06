@@ -1,7 +1,7 @@
 <h1 id="title" class="title">Login</h1>
 <!--<p class="sub-title">Hello! Log in with your email.</p>-->
-<p class="sub-title" style="color:red ;">Hello! You are using the DEMO file.</p>
-<p class="sub-title" style="color:red ;">You will be automatically logged in shortly...</p>
+<p *ngIf="demo" class="sub-title" style="color:red ;">Hello! You are using the DEMO file.</p>
+<p *ngIf="demo" class="sub-title" style="color:red ;">You will be automatically logged in shortly...</p>
 
 <nb-alert *ngIf="errors?.length" outline="danger" role="alert">
 <p class="alert-title"><b>Oh snap!</b></p>

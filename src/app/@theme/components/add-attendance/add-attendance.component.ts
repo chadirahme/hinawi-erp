@@ -2,6 +2,7 @@ import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {ApiAuth} from "../../../@core/services/api.auth";
 import {MobileAttendance} from "../../../@core/domains/webdashboard.model";
 import {NbDialogRef} from "@nebular/theme";
+import {} from 'googlemaps';
 /// <reference types="@types/googlemaps" />
 
 @Component({
@@ -137,7 +138,7 @@ export class AddAttendanceComponent implements OnInit {
 
     this.authService.addMobileAttendance(this.mobileAttendance).subscribe(data => {
       console.log(data);
-      this.dialogRef.close(this.selectedStatus);
+      this.dialogRef.close(data.message);
     });
   }
 

@@ -13,50 +13,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
 
-  {
-    title: 'Charts',
-    icon: 'nb-bar-chart',
-    children: [
-      {
-        title: 'Quotation Chart',
-        link: '/pages/accounting/quotationchart',
-      },
 
-      {
-        title: 'Petty Cash Chart',
-        link: '/pages/accounting/pettycashchart',
-      },
-
-      {
-        title: 'Sales Data',
-        link: '/pages/realestate/sales-chart',
-      },
-      {
-        title: 'Profit Data',
-        link: '/pages/realestate/profit-chart',
-      },
-      {
-        title: 'Company Data',
-        link: '/pages/chartdashboard',
-      },
-      {
-        title: 'Realestate Status',
-        link: '/pages/realestate/status-chart',
-      },
-      {
-        title: 'Realestate Flat Type',
-        link: '/pages/realestate/flattype-chart',
-      },
-      {
-        title: 'Realestate Monthly Sales',
-        link: '/pages/realestate/monthly-sales-chart',
-      },
-      {
-        title: 'School',
-        link: '/pages/schooldashboard',
-      },
-    ]
-  },
   // {
   //   title: 'Balances Dashboard',
   //   icon: 'nb-home',
@@ -81,10 +38,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-list',
     children: [
       {
-        title: 'General List',
-        link: '/pages/lists/general-list',
-      },
-      {
         title: 'Customers List',
         link: '/pages/lists/customers-list',
       },
@@ -103,6 +56,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Mobile Attendance',
         link: '/pages/lists/mobile-attendance',
+      },
+      {
+        title: 'General List',
+        link: '/pages/lists/general-list',
       },
     ]
   },
@@ -153,6 +110,51 @@ export const MENU_ITEMS: NbMenuItem[] = [
       //   title: 'All Payments Report',
       //   link: '/pages/lists/vendors-list',
       // },
+    ]
+  },
+
+  {
+    title: 'Charts',
+    icon: 'nb-bar-chart',
+    children: [
+      {
+        title: 'Quotation Chart',
+        link: '/pages/accounting/quotationchart',
+      },
+
+      {
+        title: 'Petty Cash Chart',
+        link: '/pages/accounting/pettycashchart',
+      },
+
+      {
+        title: 'Sales Data',
+        link: '/pages/realestate/sales-chart',
+      },
+      {
+        title: 'Profit Data',
+        link: '/pages/realestate/profit-chart',
+      },
+      {
+        title: 'Company Data',
+        link: '/pages/chartdashboard',
+      },
+      {
+        title: 'Realestate Status',
+        link: '/pages/realestate/status-chart',
+      },
+      {
+        title: 'Realestate Flat Type',
+        link: '/pages/realestate/flattype-chart',
+      },
+      {
+        title: 'Realestate Monthly Sales',
+        link: '/pages/realestate/monthly-sales-chart',
+      },
+      {
+        title: 'School',
+        link: '/pages/schooldashboard',
+      },
     ]
   },
 

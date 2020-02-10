@@ -18,11 +18,11 @@ export class ApiAuth {
       let url = window.location.href;
       this.demo= url.indexOf("demo")>0;
       if (this.demo==true) {
-        this.baseUrl = 'http://hinawi2.dyndns.org:8092/api/';
+        this.baseUrl = 'https://hinawi2.dyndns.org:8092/api/';
       }
       else{
-        //this.baseUrl = 'http://hinawi2.dyndns.org:8091/api/';
-        this.baseUrl = 'http://localhost:8091/api/';
+        this.baseUrl = 'https://hinawi2.dyndns.org:8091/api/';
+        //this.baseUrl = 'https://localhost:8091/api/';
       }
       //this.baseUrl = baseUrl;
     }

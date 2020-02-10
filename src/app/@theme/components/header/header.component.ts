@@ -50,7 +50,7 @@ export class NbFormComponent {
       <nb-card-body>
          <nb-list>
         <nb-list-item *ngFor="let message of messages">
-          {{ message.userName }} :  {{ message.message }}
+        {{ message.userName }} :  {{ message.message }}
         </nb-list-item>
       </nb-list>
       </nb-card-body>

@@ -51,22 +51,23 @@ export class ProspectiveListComponent implements OnInit {
         title: 'Arabic Name',
         type: 'string',
       },
-      companyName: {
-        title: 'Company Name',
+      telephone1: {
+        title: 'Telephone',
+        type: 'string',
+      },
+      telephone2: {
+        title: 'Alt. Phone',
         type: 'string',
       },
       email: {
         title: 'E-mail',
         type: 'string',
       },
-      telephone1: {
-        title: 'Telephone',
+      companyName: {
+        title: 'Company Name',
         type: 'string',
       },
-      // telephone2: {
-      //   title: 'Mobile',
-      //   type: 'string',
-      // },
+
       // note: {
       //   title: 'Note',
       //   type: 'string',
@@ -86,9 +87,17 @@ export class ProspectiveListComponent implements OnInit {
         title: 'Active',
         type: 'string',
       },
+      priorityID: {
+        title: 'Priority',
+        type: 'string',
+      },
+      note: {
+        title: 'Note',
+        type: 'string',
+      },
     },
     actions: {
-      position: 'right',
+      position: 'left',
       add: true,
       edit:true,
       delete:false,

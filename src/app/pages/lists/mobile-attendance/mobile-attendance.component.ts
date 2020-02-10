@@ -66,7 +66,7 @@ export class MobileAttendanceComponent implements OnInit {
         type: 'string',
       },
       checkoutTime: {
-        title: 'Checkout Time',
+        title: 'Checkout Time1',
         type: 'string',
       },
 

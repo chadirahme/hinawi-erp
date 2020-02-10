@@ -78,8 +78,9 @@
   <button nbButton *ngIf="!demo"
           fullWidth
           status="success"
-          [disabled]="!form.valid"
-          [class.btn-pulse]="submitted">
+          [disabled]="!form.valid || loading"
+          [class.btn-pulse]="submitted"
+          [class.spinner]="loading" >
     Log In
   </button>
   <p></p>
@@ -88,7 +89,7 @@
           fullWidth
           status="info"
           (click)="onNavigate()"
-          [class.btn-pulse]="submitted">
+          >
     Demo
   </button>
 </form>

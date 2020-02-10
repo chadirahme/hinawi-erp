@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit{
   user: UserModel;
   submitted: boolean;
   demo: boolean =false;
+  loading: boolean;
   //form: FormGroup;
 
   @ViewChild(NgForm) form;
@@ -74,7 +75,9 @@ export class LoginComponent implements OnInit{
     localStorage.setItem('token','');
     this.errors= [];
     this.messages.push("conecting.....");
+    this.loading = true; //use for spin
     console.log(this.user);
+
     try
     {
       this.user.username=this.user.email;
@@ -82,6 +85,7 @@ export class LoginComponent implements OnInit{
         console.log(data);
         this.messages= [];
         this.errors= [];
+        this.loading = false;
         if(data==null) {//.message=='Invalid User'
           //console.log(data.message);
           alert('Connection problem at this time !!');

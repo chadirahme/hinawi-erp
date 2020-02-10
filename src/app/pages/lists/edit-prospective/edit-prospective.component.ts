@@ -4,6 +4,7 @@ import {NbDialogRef} from "@nebular/theme";
 import {ProspectiveModel, ProspectiveCotact, ProspectiveCotactId} from "../../../@core/domains/user.model";
 import {LocalDataSource} from "ng2-smart-table";
 import {HttpErrorResponse} from "@angular/common/http";
+import {WsTopic} from "../../../@core/services/ws.topic";
 
 @Component({
   selector: 'edit-prospective',
@@ -129,8 +130,9 @@ export class EditProspectiveComponent implements OnInit {
   };
 
   constructor(protected dialogRef: NbDialogRef<EditProspectiveComponent>,
-              private apiAuth: ApiAuth) {
+              private apiAuth: ApiAuth,private wsTopic: WsTopic) {
   }
+
 
   ngOnInit() {
     //console.log(this.title);
@@ -142,7 +144,15 @@ export class EditProspectiveComponent implements OnInit {
       this.prospective.cityRefKey=0;
       this.prospective.streeRefKey=0;
       this.prospective.howKnowRefKey=0;
+      this.prospective.parentRefKey=0;
+      this.prospective.sublevel=0;
+      this.prospective.telephone1="";
       this.prospective.telephone2="";
+      this.prospective.arName="";
+      this.prospective.companyName="";
+      this.prospective.poBox=""; //Address1
+      this.prospective.zipCode=""; //Address2
+      this.prospective.interestLevel="";
 
       this.contacts= [];
       this.prospective.lstProspectiveCotact=this.contacts;
@@ -311,9 +321,12 @@ export class EditProspectiveComponent implements OnInit {
       alert('English Name must be filled !!');
       return;
     }
+    let that=this;
     console.log('save');
     this.apiAuth.saveProspectives(this.prospective).subscribe(data => {
       console.log(data);
+      that.wsTopic.sendMessage("Prospective "+this.prospective.name + " data changed..");
+
       this.dialogRef.close('Prospective data saved..');
     },(err: HttpErrorResponse) => {
       if (err.error instanceof Error) {

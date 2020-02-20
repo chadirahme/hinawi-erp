@@ -53,11 +53,23 @@ export class ProspectiveListComponent implements OnInit {
       },
       telephone1: {
         title: 'Telephone',
-        type: 'string',
+        type: 'html',
+        valuePrepareFunction: (value) => {
+        return  `<a href="https://web.whatsapp.com/send?phone=${value}&text=Hi, I contacted you Through HinawiOnline."
+          data-text="Take a look at this awesome website:" class="wa_btn wa_btn_s"
+          target="_blank"
+            >${value}</a>`;
+        }
       },
       telephone2: {
         title: 'Alt. Phone',
-        type: 'string',
+        type: 'html',
+        valuePrepareFunction: (value) => {
+          return  `<a href="https://web.whatsapp.com/send?phone=${value}&text=Hi, I contacted you Through HinawiOnline."
+          data-text="Take a look at this awesome website:" class="wa_btn wa_btn_s"
+          target="_blank"
+            >${value}</a>`;
+        }
       },
       email: {
         title: 'E-mail',
@@ -82,6 +94,10 @@ export class ProspectiveListComponent implements OnInit {
           }
           return null;
         }
+      },
+      hasQuotation: {
+        title: 'Has Quotation',
+        type: 'string',
       },
       active: {
         title: 'Active',

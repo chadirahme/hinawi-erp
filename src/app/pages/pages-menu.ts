@@ -13,6 +13,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
 
+  {
+    title: 'My Attendance',
+    icon: 'ion-clock',
+    link: '/pages/my-attendance',
+    home: true,
+  },
 
   // {
   //   title: 'Balances Dashboard',
@@ -69,10 +75,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Accounting',
     icon: 'nb-e-commerce',
     children: [
-      {
-        title: 'Petty Cash Chart',
-        link: '/pages/accounting/pettycashchart',
-      },
+      // {
+      //   title: 'Petty Cash Chart',
+      //   link: '/pages/accounting/pettycashchart',
+      // },
       {
         title: 'Petty Cash Report',
         link: '/pages/accounting/pettycash',
@@ -82,10 +88,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Approve Purchase Orders',
         link: '/pages/accounting/po',
       },
-      {
-        title: 'Quotation Chart',
-        link: '/pages/accounting/quotationchart',
-      },
+      // {
+      //   title: 'Quotation Chart',
+      //   link: '/pages/accounting/quotationchart',
+      // },
       // {
       //   title: 'Approve Cheques Issued',
       //   link: '/pages/lists/vendors-list',
@@ -123,38 +129,38 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
 
       {
-        title: 'Petty Cash Chart',
+        title: 'All Payment Vouchers',
         link: '/pages/accounting/pettycashchart',
       },
 
-      {
-        title: 'Sales Data',
-        link: '/pages/realestate/sales-chart',
-      },
-      {
-        title: 'Profit Data',
-        link: '/pages/realestate/profit-chart',
-      },
-      {
-        title: 'Company Data',
-        link: '/pages/chartdashboard',
-      },
-      {
-        title: 'Realestate Status',
-        link: '/pages/realestate/status-chart',
-      },
-      {
-        title: 'Realestate Flat Type',
-        link: '/pages/realestate/flattype-chart',
-      },
-      {
-        title: 'Realestate Monthly Sales',
-        link: '/pages/realestate/monthly-sales-chart',
-      },
-      {
-        title: 'School',
-        link: '/pages/schooldashboard',
-      },
+      // {
+      //   title: 'Sales Data',
+      //   link: '/pages/realestate/sales-chart',
+      // },
+      // {
+      //   title: 'Profit Data',
+      //   link: '/pages/realestate/profit-chart',
+      // },
+      // {
+      //   title: 'Company Data',
+      //   link: '/pages/chartdashboard',
+      // },
+      // {
+      //   title: 'Realestate Status',
+      //   link: '/pages/realestate/status-chart',
+      // },
+      // {
+      //   title: 'Realestate Flat Type',
+      //   link: '/pages/realestate/flattype-chart',
+      // },
+      // {
+      //   title: 'Realestate Monthly Sales',
+      //   link: '/pages/realestate/monthly-sales-chart',
+      // },
+      // {
+      //   title: 'School',
+      //   link: '/pages/schooldashboard',
+      // },
     ]
   },
 

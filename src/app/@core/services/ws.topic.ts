@@ -17,11 +17,13 @@ export class WsTopic {
     let url = window.location.href;
     this.demo= url.indexOf("demo")>0;
     if (this.demo==true) {
-      this.baseUrl = 'https://hinawi2.dyndns.org:8092/ws/';
+      //this.baseUrl = 'http://hinawi2.dyndns.org:8092/ws/';
+      this.baseUrl = 'https://test.hinawionline.com/ws/';
     }
     else{
-      this.baseUrl = 'https://hinawi2.dyndns.org:8091/ws/';
-      //this.baseUrl = 'https://localhost:8091/ws/';
+      this.baseUrl = 'http://hinawi2.dyndns.org:8091/ws/';
+      //this.baseUrl = 'https://test.hinawionline.com/ws/';
+      //this.baseUrl = 'http://localhost:5000/ws/';
     }
   }
 

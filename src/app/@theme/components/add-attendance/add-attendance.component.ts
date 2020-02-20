@@ -26,11 +26,10 @@ export class AddAttendanceComponent implements OnInit {
   constructor(private authService: ApiAuth,protected dialogRef: NbDialogRef<AddAttendanceComponent>) { }
 
   ngOnInit() {
+    //check if user already check in, so hide the type
     this.type = "Customer";
     this.loadInitData();
     this.getLocation();
-
-
 
   }
   getLocation() {

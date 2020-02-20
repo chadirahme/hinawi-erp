@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit{
     console.log("demo="+this.demo);
 
     this.user=new UserModel();
-    this.user.email="";//"demo@hinawi.com";
-    this.user.password="";//"Passw0rd!";
+    this.user.email="";
+    this.user.password="";
     this.user.username="";
     this.errors= [];
     this.messages= [];
@@ -103,7 +103,7 @@ export class LoginComponent implements OnInit{
           localStorage.setItem('userid',data.result.userId);
           localStorage.setItem('username',data.result.userName);
           localStorage.setItem('role',data.result.role);
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/pages/my-attendance']);//my-attendance dashboard
         }
         else {
           //alert('Connection problem at this time !');
@@ -122,12 +122,14 @@ export class LoginComponent implements OnInit{
   handleEror(error){
     this.messages= [];
     this.errors.push('Connection problem at this time !');
+    this.loading = false;
     //alert(error.message); // error path;
   }
 
   onNavigate(){
     //this.router.navigateByUrl("https://www.google.com");
-    window.location.href="http://hinawi2.dyndns.org:8181/demo/#/auth/login";
+    //window.location.href="http://hinawi2.dyndns.org:8181/demo/#/auth/login";
+    window.location.href="https://demo.hinawionline.com";
   }
 
 }

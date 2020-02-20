@@ -8,6 +8,7 @@ make pakage and run
 C:\tomcat\erp>java -jar -Dspring.profiles.active=prod demo-0.0.1-SNAPSHOT.jar
 
 ng g c vendors-list
+ng g c my-attendance --module pages
 
 git init
 git add README.md
@@ -16,6 +17,8 @@ git remote add origin https://github.com/chadirahme/hinawi-erp.git
 
 ssh -i dockerkey.pem ec2-user@ec2-18-221-165-162.us-east-2.compute.amazonaws.com
 
+upload to AWS S3 demo bucket
+aws s3 cp ./dist s3://demo.hinawionline.com --recursive --acl public-read
 
 Please follow these steps:
 1) Login to Control Panel
@@ -120,3 +123,7 @@ https://canvasjs.com/jquery-charts/column-line-area-chart/
 
 https://www.mssqltips.com/sqlservertip/4328/access-sql-server-instance-on-azure-vm-using-local-copy-of-management-studio/
 
+run this in window10 to fix error
+npm install --global windows-build-tools
+and run npm install
+//    "start": "ng serve --ssl true --ssl-cert /ssl/server.crt --ssl-key /ssl/server.key",

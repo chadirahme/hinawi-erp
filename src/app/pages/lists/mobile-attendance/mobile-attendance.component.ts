@@ -53,6 +53,10 @@ export class MobileAttendanceComponent implements OnInit {
         title: 'Name',
         type: 'string',
       },
+      reasonDesc: {
+        title: 'Reason',
+        type: 'string',
+      },
       checkinNote: {
         title: 'Checkin Note',
         type: 'string',
@@ -62,15 +66,17 @@ export class MobileAttendanceComponent implements OnInit {
         type: 'number',
       },
       checkinTime: {
-        title: 'checkin Time',
+        title: 'Checkin Time',
         type: 'string',
       },
       checkoutTime: {
-        title: 'Checkout Time1',
+        title: 'Checkout Time',
         type: 'string',
       },
-
-      //checkoutTime
+      visitDuration: {
+        title: 'Duration',
+        type: 'string',
+      },
     },
   };
 

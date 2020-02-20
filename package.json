@@ -17,7 +17,7 @@
   "scripts": {
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
-    "start": "ng serve --ssl true --ssl-cert /ssl/server.crt --ssl-key /ssl/server.key",
+    "start": "ng serve",
     "build": "ng build",
     "build:prod": "npm run build -- --prod --aot",
     "test": "ng test",

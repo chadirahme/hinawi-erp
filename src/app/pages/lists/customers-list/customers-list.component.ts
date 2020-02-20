@@ -11,7 +11,6 @@ import {balance} from "../../../mycomponent/balance.pipe";
   styleUrls: ['./customers-list.component.scss']
 })
 export class CustomersListComponent implements OnInit {
-
   customers: any[];
   source: LocalDataSource = new LocalDataSource();
   settings = {
@@ -37,13 +36,25 @@ export class CustomersListComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
-      custKey: {
-        title: 'ID',
-        type: 'number',
+      // custKey: {
+      //   title: 'ID',
+      //   type: 'number',
+      // },
+      idx: {
+        title : "Sr. No.",
+        type : "text",
+        filter:false,
+        valuePrepareFunction:(value,row,cell) =>{
+          const pager = this.source.getPaging();
+          const ret = (pager.page-1) * pager.perPage + cell.row.index+1;
+          //const ret =  cell.row.index+1;
+          return ret;
+        }
       },
       name: {
         title: 'Name',
         type: 'string',
+        width: '220px',
       },
       arName: {
         title: 'Arabic Name',
@@ -52,6 +63,7 @@ export class CustomersListComponent implements OnInit {
       companyName: {
         title: 'Company Name',
         type: 'string',
+        width: '100px',
       },
       email: {
         title: 'E-mail',
@@ -79,6 +91,7 @@ export class CustomersListComponent implements OnInit {
         type: 'string',
       },
     },
+
   };
   constructor(private apiAuth: ApiAuth, private wsTopic: WsTopic,private cp: DecimalPipe,
   private balancePie: balance) { }

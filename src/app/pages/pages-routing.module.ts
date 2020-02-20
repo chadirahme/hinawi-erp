@@ -9,6 +9,7 @@ import {FavdashboardComponent} from "./favdashboard/favdashboard.component";
 import {Role} from "../@core/domains/user.model";
 import {AuthGuard} from "../auth-guard.service";
 import {RoleGuard} from "../role-guard.service";
+import {MyAttendanceComponent} from "./my-attendance/my-attendance.component";
 
 const routes: Routes = [{
   path: '',
@@ -30,6 +31,10 @@ const routes: Routes = [{
     {
       path: 'schooldashboard',
       component: SchooldashboardComponent,
+    },
+    {
+      path: 'my-attendance',
+      component: MyAttendanceComponent,
     },
     {
       path: '',

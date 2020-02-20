@@ -90,7 +90,8 @@ export class HeaderComponent implements OnInit {
   battleInit: number;
   customers: any[];
 
-  userMenu = [{ title: 'Attendance' }, { title: 'Log out' }];
+  //userMenu = [{ title: 'Attendance' }, { title: 'Log out' }];
+  userMenu = [{ title: 'Log out' }];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,

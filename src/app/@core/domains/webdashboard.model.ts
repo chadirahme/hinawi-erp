@@ -14,8 +14,16 @@ export class MobileAttendance {
   customerType: string;
   customerName: string;
   checkinNote: string;
+  checkoutNote: string;
   checkinLatitude: number;
   checkinLongitude: number;
+  checkoutLatitude: number;
+  checkoutLongitude: number;
+  checkinTime: any;
+  checkoutTime: any;
+  localCheckinTime: any;
+  reasonId: number;
+  reasonDesc: string;
 }
 
 export class ChequeModel {

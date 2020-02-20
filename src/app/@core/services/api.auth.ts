@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Observable} from "rxjs/index";
+import {Observable, throwError} from "rxjs/index";
 import {ApiResponse} from "../domains/api.response";
 import {User} from "../domains/user.model";
 import {WebDashboard, MobileAttendance, ChequeModel, HRListValues} from "../domains/webdashboard.model";
+import {catchError} from "rxjs/internal/operators";
+import {HttpErrorResponse} from "@angular/common/http";
 
 
 @Injectable()
@@ -18,11 +20,13 @@ export class ApiAuth {
       let url = window.location.href;
       this.demo= url.indexOf("demo")>0;
       if (this.demo==true) {
-        this.baseUrl = 'https://hinawi2.dyndns.org:8092/api/';
+        //this.baseUrl = 'http://hinawi2.dyndns.org:8092/api/';
+        this.baseUrl = 'https://test.hinawionline.com/api/';
       }
       else{
-        this.baseUrl = 'https://hinawi2.dyndns.org:8091/api/';
-        //this.baseUrl = 'https://localhost:8091/api/';
+        this.baseUrl = 'http://hinawi2.dyndns.org:8091/api/';
+        //this.baseUrl = 'https://test.hinawionline.com/api/';
+        //this.baseUrl = 'http://localhost:5000/api/';
       }
       //this.baseUrl = baseUrl;
     }
@@ -58,6 +62,11 @@ export class ApiAuth {
     getProspectiveList(): Observable<ApiResponse> {
         return this.http.get<ApiResponse>(this.baseUrl+'prospectiveList');
     }
+
+      getProspectiveSortedList(): Observable<ApiResponse> {
+          return this.http.get<ApiResponse>(this.baseUrl+'prospectiveSortedList');
+      }
+
 
    getProspectiveContactsList(recNo:any): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(this.baseUrl+'prospectiveContactsList?recNo='+recNo);
@@ -102,12 +111,24 @@ export class ApiAuth {
   }
 
    getMobileAttendanceList(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(this.baseUrl+'mobileAttendance');
+    return this.http.get<ApiResponse>(this.baseUrl+'attendance/mobileAttendance');
   }
 
   addMobileAttendance(mobileAttendance: MobileAttendance): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.baseUrl+'addMobileAttendance',mobileAttendance);
+    return this.http.post<ApiResponse>(this.baseUrl+'attendance/addMobileAttendance',mobileAttendance);
+      // .pipe(
+      //   catchError(this.handleError)
+      // );
   }
+
+   checkIfUserCheckedIn(userId:any): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'attendance/checkIfUserCheckedIn?userId='+userId);
+  }
+
+  findLastUserVisit(userId:any): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'attendance/findLastUserVisit?userId='+userId);
+  }
+
 
   getCUCList(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(this.baseUrl+'accounting/cuc?name=s');
@@ -165,5 +186,10 @@ export class ApiAuth {
     return this.http.get<ApiResponse>(this.baseUrl+'list/prospectiveStatusHistory?custKey='+custKey);
   }
 
+  handleError(error: HttpErrorResponse){
+    console.log("lalalalalalalala");
+    alert(error.message);
+    return throwError(error);
+  }
 
 }

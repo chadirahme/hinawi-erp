@@ -13,7 +13,37 @@ import {Router} from "@angular/router";
 export class BasicAuthHtppInterceptorService implements HttpInterceptor {
 
   constructor(private router: Router) { }
+  handleError(error: HttpErrorResponse){
+    console.log("BasicAuthHtppInterceptorService >> ");
+    if (error.status == 0) {
+      this.router.navigate(['auth/login']);
+      return;
+    }
+    alert(error.message);
+    return throwError(error);
+  }
 
+  //https://pusher.com/tutorials/error-handling-angular-part-2
+
+  // intercept(req: HttpRequest<any>, next: HttpHandler):
+  // Observable<HttpEvent<any>>{
+  //
+  //     if (localStorage.getItem('username') && localStorage.getItem('token')) {
+  //       req = req.clone({
+  //         setHeaders: {
+  //           Authorization: localStorage.getItem('token')
+  //         }
+  //       })
+  //     }
+  //
+  //
+  //   return next.handle(req)
+  //     .pipe(
+  //       catchError(this.handleError)
+  //     )
+  // };
+
+//old method
   intercept(req: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
 
     if (localStorage.getItem('username') && localStorage.getItem('token')) {

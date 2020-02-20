@@ -33,6 +33,7 @@ import {PettycashEchartsBarComponent} from "./accounting/pettycash-echarts-bar/p
 import {PettycashLegendChartComponentComponent} from "./accounting/pettycash-legend-chart-component/pettycash-legend-chart-component.component";
 import {AuthErrorHandler} from "../auth-error-handler";
 import {SimpleDateComponent} from "../mycomponent/SimpleDateComponent";
+import { MyAttendanceComponent } from './my-attendance/my-attendance.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -70,6 +71,7 @@ const PAGES_COMPONENTS = [
     ChartdashboardComponent,
     SchooldashboardComponent,
     FavdashboardComponent,
+    MyAttendanceComponent,
    // PettycashEchartsBarComponent,
     //PettycashLegendChartComponentComponent,
     //CucComponent,

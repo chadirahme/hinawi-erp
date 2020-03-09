@@ -7,6 +7,7 @@ import {VendorsListComponent} from "./vendors-list/vendors-list.component";
 import {StudetnsListComponent} from "./studetns-list/studetns-list.component";
 import {MobileAttendanceComponent} from "./mobile-attendance/mobile-attendance.component";
 import {GeneralListComponent} from "./general-list/general-list.component";
+import {EmployeesListComponent} from "./employees-list/employees-list.component";
 
 const routes: Routes = [{
     path: '',
@@ -36,7 +37,10 @@ const routes: Routes = [{
         path: 'mobile-attendance',
         component: MobileAttendanceComponent,
       },
-      //Mobile Attendance
+      {
+        path: 'employees-list',
+        component: EmployeesListComponent,
+      },
     ],
 }];
 

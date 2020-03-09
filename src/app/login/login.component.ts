@@ -103,6 +103,7 @@ export class LoginComponent implements OnInit{
           localStorage.setItem('userid',data.result.userId);
           localStorage.setItem('username',data.result.userName);
           localStorage.setItem('role',data.result.role);
+          localStorage.setItem('companyName',data.result.companyName);
           this.router.navigate(['/pages/my-attendance']);//my-attendance dashboard
         }
         else {

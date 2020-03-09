@@ -12,6 +12,7 @@ import {WsTopic} from "../../../@core/services/ws.topic";
 import {ApiAuth} from "../../../@core/services/api.auth";
 import {Router} from "@angular/router";
 import {AddAttendanceComponent} from "../add-attendance/add-attendance.component";
+import {NotificationsService} from "angular2-notifications";
 
 //https://www.trycatchclasses.com/how-to-make-facebook-like-notification-popup-tutorial/
 @Component({
@@ -89,6 +90,8 @@ export class HeaderComponent implements OnInit {
   userName:string;
   battleInit: number;
   customers: any[];
+  companyName: string;
+  subscription: any;
 
   //userMenu = [{ title: 'Attendance' }, { title: 'Log out' }];
   userMenu = [{ title: 'Log out' }];
@@ -98,7 +101,8 @@ export class HeaderComponent implements OnInit {
               private userService: UserService,private windowService: NbWindowService,
               private analyticsService: AnalyticsService,private search: NbSearchService,
               private dialogService: NbDialogService,
-              private wsTopic: WsTopic, private apiAuth: ApiAuth,private router: Router) {
+              private wsTopic: WsTopic, private apiAuth: ApiAuth,private router: Router,
+              private _notifications: NotificationsService) {
 
     search.onSearchSubmit().subscribe(data => this.sendName(data.term));
   }
@@ -127,10 +131,19 @@ export class HeaderComponent implements OnInit {
       //this.user.name=isOpen;
     });
 
+    if(this.subscription==null) {
+      this.subscription = this.wsTopic.attendanceResult.subscribe(msg => {
+        console.log("attendanceResult.subscribe");
+        this.notifyUser(msg);
+      });
+    }
+
     this.user.name =localStorage.getItem('username');
     this.menuService.onItemClick().subscribe(( event ) => {
       this.onItemSelection(event.item.title);
-    })
+    });
+
+    this.companyName=localStorage.getItem("companyName");
   }
 
   toggleSidebar(): boolean {
@@ -210,6 +223,39 @@ export class HeaderComponent implements OnInit {
       // Do something on Profile
       //console.log('Profile Clicked ')
       this.openWindow1();
+    }
+  }
+
+  options = {
+    position: ["bottom", "right"],
+    timeOut: 9000,
+    showProgressBar: true,
+    pauseOnHover: true,
+    clickToClose: true,
+    animate: 'scale'
+  };
+
+  notifyUser(msg): void{
+    let content=localStorage.getItem('username') + " checkIn";
+    //this._notifications.create('User Attendance', 'content', 'success', options);
+    const toast = this._notifications.success('Attendance created!', msg );
+
+    //this._notificationService.generateNotification(data);
+
+    var audio = new Audio('assets/images/sms-alert.mp3');
+    audio.play();
+
+    this.subscription.unsubscribe();
+
+    // toast.click.subscribe((event) => {
+    //   //alert(event)
+    //   //reload my component
+    // });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe()
     }
   }
 

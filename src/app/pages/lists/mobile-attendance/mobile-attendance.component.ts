@@ -9,9 +9,14 @@ import {ApiAuth} from "../../../@core/services/api.auth";
 })
 export class MobileAttendanceComponent implements OnInit {
 
+  selectedMonth: any;
   customers: any[];
   source: LocalDataSource = new LocalDataSource();
   settings = {
+    pager: {
+      display: true,
+      perPage: 50
+    },
     actions: {
       columnTitle: 'Actions',
       add: false,
@@ -54,16 +59,20 @@ export class MobileAttendanceComponent implements OnInit {
         type: 'string',
       },
       reasonDesc: {
-        title: 'Reason',
+        title: 'CheckIn Reason',
         type: 'string',
       },
       checkinNote: {
-        title: 'Checkin Note',
+        title: 'CheckIn Note',
+        type: 'string',
+      },
+      checkoutReasonDesc: {
+        title: 'CheckOut Reason',
         type: 'string',
       },
       checkoutNote: {
-        title: 'Checkout Note',
-        type: 'number',
+        title: 'CheckOut Note',
+        type: 'string',
       },
       checkinTime: {
         title: 'Checkin Time',
@@ -77,6 +86,10 @@ export class MobileAttendanceComponent implements OnInit {
         title: 'Duration',
         type: 'string',
       },
+      visitDistance: {
+        title: 'Distance',
+        type: 'string',
+      },
     },
   };
 
@@ -84,13 +97,15 @@ export class MobileAttendanceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadData();
+    let month = new Date();
+    this.selectedMonth=month.getMonth()+1;
+    //this.loadData();
   }
 
   loadData(): void {
     try {
       // console.log("grade>> "+ this.apiParam.grade);
-      this.apiAuth.getMobileAttendanceList().subscribe(data => {
+      this.apiAuth.getMobileAttendanceList(this.selectedMonth).subscribe(data => {
         this.customers = data.result;
         this.source.load(data.result);
         //this.dataSource = new MatTableDataSource(data);

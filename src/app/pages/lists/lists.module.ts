@@ -21,6 +21,7 @@ import {CommonModule, DecimalPipe} from "@angular/common";
 import { EditProspectiveComponent } from './edit-prospective/edit-prospective.component';
 import {SimpleDateComponent} from "../../mycomponent/SimpleDateComponent";
 import {balance} from "../../mycomponent/balance.pipe";
+import { EmployeesListComponent } from './employees-list/employees-list.component';
 
 const COMPONENTS = [
     ListsComponent,
@@ -57,7 +58,8 @@ const MODULES = [
         MobileAttendanceComponent,
         GeneralListComponent,
         EditProspectiveComponent,
-        balance
+        balance,
+        EmployeesListComponent
     ],
     providers: [
       DecimalPipe,balance

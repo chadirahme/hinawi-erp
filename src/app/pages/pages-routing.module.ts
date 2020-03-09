@@ -59,6 +59,10 @@ const routes: Routes = [{
       canActivate: [RoleGuard],
       data: { roles: [Role.Admin] }
     },
+    {
+      path: 'reports',
+      loadChildren: './reports/reports.module#ReportsModule',
+    },
   ],
 }];
 

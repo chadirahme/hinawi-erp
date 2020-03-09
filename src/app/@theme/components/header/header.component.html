@@ -3,9 +3,10 @@
      [class.right]="position === 'inverse'">
   <div class="logo-containter">
     <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
-    <div class="logo" (click)="goToHome()">Hinawi-<span>2020</span></div>
+    <div class="logo" (click)="goToHome()">Hinawi-2020<span style="color: #00b3ff"> {{companyName}}</span></div>
   </div>
-  <ngx-theme-switcher></ngx-theme-switcher>
+  <!--<ngx-theme-switcher></ngx-theme-switcher>-->
+  <simple-notifications [options]="options"></simple-notifications>
 </div>
 
 <div class="header-container">

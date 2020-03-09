@@ -13,6 +13,10 @@ export class VendorsListComponent implements OnInit {
   customers: any[];
   source: LocalDataSource = new LocalDataSource();
   settings = {
+    pager: {
+      display: true,
+      perPage: 50
+    },
     actions: {
       add: false,
       edit: false,

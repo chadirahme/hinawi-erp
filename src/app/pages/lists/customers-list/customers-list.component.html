@@ -1,7 +1,11 @@
-<p>
-  Customers List
-</p>
+
 <!--<span [innerHTML]="50000 | balance: 50"></span>-->
+
+<nb-card status="success">
+
+  <nb-card-header>
+    Customers List
+  </nb-card-header>
 
 <nb-card-body>
   <ng2-smart-table [settings]="settings" [source]="source"
@@ -9,6 +13,8 @@
                    (createConfirm)="onCreateConfirm($event)">
   </ng2-smart-table>
 </nb-card-body>
+
+</nb-card>
 
 
 <!--<nb-card size="small">-->

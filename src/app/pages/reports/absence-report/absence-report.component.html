@@ -1,0 +1,43 @@
+<nb-card status="success">
+  <nb-card-header>Absence Report</nb-card-header>
+  <nb-card-body>
+    <input nbInput placeholder="Pick Date Range" [nbDatepicker]="formpicker" [(ngModel)]="ngModelDate">
+    <nb-rangepicker #formpicker
+                    ></nb-rangepicker>
+
+    <span style="margin-left: 10px">
+        <button class="btn btn-primary" type="button" (click)="loadData()">Search!</button>
+        </span>
+
+    <div class="row">
+      <ng2-smart-table [settings]="settings" [source]="source">
+      </ng2-smart-table>
+    </div>
+
+
+  </nb-card-body>
+</nb-card>
+
+<!--<nb-card status="success">-->
+  <!--<nb-card-header>Absence Report</nb-card-header>-->
+  <!--<nb-card-body>-->
+    <!--<div class="row">-->
+
+      <!--<div class="col-sm-6">-->
+        <!--<div class="input-group">-->
+          <!--<input [nbDatepicker]="datepicker" [(ngModel)]="ngModelDate">-->
+          <!--<nb-datepicker #datepicker></nb-datepicker>-->
+
+          <!--<span style="margin-left: 10px">-->
+        <!--<button class="btn btn-primary" type="button" (click)="loadData()">Search!</button>-->
+        <!--</span>-->
+        <!--</div>-->
+
+
+      <!--</div>-->
+    <!--</div>-->
+    <!--<ng2-smart-table [settings]="settings" [source]="source"-->
+    <!--&gt;-->
+    <!--</ng2-smart-table>-->
+  <!--</nb-card-body>-->
+<!--</nb-card>-->

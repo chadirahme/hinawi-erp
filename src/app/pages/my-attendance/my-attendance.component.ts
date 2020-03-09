@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ApiAuth} from "../../@core/services/api.auth";
 import {MobileAttendance} from "../../@core/domains/webdashboard.model";
 import {DatePipe} from "@angular/common";
+import {WsTopic} from "../../@core/services/ws.topic";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'my-attendance',
@@ -10,8 +12,10 @@ import {DatePipe} from "@angular/common";
 })
 export class MyAttendanceComponent implements OnInit {
 
+  keyword = 'name';
   customersList: any[];
   selectedCustomer: any;
+  selectedCustomerName: any;
   type: string;
   mobileAttendance: MobileAttendance;
   oldMobileAttendance: MobileAttendance;
@@ -29,7 +33,47 @@ export class MyAttendanceComponent implements OnInit {
   demo: boolean =false;
   customerInfo: any;
 
-  constructor(private authService: ApiAuth, private datePipe: DatePipe) { }
+  constructor(private authService: ApiAuth, private datePipe: DatePipe,
+               private wsTopic: WsTopic,private router: Router)
+  {
+    //this._pushNotifications.requestPermission();
+    //this._notificationService.requestPermission();
+  }
+
+
+  //used with auto complete text
+  selectEvent(item) {
+    console.log(item);
+    // do something with selected item
+    var info = item;
+    this.selectedCustomer = info.name;
+    this.customerInfo = "Contact person: ";
+    console.log(info);
+    if(this.type === 'Prospective'){
+      this.customerInfo += info.contact + " | " ;
+      this.customerInfo+=`<a href="https://web.whatsapp.com/send?phone=${info.telephone1}&text=Hi, I contacted you Through HinawiOnline."
+      data-text="Take a look at this awesome website:" class="wa_btn wa_btn_s"
+      target="_blank"
+        >${info.telephone1}</a>`;
+    }
+    if(this.type === 'Vendor' || this.type === 'Customer'){
+      this.customerInfo += info.contact + " | ";
+      this.customerInfo+=`<a href="https://web.whatsapp.com/send?phone=${info.phone}&text=Hi, I contacted you Through HinawiOnline."
+      data-text="Take a look at this awesome website:" class="wa_btn wa_btn_s"
+      target="_blank"
+        >${info.phone}</a>`;
+    }
+
+  }
+
+  onChangeSearch(val: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e){
+    // do something when input is focused
+  }
 
   ngOnInit() {
     let url = window.location.href;
@@ -37,9 +81,9 @@ export class MyAttendanceComponent implements OnInit {
     this.demo=true;
     this.selectedReason=0;
     this.type = "Customer";
-    this.checkIfUserCheckedIn();
     this.loadAttendanceReasonList();
-    this.loadInitData();
+    this.checkIfUserCheckedIn();
+   // this.loadInitData();
     if(this.demo)
     this.getLocation();
   }
@@ -48,7 +92,6 @@ export class MyAttendanceComponent implements OnInit {
     try {
       this.authService.getHRListValues(159).subscribe(data => {
         this.attendanceReasonList = data.result;
-        //this.selectedStreet=0;
       });
     }
     catch (e) {
@@ -98,14 +141,26 @@ export class MyAttendanceComponent implements OnInit {
           if(this.oldMobileAttendance.checkoutTime!=null) {
             this.lastActivity = "Check Out at :" +this.datePipe.transform(this.oldMobileAttendance.checkoutTime, 'dd/MM/yyyy h:mm:ss a');
             this.hadCheckOut=true;
+            this.loadInitData();
           }
           else {
 
             this.lastActivity = "Check In at :" + this.datePipe.transform(this.oldMobileAttendance.checkinTime, 'dd/MM/yyyy h:mm:ss a');
+            this.type = this.oldMobileAttendance.customerType;
+            this.callType(this.type);
+            this.selectedCustomer=this.oldMobileAttendance.customerName;
+            this.selectedCustomerName=this.oldMobileAttendance.customerName;
+            this.selectedReason=23;
+            this.selectedReasonDesc="Moving In \\ Out (Transportation)";
+            //if(this.type=='Prospective'){
+              //this.loadProspectiveData();
+            //}
+
           }
           this.lastActivity += " | " + this.oldMobileAttendance.customerType+ " : " + this.oldMobileAttendance.customerName;
 
-
+        }else{//if user first time enter
+          this.loadInitData();
         }
       });
 
@@ -120,7 +175,7 @@ export class MyAttendanceComponent implements OnInit {
     try {
       this.authService.getCustomersList().subscribe(data => {
         this.customersList=data.result;
-        this.selectedCustomer=0;
+        //this.selectedCustomer=0;
       });
 
     }
@@ -133,7 +188,7 @@ export class MyAttendanceComponent implements OnInit {
     try {
       this.authService.getVendorsList().subscribe(data => {
         this.customersList=data.result;
-        this.selectedCustomer=0;
+        //this.selectedCustomer=0;
       });
 
     }
@@ -145,7 +200,7 @@ export class MyAttendanceComponent implements OnInit {
     try {
       this.authService.getProspectiveSortedList().subscribe(data => {
         this.customersList=data.result;
-        this.selectedCustomer=0;
+        //this.selectedCustomer=0;
       });
 
     }
@@ -156,6 +211,7 @@ export class MyAttendanceComponent implements OnInit {
 
   callType(value){
     //console.log(value);
+    this.selectedCustomerName="";
     this.customerInfo="";
     this.type=value;
     //this.order.type=value; Customer Prospective Vendor
@@ -196,6 +252,7 @@ export class MyAttendanceComponent implements OnInit {
   }
 
   submit(){
+   //this.notify("Check Out");
     console.log(this.selectedCustomer);
 
     //if(this.hadCheckOut) {
@@ -204,13 +261,13 @@ export class MyAttendanceComponent implements OnInit {
         return;
       }
       if (!this.selectedReason || this.selectedReason == "0") {
-        alert('Please select Attendance Reason !!');
+        alert('Please select CheckIn Attendance Reason !!');
         return;
       }
     //}
 
     if(!this.note){
-      alert('Please enter your Reason or Result !!');
+      alert('Please enter your CheckIn Reason or Result !!');
       return;
     }
 
@@ -226,21 +283,35 @@ export class MyAttendanceComponent implements OnInit {
     this.mobileAttendance.reasonDesc=this.selectedReasonDesc;
 
     //this.mobileAttendance.checkinTime = Date.now();
-    this.mobileAttendance.localCheckinTime = Date.now();
+    // let d = new Date();
+    // let utc = d.getTime(); //- (d.getTimezoneOffset() * 60000);
+    // let nd = new Date(utc);
+
+
+
+    let MMddyyyy = this.datePipe.transform(new Date(),"yyyy-MM-ddTHH:mm:ss");
+    this.mobileAttendance.localCheckinTime =MMddyyyy;   //new Date();//.toLocaleString();//.slice(0, 19).replace('T', ' '); //Date.now();
 
     this.authService.addMobileAttendance(this.mobileAttendance).subscribe(data => {
       console.log(data);
+      //this.notify("Check In");
       alert(data.message);
-      this.mobileAttendance=new MobileAttendance();
-      this.note="";
-      this.selectedCustomer=0;
-      //this.dialogRef.close(data.message);
+      this.wsTopic.sendAttendance(this.mobileAttendance);
+      this.refresh();
+
+     // this.mobileAttendance=new MobileAttendance();
+     // this.note="";
+     // this.selectedCustomer=0;
     });
   }
 
   submitCheckOut(){
+    if (!this.selectedReason || this.selectedReason == "0") {
+      alert('Please select CheckOut Attendance Reason !!');
+      return;
+    }
     if(!this.note){
-      alert('Please enter your Reason or Result !!');
+      alert('Please enter your CheckOut Reason or Result !!');
       return;
     }
     this.mobileAttendance=new MobileAttendance();
@@ -251,18 +322,76 @@ export class MyAttendanceComponent implements OnInit {
     this.mobileAttendance.checkoutNote=this.note;
     this.mobileAttendance.checkoutLatitude=this.lat;
     this.mobileAttendance.checkoutLongitude=this.lng;
+    this.mobileAttendance.reasonId=this.selectedReason;
+    this.mobileAttendance.reasonDesc=this.selectedReasonDesc;
     //this.mobileAttendance.checkinTime = Date.now();
-    this.mobileAttendance.localCheckinTime = Date.now();
+    let MMddyyyy = this.datePipe.transform(new Date(),"yyyy-MM-ddTHH:mm:ss");
+    this.mobileAttendance.localCheckinTime = MMddyyyy;
+
 
     this.authService.addMobileAttendance(this.mobileAttendance).subscribe(data => {
       console.log(data);
+      //this.notify("Check Out");
       alert(data.message);
-      this.mobileAttendance=new MobileAttendance();
-      this.note="";
-      this.selectedCustomer=0;
+      this.wsTopic.sendAttendance(this.mobileAttendance);
+      this.refresh();
+     // this.mobileAttendance=new MobileAttendance();
+     // this.note="";
+     // this.selectedCustomer=0;
       //this.dialogRef.close(data.message);
     });
+
+  }
+
+   options = {
+    position: ["middle", "center"],
+    timeOut: 5000,
+     showProgressBar: true,
+     pauseOnHover: true,
+     clickToClose: true,
+     icon: "assets/images/logo.jpg",
+     animate: 'scale'
+   };
+
+  refresh(){
+    //this.router.navigate(["/#/pages/my-attendance"]);
+    //this.ngOnInit();
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
+
+    let currentUrl = this.router.url + '?';
+
+    this.router.navigateByUrl(currentUrl)
+      .then(() => {
+        this.router.navigated = false;
+        this.router.navigate([this.router.url]);
+      });
   }
 
 
+  // notify(type){ //our function to be called on click
+  //   let options = { //set options
+  //     body: localStorage.getItem('username') + " " + type + " for " +this.selectedReasonDesc + " "+this.selectedCustomer,
+  //     icon: "assets/images/logo.jpg" //adding an icon
+  //   }
+  //   // var n  =this._pushNotifications.create('User Attendance', options).subscribe( //creates a notification
+  //   //   res => console.log(res),
+  //   //   err => console.log(err)
+  //   // );
+  //   //setTimeout(n.close.bind(n), 9000);
+  //   // let data: Array < any >= [];
+  //   // data.push({
+  //   //   'title': 'Approval',
+  //   //   'alertContent': 'This is First Alert -- By Debasis Saha'
+  //   // });
+  //
+  //   let content=localStorage.getItem('username') + " " + type + " for " +this.selectedReasonDesc + " "+this.selectedCustomer;
+  //   //this._notifications.create('User Attendance', 'content', 'success', options);
+  //   const toast = this._notifications.success('Attendance created!', content);
+  //   //this._notificationService.generateNotification(data);
+  //
+  //   toast.click.subscribe((event) => {
+  //     //alert(event)
+  //     //reload my component
+  //   });
+  // }
 }

@@ -1,6 +1,7 @@
 import {Injectable, EventEmitter, Output} from "@angular/core";
 import {Stomp} from "@stomp/stompjs";
 import * as SockJS from 'sockjs-client';
+import {MobileAttendance} from "../domains/webdashboard.model";
 @Injectable()
 export class WsTopic {
 
@@ -12,6 +13,7 @@ export class WsTopic {
 
 
   @Output() change: EventEmitter<string> = new EventEmitter();
+  @Output() attendanceResult: EventEmitter<string> = new EventEmitter();
 
   constructor(){
     let url = window.location.href;
@@ -39,6 +41,11 @@ export class WsTopic {
       _this.stompClient.subscribe('/topic/hi', function (hello) {
         _this.showGreeting(JSON.parse(hello.body));
       });
+      _this.stompClient.subscribe('/topic/attendanceResult', function (result) {
+        _this.showAttendanceResult(JSON.parse(result.body));
+      });
+
+
     });
   }
 
@@ -58,9 +65,37 @@ export class WsTopic {
     );
   }
 
+  sendAttendance(mobileAttendance: MobileAttendance) {
+    console.log('sendAttendance>> '+mobileAttendance);
+    if (this.stompClient == null) {
+      console.log('stompClient = nul');
+      this.connect();
+    }
+    console.log('stompClient != nul');
+    this.stompClient.send(
+      '/app/attendanceMessage',
+      {},
+      JSON.stringify({ 'userName': localStorage.getItem('username') ,
+        'customerName':mobileAttendance.customerName ,
+        'userId': localStorage.getItem('userid'),
+        'checkoutNote': mobileAttendance.checkoutNote,
+        'reasonDesc': mobileAttendance.reasonDesc,
+      })
+    );
+  }
+
+  // @MessageMapping("attendanceResult")
+  // @SendTo("/topic/attendanceMessage")
+
   showGreeting(message) {
     console.log(message);
     this.change.emit(message.result);
+    //this.greetings.push(message);
+  }
+
+  showAttendanceResult(message) {
+    console.log(message);
+    this.attendanceResult.emit(message.result);
     //this.greetings.push(message);
   }
 }

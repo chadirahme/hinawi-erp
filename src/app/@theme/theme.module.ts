@@ -67,8 +67,9 @@ import { CORPORATE_THEME } from './styles/theme.corporate';
 import {NbFormComponent, NbShowcaseDialogComponent} from "./components/header/header.component";
 import { AddAttendanceComponent } from './components/add-attendance/add-attendance.component';
 import { CountryListComponent } from './components/country-list/country-list.component';
+import {SimpleNotificationsModule} from "angular2-notifications";
 
-const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
+const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule,SimpleNotificationsModule];
 
 const NB_MODULES = [
   NbCardModule,

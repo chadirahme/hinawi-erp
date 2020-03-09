@@ -1,0 +1,40 @@
+<nb-card status="success">
+  <nb-card-header>
+    Attendance Report By Employee Movement
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+
+      <div class="col-sm-4">
+        <div class="input-group">
+          <select class="form-control" [(ngModel)]="selectedUser" id="ddlUsers">
+            <option value="0">-- Select Employee --</option>
+            <option *ngFor="let item of usersList" [ngValue]="item.userId">
+              {{item.userName}}
+            </option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <input nbInput placeholder="Form Picker" [nbDatepicker]="ngmodel" [(ngModel)]="ngModelDate">
+        <nb-datepicker #ngmodel></nb-datepicker>
+
+      </div>
+
+      <div class="col-sm-4">
+        <span style="margin-left: 10px">
+        <button class="btn btn-primary" type="button" (click)="search()">Search!</button>
+        </span>
+      </div>
+
+    </div>
+    <div class="row">
+      <ng2-smart-table [settings]="settings" [source]="source">
+      </ng2-smart-table>
+    </div>
+
+
+  </nb-card-body>
+</nb-card>

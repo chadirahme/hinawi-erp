@@ -9,7 +9,7 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="inputStatus">Visit to</label>
-          <select class="form-control" id="inputStatus" #t (change)="callType(t.value)">
+          <select class="form-control" id="inputStatus" #t (change)="callType(t.value)" [(ngModel)]="type">
             <option >Customer</option>
             <option >Prospective</option>
             <option >Vendor</option>
@@ -20,15 +20,33 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="ddlCustomer">{{type}}</label>
-          <select class="form-control" [(ngModel)]="selectedCustomer" id="ddlCustomer" (change)="setSelectedStatus($event)">
-            <option value="0">--Select--</option>
-            <option *ngFor="let item of customersList" [ngValue]="item.name">
-              {{item.name}}
-            </option>
-          </select>
+          <div class="ng-autocomplete">
+            <ng-autocomplete id="ddlCustomer" [(ngModel)]="selectedCustomerName"  [data]="customersList" [searchKeyword]="keyword" (selected)='selectEvent($event)'
+                             (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+                             [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.name"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+
+          <!--<select class="form-control" [(ngModel)]="selectedCustomer" id="ddlCustomer" (change)="setSelectedStatus($event)">-->
+            <!--<option value="0">&#45;&#45;Select&#45;&#45;</option>-->
+            <!--<option *ngFor="let item of customersList" [ngValue]="item.name">-->
+              <!--{{item.name}}-->
+            <!--</option>-->
+          <!--</select>-->
+
+
         </div>
       </div>
     </div>
+
 
     <div class="row">
       <div class="col-sm-6">
@@ -39,7 +57,7 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="ddlCustomer">Attendance Reason</label>
+          <label for="ddlSelectReason">Attendance Reason</label>
           <select class="form-control" [(ngModel)]="selectedReason" id="ddlSelectReason" (change)="changeReason($event)">
             <option value="0">--Select--</option>
             <option *ngFor="let item of attendanceReasonList" [ngValue]="item.id">
@@ -76,9 +94,8 @@
       &nbsp;
       <button type="submit" *ngIf="!hadCheckOut" class="btn btn-primary" (click)="submitCheckOut()">Check Out</button>
 
+      <!--<simple-notifications [options]="options"></simple-notifications>-->
+
     </div>
-
-
-
   </nb-card-body>
 </nb-card>

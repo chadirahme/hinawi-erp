@@ -34,6 +34,8 @@ import {PettycashLegendChartComponentComponent} from "./accounting/pettycash-leg
 import {AuthErrorHandler} from "../auth-error-handler";
 import {SimpleDateComponent} from "../mycomponent/SimpleDateComponent";
 import { MyAttendanceComponent } from './my-attendance/my-attendance.component';
+import {AutocompleteLibModule} from "angular-ng-autocomplete";
+import {SimpleNotificationsModule} from "angular2-notifications";
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -63,6 +65,8 @@ const PAGES_COMPONENTS = [
     NbBadgeModule,
     DragDropModule,
     PagesSharedModule,
+    AutocompleteLibModule,
+    SimpleNotificationsModule,
     //PettycashEchartsBarComponent,
    // PagesSharedComponent
   ],

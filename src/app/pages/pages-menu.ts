@@ -56,11 +56,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/lists/vendors-list',
       },
       {
+        title: 'Employees List',
+        link: '/pages/lists/employees-list',
+      },
+      {
         title: 'Students List',
         link: '/pages/lists/students-list',
       },
       {
-        title: 'Mobile Attendance',
+        title: 'Attendance List',
         link: '/pages/lists/mobile-attendance',
       },
       {
@@ -107,6 +111,26 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Cheques Under Collection',
         link: '/pages/accounting/cuc',
+      },
+      {
+        title: 'Attendance Report - Daily',
+        link: '/pages/reports/attendance-report',
+      },
+      {
+        title: 'Attendance Report - Monthly',
+        link: '/pages/reports/attendance-monthly',
+      },
+      {
+        title: 'Attendance Report - By Reason',
+        link: '/pages/reports/attendance-byreason',
+      },
+      {
+        title: 'Attendance Report - By Movement',
+        link: '/pages/reports/attendance-bymove',
+      },
+      {
+        title: 'Absence Report',
+        link: '/pages/reports/absence-report',
       },
       // {
       //   title: 'Cheque Payment Report',

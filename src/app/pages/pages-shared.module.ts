@@ -12,11 +12,15 @@ import {ProfitChartComponent} from "./realestate/profit-chart/profit-chart.compo
 import {MonthlySalesChartComponent} from "./realestate/monthly-sales-chart/monthly-sales-chart.component";
 import {QuotationChartComponent} from "./accounting/quotation-chart/quotation-chart.component";
 import {SimpleDateComponent} from "../mycomponent/SimpleDateComponent";
+import {AttendanceByreasonPiechartComponent} from "./reports/attendance-byreason-piechart/attendance-byreason-piechart.component";
+import {ReasonPieComponent} from "./reports/attendance-byreason/reason-pie.component";
 @NgModule({
   declarations: [ PettycashEchartsBarComponent,PettycashLegendChartComponentComponent,StatusChartComponent,FlattypeChartComponent,
-    SalesChartComponent,ProfitChartComponent,MonthlySalesChartComponent,QuotationChartComponent,SimpleDateComponent],
+    SalesChartComponent,ProfitChartComponent,MonthlySalesChartComponent,QuotationChartComponent,SimpleDateComponent,AttendanceByreasonPiechartComponent,
+    ReasonPieComponent],
   exports: [ PettycashEchartsBarComponent,PettycashLegendChartComponentComponent,StatusChartComponent,FlattypeChartComponent,
-    SalesChartComponent,ProfitChartComponent,MonthlySalesChartComponent,QuotationChartComponent,SimpleDateComponent ],
+    SalesChartComponent,ProfitChartComponent,MonthlySalesChartComponent,QuotationChartComponent,SimpleDateComponent,AttendanceByreasonPiechartComponent,
+    ReasonPieComponent],
   imports:[ThemeModule, ChartModule,
     NgxEchartsModule,
     NgxChartsModule,]

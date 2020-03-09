@@ -26,6 +26,8 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthErrorHandler} from "./auth-error-handler";
 import {RoleGuard} from "./role-guard.service";
 import {ReactiveFormsModule} from "@angular/forms";
+import {NbDatepickerModule} from "@nebular/theme";
+import {SimpleNotificationsModule} from "angular2-notifications";
 
 @NgModule({
   declarations: [AppComponent, LoginComponent,
@@ -42,6 +44,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    NbDatepickerModule.forRoot(),
+    SimpleNotificationsModule.forRoot() //add here and in pages.module
   ],
   bootstrap: [AppComponent],
   providers: [ApiAuth,WsTopic,AuthGuard,RoleGuard,

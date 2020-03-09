@@ -110,8 +110,8 @@ export class ApiAuth {
     return this.http.post<ApiResponse>(this.baseUrl+'deleteWebDashBoard',webDashboard);
   }
 
-   getMobileAttendanceList(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(this.baseUrl+'attendance/mobileAttendance');
+   getMobileAttendanceList(month: any): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'attendance/mobileAttendance?month='+month);
   }
 
   addMobileAttendance(mobileAttendance: MobileAttendance): Observable<ApiResponse> {
@@ -186,10 +186,36 @@ export class ApiAuth {
     return this.http.get<ApiResponse>(this.baseUrl+'list/prospectiveStatusHistory?custKey='+custKey);
   }
 
+  getEmployeesList(active): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'list/employeesList?active='+active);
+  }
+
   handleError(error: HttpErrorResponse){
     console.log("lalalalalalalala");
     alert(error.message);
     return throwError(error);
   }
 
+  //reports region
+  getActiveUsers(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl + 'reports/activeUsers');
+  }
+   getDailyAttendanceReport(month:any): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl+'reports/attendanceDaily?month='+month);
+  }
+  getMonthlyAttendanceReport(month:any): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl + 'reports/attendanceMonthly?month='+month);
+  }
+
+  getAttendanceByReasonReport(month:any, userId:any): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl + 'reports/attendanceByReason?month='+month+'&userId='+userId);
+  }
+
+  getAbsenceReport(start:any, end:any): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl + 'reports/getAbsenceReport?start='+start+'&end='+end);
+  }
+
+  getAttendanceByMovement(userId:any, start:any, end:any): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl + 'reports/attendanceByMovement?start='+start+'&end='+end+'&userId='+userId);
+  }
 }

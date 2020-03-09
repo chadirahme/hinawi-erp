@@ -1,0 +1,18 @@
+<nb-card status="success">
+  <nb-card-header [hidden]="!(reports?.length > 0)"> Duration By Reason
+  </nb-card-header>
+  <nb-card-body>
+    <!--<pettycash-legend-chart-component [legendItems]="chartLegend"></pettycash-legend-chart-component>-->
+    <div echarts [options]="options" class="echart"></div>
+  </nb-card-body>
+
+  <!--<nb-card-footer>-->
+    <!--<div  style="color: blue;">-->
+      <!--This report display all types of payment voucher issued including paybills.-->
+    <!--</div>-->
+    <!--<div style="color: blue;">-->
+      <!--In Desktop, Go to Report -> Payment Reports -> All Payment Voucher Lists-->
+    <!--</div>-->
+  <!--</nb-card-footer>-->
+
+</nb-card>

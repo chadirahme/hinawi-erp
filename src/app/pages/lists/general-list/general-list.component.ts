@@ -10,6 +10,7 @@ import {HRListValues} from "../../../@core/domains/webdashboard.model";
 })
 export class GeneralListComponent implements OnInit {
 
+  isEditOrDelete=true;
   hrFieldsList: any[];
   selectedField: any;
   hrMainFieldsList: any[];
@@ -22,9 +23,10 @@ export class GeneralListComponent implements OnInit {
 
   settings = {
     //selectMode: 'multi', // just add this
+    //mode: 'external',
     actions: {
       add: true,
-      edit: true,
+      edit: this.isEditOrDelete,
       delete: false,
     },
     add: {
@@ -52,6 +54,15 @@ export class GeneralListComponent implements OnInit {
         title: 'Name in Arabic',
         type: 'string',
       },
+      // isEdit:{
+      //   title: 'isEdit',
+      //   type: 'string',
+      //   valuePrepareFunction: (data) => {
+      //     this.isEditOrDelete = data=='Y';
+      //     return data;
+      //   },
+      //   show: true
+      // },
       // defaultValue: {
       //   title: 'Default Value',
       //   type: 'string',
@@ -102,6 +113,14 @@ export class GeneralListComponent implements OnInit {
         type: 'string',
       },
     },
+    rowClassFunction: (row) => {
+      if(row.data.isEdit=='Y')
+        return '';
+      //this.isEditOrDelete = false; //row.data.isEdit=='Y';
+       // console.log(row.data.isEdit);
+       else
+         return 'hide-action';
+    }
   };
 
   constructor(private apiAuth: ApiAuth) {
@@ -217,9 +236,12 @@ export class GeneralListComponent implements OnInit {
       this.hrListValues.subId=0;
       else
         this.hrListValues.subId=this.selectedMainField.id;
-      this.hrListValues.priorityId=1;
+      if(!event.newData.priorityId)
+        this.hrListValues.priorityId=0;
       this.hrListValues.fieldId=this.selectedField.fieldId;
       this.hrListValues.fieldName=this.selectedField.fieldName;
+      this.hrListValues.isEdit='Y';
+      this.hrListValues.required='N';
 
       this.apiAuth.saveHRListValues(this.hrListValues).subscribe(data => {
         console.log(data);

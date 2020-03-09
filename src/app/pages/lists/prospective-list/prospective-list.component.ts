@@ -21,6 +21,10 @@ export class ProspectiveListComponent implements OnInit {
   contactSource: LocalDataSource = new LocalDataSource();
 
   settings = {
+    pager: {
+      display: true,
+      perPage: 50
+    },
     mode: 'external',
     add: {
       addButtonContent: '<i class="nb-plus"></i>',

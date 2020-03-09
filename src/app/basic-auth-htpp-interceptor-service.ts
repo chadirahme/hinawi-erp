@@ -49,7 +49,8 @@ export class BasicAuthHtppInterceptorService implements HttpInterceptor {
     if (localStorage.getItem('username') && localStorage.getItem('token')) {
       req = req.clone({
         setHeaders: {
-          Authorization: localStorage.getItem('token')
+          Authorization: localStorage.getItem('token'),
+          //"X-Timezone-Offset": this.getTimezoneOffset()
         }
       })
     }
@@ -70,6 +71,11 @@ export class BasicAuthHtppInterceptorService implements HttpInterceptor {
       }));
   }
 
+  private getTimezoneOffset() : string {
+
+    return( String( new Date().getTimezoneOffset() ) );
+
+  }
   //   return next.handle(req)
   //     .pipe(
   //       retry(1),

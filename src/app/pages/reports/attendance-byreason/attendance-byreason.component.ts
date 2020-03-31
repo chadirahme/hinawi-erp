@@ -4,6 +4,7 @@ import {LocalDataSource} from "ng2-smart-table";
 import {NbThemeService} from "@nebular/theme";
 import {AttendanceByreasonPiechartComponent} from "../attendance-byreason-piechart/attendance-byreason-piechart.component";
 import {ReasonPieComponent} from "./reason-pie.component";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'attendance-byreason',
@@ -16,11 +17,17 @@ export class AttendanceByreasonComponent implements OnInit {
   @ViewChild('childRef2') child2:ReasonPieComponent;
   selectedMonth: any;
 
+  ngModelDate: Date;
   usersList: any[];
   selectedUser: any;
+  start: any;
   source: LocalDataSource = new LocalDataSource();
   reports: any[];
   settings = {
+    pager: {
+      display: true,
+      perPage: 50
+    },
     actions: {
       columnTitle: 'Actions',
       add: false,
@@ -43,10 +50,11 @@ export class AttendanceByreasonComponent implements OnInit {
     },
   };
 
-  constructor(private apiAuth: ApiAuth) {
+  constructor(private apiAuth: ApiAuth,private datePipe: DatePipe) {
   }
 
   ngOnInit() {
+    this.ngModelDate = new Date();
     let month = new Date();
     this.selectedMonth=month.getMonth()+1;
     this.loadActiveUsersList();
@@ -66,7 +74,10 @@ export class AttendanceByreasonComponent implements OnInit {
 
   loadData(): void {
     try {
-      this.apiAuth.getAttendanceByReasonReport(this.selectedMonth,this.selectedUser).subscribe(data => {
+       this.start = this.datePipe.transform(this.ngModelDate,"yyyy-MM-dd");
+
+      //this.apiAuth.getAttendanceByReasonDailyReport(this.selectedMonth,this.selectedUser).subscribe(data => {
+      this.apiAuth.getAttendanceByReasonDailyReport(this.selectedMonth,this.selectedUser,this.start).subscribe(data => {
         this.reports = data.result;
         this.source.load(data.result);
         console.log("done...");
@@ -85,18 +96,18 @@ export class AttendanceByreasonComponent implements OnInit {
       alert("Please select an Employee !!");
       return;
     }
-    if(this.selectedMonth=="0")
-    {
-      alert("Please select a Month !!");
-      return;
-    }
+    // if(this.selectedMonth=="0")
+    // {
+    //   alert("Please select a Month !!");
+    //   return;
+    // }
     this.loadData();
   }
 
   fillPieChartData(msg) {
     //console.log(msg);
-    this.child.loadData(this.selectedUser,this.selectedMonth);
-    this.child2.loadData(this.selectedUser,this.selectedMonth);
+    this.child.loadData(this.selectedUser,this.selectedMonth,this.start);
+    this.child2.loadData(this.selectedUser,this.selectedMonth,this.start);
   }
 
 }

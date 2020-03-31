@@ -1,0 +1,20 @@
+//@import '~@swimlane/ngx-datatable/index.css';
+//@import '~@swimlane/ngx-datatable/themes/material.scss';
+//@import '~@swimlane/ngx-datatable/assets/icons.css';
+
+//.ngx-datatable,
+//.info {
+//  text-align: left;
+//  width: 75%;
+//  margin: 0 auto;
+//}
+
+.scrollable {
+  overflow: auto;
+  box-sizing: border-box;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}

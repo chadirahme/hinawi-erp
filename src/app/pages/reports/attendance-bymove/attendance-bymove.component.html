@@ -1,6 +1,7 @@
 <nb-card status="success">
   <nb-card-header>
     Attendance Report By Employee Movement
+
   </nb-card-header>
   <nb-card-body>
     <div class="row">
@@ -30,11 +31,24 @@
       </div>
 
     </div>
+
     <div class="row">
-      <ng2-smart-table [settings]="settings" [source]="source">
-      </ng2-smart-table>
+      <div class="col-sm-12">
+      <div style="color: green;font-weight: bold;margin: 10px;">This report displays the employee who has a movement for more than one location.</div>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-12" style = "overflow-x: scroll;">
+        <div class="smart-table-container" style = "width: 1500px;">
+          <ng2-smart-table [settings]="settings" [source]="source">
+          </ng2-smart-table>
+        </div>
+      </div>
+    </div>
+
 
 
   </nb-card-body>
 </nb-card>
+

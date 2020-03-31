@@ -6,6 +6,7 @@ import {AttendanceMonthlyComponent} from "./attendance-monthly/attendance-monthl
 import {AttendanceByreasonComponent} from "./attendance-byreason/attendance-byreason.component";
 import {AbsenceReportComponent} from "./absence-report/absence-report.component";
 import {AttendanceBymoveComponent} from "./attendance-bymove/attendance-bymove.component";
+import {AttendanceDetailsComponent} from "./attendance-details/attendance-details.component";
 
 
 const routes: Routes = [{
@@ -31,6 +32,10 @@ const routes: Routes = [{
     {
       path: 'absence-report',
       component: AbsenceReportComponent
+    },
+    {
+      path: 'attendance-details',
+      component: AttendanceDetailsComponent
     }
   ],
 }];

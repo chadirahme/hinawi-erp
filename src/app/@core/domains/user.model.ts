@@ -34,6 +34,8 @@ export class ProspectiveModel {
   cityRefKey: number;
   streeRefKey: number;
   howKnowRefKey: number;
+  webUserName: string;
+  webCompanyName: string;
 
   lstProspectiveCotact: ProspectiveCotact[];
 

@@ -4,6 +4,8 @@ import {MobileAttendance} from "../../@core/domains/webdashboard.model";
 import {DatePipe} from "@angular/common";
 import {WsTopic} from "../../@core/services/ws.topic";
 import {Router} from "@angular/router";
+import {NbDialogService} from "@nebular/theme";
+import {ShowcaseDialogComponent} from "../../@theme/dialog/showcase-dialog.component";
 
 @Component({
   selector: 'my-attendance',
@@ -32,9 +34,10 @@ export class MyAttendanceComponent implements OnInit {
   selectedReasonDesc: any;
   demo: boolean =false;
   customerInfo: any;
+  recNo: any;
 
   constructor(private authService: ApiAuth, private datePipe: DatePipe,
-               private wsTopic: WsTopic,private router: Router)
+               private wsTopic: WsTopic,private router: Router,private dialogService: NbDialogService)
   {
     //this._pushNotifications.requestPermission();
     //this._notificationService.requestPermission();
@@ -50,6 +53,7 @@ export class MyAttendanceComponent implements OnInit {
     this.customerInfo = "Contact person: ";
     console.log(info);
     if(this.type === 'Prospective'){
+      this.recNo=info.recNo;
       this.customerInfo += info.contact + " | " ;
       this.customerInfo+=`<a href="https://web.whatsapp.com/send?phone=${info.telephone1}&text=Hi, I contacted you Through HinawiOnline."
       data-text="Take a look at this awesome website:" class="wa_btn wa_btn_s"
@@ -136,9 +140,11 @@ export class MyAttendanceComponent implements OnInit {
     try {
       this.authService.findLastUserVisit(+localStorage.getItem('userid')).subscribe(data => {
         this.oldMobileAttendance=data.result;
+        let reasonDesc="";
         if(this.oldMobileAttendance){
-
+           reasonDesc=this.oldMobileAttendance.reasonDesc;
           if(this.oldMobileAttendance.checkoutTime!=null) {
+            reasonDesc=this.oldMobileAttendance.checkoutReasonDesc;
             this.lastActivity = "Check Out at :" +this.datePipe.transform(this.oldMobileAttendance.checkoutTime, 'dd/MM/yyyy h:mm:ss a');
             this.hadCheckOut=true;
             this.loadInitData();
@@ -158,6 +164,7 @@ export class MyAttendanceComponent implements OnInit {
 
           }
           this.lastActivity += " | " + this.oldMobileAttendance.customerType+ " : " + this.oldMobileAttendance.customerName;
+          this.lastActivity +="<br/>" + "Reason : " + reasonDesc;
 
         }else{//if user first time enter
           this.loadInitData();
@@ -255,25 +262,60 @@ export class MyAttendanceComponent implements OnInit {
    //this.notify("Check Out");
     console.log(this.selectedCustomer);
 
+    //check if last this.oldMobileAttendance.checkinTime before now
+
+    let MMddyyyy2 = this.datePipe.transform(new Date(),"yyyy-MM-dd HH:mm:ss");
+
+    console.log(this.oldMobileAttendance.checkinTime);
+    console.log(MMddyyyy2);
+    if(this.oldMobileAttendance.checkinTime > MMddyyyy2){
+      this.dialogService.open(ShowcaseDialogComponent, {
+        context: {
+          title: 'Wrong Check-In Time !!',
+          message: 'You already had a Check-In after the current time !!',
+          status:  'warning'
+        },
+      });
+      return;
+    }
+
     //if(this.hadCheckOut) {
       if (!this.selectedCustomer || this.selectedCustomer == "0") {
-        alert('Please select your Visitor !!');
+        this.dialogService.open(ShowcaseDialogComponent, {
+          context: {
+            title: 'Missing Data !!',
+            message: 'Please select the name who you want to work for at this time !!',
+            status:  'warning'
+          },
+        });
         return;
       }
       if (!this.selectedReason || this.selectedReason == "0") {
-        alert('Please select CheckIn Attendance Reason !!');
+        this.dialogService.open(ShowcaseDialogComponent, {
+          context: {
+            title: 'Missing Data !!',
+            message: 'Please select CheckIn Attendance Reason !!',
+            status:  'warning'
+          },
+        });
         return;
       }
-    //}
 
     if(!this.note){
-      alert('Please enter your CheckIn Reason or Result !!');
+      this.dialogService.open(ShowcaseDialogComponent, {
+        context: {
+          title: 'Missing Data !!',
+          message: 'Please enter your CheckIn Reason or Result !!',
+          status:  'warning'
+        },
+      });
       return;
     }
 
     this.mobileAttendance=new MobileAttendance();
     this.mobileAttendance.userId=+localStorage.getItem('userid');
     this.mobileAttendance.userName=localStorage.getItem('username');//"chadi";
+    this.mobileAttendance.recNo=this.recNo;
     this.mobileAttendance.customerType=this.type;
     this.mobileAttendance.customerName= this.selectedCustomer ;//"Customer1";
     this.mobileAttendance.checkinNote=this.note;
@@ -295,9 +337,17 @@ export class MyAttendanceComponent implements OnInit {
     this.authService.addMobileAttendance(this.mobileAttendance).subscribe(data => {
       console.log(data);
       //this.notify("Check In");
-      alert(data.message);
-      this.wsTopic.sendAttendance(this.mobileAttendance);
-      this.refresh();
+      //alert(data.message);
+      this.dialogService.open(ShowcaseDialogComponent, {
+        context: {
+          title: 'Checkin Attendance Saved!!',
+          message: data.message,
+          status:  'success'
+        },
+      }).onClose.subscribe((result: any) => this.refresh());
+
+      //this.wsTopic.sendAttendance(this.mobileAttendance);
+      //this.refresh();
 
      // this.mobileAttendance=new MobileAttendance();
      // this.note="";
@@ -306,12 +356,37 @@ export class MyAttendanceComponent implements OnInit {
   }
 
   submitCheckOut(){
+    //check if last this.oldMobileAttendance.checkinTime before now
+    let MMddyyyy2 = this.datePipe.transform(new Date(),"yyyy-MM-dd HH:mm:ss");
+    if(this.oldMobileAttendance.checkinTime > MMddyyyy2){
+      this.dialogService.open(ShowcaseDialogComponent, {
+        context: {
+          title: 'Wrong Check-Out Time !!',
+          message: 'You already had a Check-In after the current time !!',
+          status:  'warning'
+        },
+      });
+      return;
+    }
+
     if (!this.selectedReason || this.selectedReason == "0") {
-      alert('Please select CheckOut Attendance Reason !!');
+      this.dialogService.open(ShowcaseDialogComponent, {
+        context: {
+          title: 'Missing Data !!',
+          message: 'Please select CheckOut Attendance Reason !!',
+          status:  'warning'
+        },
+      });
       return;
     }
     if(!this.note){
-      alert('Please enter your CheckOut Reason or Result !!');
+      this.dialogService.open(ShowcaseDialogComponent, {
+        context: {
+          title: 'Missing Data !!',
+          message: 'Please enter your CheckOut Reason or Result !!',
+          status:  'warning'
+        },
+      });
       return;
     }
     this.mobileAttendance=new MobileAttendance();
@@ -332,9 +407,16 @@ export class MyAttendanceComponent implements OnInit {
     this.authService.addMobileAttendance(this.mobileAttendance).subscribe(data => {
       console.log(data);
       //this.notify("Check Out");
-      alert(data.message);
-      this.wsTopic.sendAttendance(this.mobileAttendance);
-      this.refresh();
+      //alert(data.message);
+      this.dialogService.open(ShowcaseDialogComponent, {
+        context: {
+          title: 'Checkout Attendance Saved!!',
+          message: data.message,
+          status:  'success'
+        },
+      }).onClose.subscribe((result: any) => this.refresh());
+      //this.wsTopic.sendAttendance(this.mobileAttendance);
+      //this.refresh();
      // this.mobileAttendance=new MobileAttendance();
      // this.note="";
      // this.selectedCustomer=0;
@@ -356,6 +438,7 @@ export class MyAttendanceComponent implements OnInit {
   refresh(){
     //this.router.navigate(["/#/pages/my-attendance"]);
     //this.ngOnInit();
+    this.wsTopic.sendAttendance(this.mobileAttendance);
     this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
 
     let currentUrl = this.router.url + '?';

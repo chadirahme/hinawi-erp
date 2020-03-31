@@ -68,6 +68,7 @@ import {NbFormComponent, NbShowcaseDialogComponent} from "./components/header/he
 import { AddAttendanceComponent } from './components/add-attendance/add-attendance.component';
 import { CountryListComponent } from './components/country-list/country-list.component';
 import {SimpleNotificationsModule} from "angular2-notifications";
+import {ShowcaseDialogComponent} from "./dialog/showcase-dialog.component";
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule,SimpleNotificationsModule];
 
@@ -120,7 +121,8 @@ const COMPONENTS = [
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
   NbShowcaseDialogComponent,
-  CountryListComponent
+  CountryListComponent,
+  ShowcaseDialogComponent,
 
 ];
 
@@ -128,7 +130,8 @@ const ENTRY_COMPONENTS = [
   ThemeSwitcherListComponent,
   NbFormComponent,
   NbShowcaseDialogComponent,
-  AddAttendanceComponent
+  AddAttendanceComponent,
+  ShowcaseDialogComponent,
 ];
 
 const PIPES = [

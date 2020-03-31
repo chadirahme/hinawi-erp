@@ -59,14 +59,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Employees List',
         link: '/pages/lists/employees-list',
       },
-      {
-        title: 'Students List',
-        link: '/pages/lists/students-list',
-      },
-      {
-        title: 'Attendance List',
-        link: '/pages/lists/mobile-attendance',
-      },
+      // {
+      //   title: 'Students List',
+      //   link: '/pages/lists/students-list',
+      // },
       {
         title: 'General List',
         link: '/pages/lists/general-list',
@@ -108,10 +104,27 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Reports',
     icon: 'nb-tables',
     children: [
+      // {
+      //   title: 'Attendance Details',
+      //   link: '/pages/reports/attendance-details',
+      // },
       {
         title: 'Cheques Under Collection',
         link: '/pages/accounting/cuc',
       },
+      {
+        title: 'Attendance List',
+        link: '/pages/lists/mobile-attendance',
+      },
+      {
+        title: 'Attendance Report - By Movement',
+        link: '/pages/reports/attendance-bymove',
+      },
+      {
+        title: 'Attendance Report - By Reason',
+        link: '/pages/reports/attendance-byreason',
+      },
+
       {
         title: 'Attendance Report - Daily',
         link: '/pages/reports/attendance-report',
@@ -119,14 +132,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Attendance Report - Monthly',
         link: '/pages/reports/attendance-monthly',
-      },
-      {
-        title: 'Attendance Report - By Reason',
-        link: '/pages/reports/attendance-byreason',
-      },
-      {
-        title: 'Attendance Report - By Movement',
-        link: '/pages/reports/attendance-bymove',
       },
       {
         title: 'Absence Report',

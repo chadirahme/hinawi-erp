@@ -24,6 +24,10 @@ export class GeneralListComponent implements OnInit {
   settings = {
     //selectMode: 'multi', // just add this
     //mode: 'external',
+    pager: {
+      display: true,
+      perPage: 50
+    },
     actions: {
       add: true,
       edit: this.isEditOrDelete,
@@ -225,7 +229,12 @@ export class GeneralListComponent implements OnInit {
     }
   }
 
-  onCreateConfirm(event):void {
+    onCreateConfirm(event):void {
+      if(event.newData.description=="" || event.newData.arDescription==""){
+        alert('Missing Data !!!');
+        return;
+      }
+
     if (window.confirm('Are you sure you want to create?')) {
       //event.newData['description'] += ' + added in code';
       event.confirm.resolve(event.newData);
@@ -254,6 +263,10 @@ export class GeneralListComponent implements OnInit {
   }
 
   onSaveConfirm(event):void {
+    if(event.newData.description=="" || event.newData.arDescription==""){
+      alert('Missing Data !!!');
+      return;
+    }
     console.log(event.newData);
     event.confirm.resolve(event.newData);
     this.hrListValues=new HRListValues();

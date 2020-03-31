@@ -80,6 +80,10 @@ export class VendorsListComponent implements OnInit {
         title: 'Active',
         type: 'string',
       },
+      note: {
+        title: 'Note',
+        type: 'string',
+      },
     },
   };
 

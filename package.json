@@ -52,6 +52,7 @@
     "@ng-bootstrap/ng-bootstrap": "^4.2.1",
     "@stomp/stompjs": "^5.4.2",
     "@swimlane/ngx-charts": "^10.1.0",
+    "@swimlane/ngx-datatable": "^16.0.3",
     "@types/googlemaps": "^3.36.5",
     "angular-ng-autocomplete": "^1.1.17",
     "angular2-chartjs": "^0.5.1",

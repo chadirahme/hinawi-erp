@@ -36,6 +36,9 @@ export class AbsenceReportComponent implements OnInit {
       checkDate:{
         title: 'Check Date',
         type: 'string',
+        valuePrepareFunction: (val) => {
+          return this.datePipe.transform(val,'dd.MM.yyyy');
+        }
       },
       monthlyDuration: {
         title: 'Duration',

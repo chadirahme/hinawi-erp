@@ -10,6 +10,7 @@ export class WebDashboard {
 
 export class MobileAttendance {
   userId: number;
+  recNo: number;
   userName: string;
   customerType: string;
   customerName: string;
@@ -24,6 +25,7 @@ export class MobileAttendance {
   localCheckinTime: any;
   reasonId: number;
   reasonDesc: string;
+  checkoutReasonDesc: string;
 }
 
 export class ChequeModel {

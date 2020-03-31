@@ -1,0 +1,24 @@
+<nb-card status="success">
+  <nb-card-header>
+    Attendance Report By Employee & Reason
+  </nb-card-header>
+  <nb-card-body>
+
+
+      <ngx-datatable class="bootstrap"
+                     [rows]="rows"
+                     [limit]="15"
+                     [loadingIndicator]="loadingIndicator"
+                     [columns]="columns"
+                     headerHeight="50"
+                     footerHeight="0"
+                     [rowHeight]="50"
+                     [scrollbarV]="false"
+                     [scrollbarH]="false"
+      >
+      </ngx-datatable>
+
+
+
+  </nb-card-body>
+</nb-card>

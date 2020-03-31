@@ -238,6 +238,7 @@ export class HeaderComponent implements OnInit {
   notifyUser(msg): void{
     let content=localStorage.getItem('username') + " checkIn";
     //this._notifications.create('User Attendance', 'content', 'success', options);
+    //msg="123" + "<br/>" + "456" + "<br/>" + "789" + "<br/>" + "101112..."
     const toast = this._notifications.success('Attendance created!', msg );
 
     //this._notificationService.generateNotification(data);

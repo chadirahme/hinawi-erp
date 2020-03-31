@@ -323,6 +323,8 @@ export class EditProspectiveComponent implements OnInit {
     }
     let that=this;
     console.log('save');
+    this.prospective.webUserName = localStorage.getItem('username');
+    this.prospective.webCompanyName = localStorage.getItem('companyName');
     this.apiAuth.saveProspectives(this.prospective).subscribe(data => {
       console.log(data);
       that.wsTopic.sendMessage("Prospective "+this.prospective.name + " data changed..");

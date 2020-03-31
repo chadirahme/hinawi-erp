@@ -127,3 +127,9 @@ run this in window10 to fix error
 npm install --global windows-build-tools
 and run npm install
 //    "start": "ng serve --ssl true --ssl-cert /ssl/server.crt --ssl-key /ssl/server.key",
+
+master detail in table
+https://stackblitz.com/edit/dynamically-row-components-for-smart-table-wmt9we?file=src%2Fapp%2Fbutton-view%2Fbutton-view.component.ts
+https://stackblitz.com/edit/angular-material-master-detail-grid?file=app%2Ftable%2Ftable.component.html
+https://javaee.ch/2018/07/24/angular-master-detail-table/
+

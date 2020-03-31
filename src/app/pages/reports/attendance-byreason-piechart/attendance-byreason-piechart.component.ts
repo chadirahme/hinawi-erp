@@ -20,18 +20,20 @@ export class AttendanceByreasonPiechartComponent implements AfterViewInit, OnDes
   // }
 
   constructor(private theme: NbThemeService,private apiAuth: ApiAuth) {
-    this.loadData(0,0);
+    this.loadData(0,0,0);
   }
 
-  loadData(userId,selectedMonth): void {
+  loadData(userId,selectedMonth,start): void {
     try {
       this.reasons=[];
-      this.apiAuth.getAttendanceByReasonReport(selectedMonth,userId).subscribe(data => {
+      this.apiAuth.getAttendanceByReasonDailyReport(selectedMonth,userId,start).subscribe(data => {
         this.reports = data.result;
         for (var j=0; j<this.reports.length; j++) {
           let payment = this.reports[j];
           console.log(payment.reasonDesc);
-          this.reasons.push({ value: payment.totalHours, name: payment.reasonDesc });
+          //this.reasons.push({ value: payment.totalHours, name: payment.reasonDesc });
+          this.reasons.push({ value: payment.totalHours * 60 + payment.totalMinutes, name: payment.reasonDesc });
+
         }
         //this.source.load(data.result);
         console.log("done...");

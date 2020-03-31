@@ -21,12 +21,14 @@ export class ApiAuth {
       this.demo= url.indexOf("demo")>0;
       if (this.demo==true) {
         //this.baseUrl = 'http://hinawi2.dyndns.org:8092/api/';
-        this.baseUrl = 'https://test.hinawionline.com/api/';
+        //this.baseUrl = 'https://test.hinawionline.com/api/';
+        this.baseUrl = 'https://hinawiapi.azurewebsites.net/api/';
       }
       else{
         this.baseUrl = 'http://hinawi2.dyndns.org:8091/api/';
         //this.baseUrl = 'https://test.hinawionline.com/api/';
-        //this.baseUrl = 'http://localhost:5000/api/';
+        this.baseUrl = 'http://localhost:5000/api/';
+        this.baseUrl = 'https://hinawiapi.azurewebsites.net/api/';
       }
       //this.baseUrl = baseUrl;
     }
@@ -207,8 +209,12 @@ export class ApiAuth {
     return this.http.get<ApiResponse>(this.baseUrl + 'reports/attendanceMonthly?month='+month);
   }
 
-  getAttendanceByReasonReport(month:any, userId:any): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(this.baseUrl + 'reports/attendanceByReason?month='+month+'&userId='+userId);
+  // getAttendanceByReasonReport(month:any, userId:any): Observable<ApiResponse> {
+  //   return this.http.get<ApiResponse>(this.baseUrl + 'reports/attendanceByReason?month='+month+'&userId='+userId);
+  // }
+
+  getAttendanceByReasonDailyReport(month:any, userId:any,start:any): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.baseUrl + 'reports/attendanceByReason?month='+month+'&userId='+userId+'&start='+start);
   }
 
   getAbsenceReport(start:any, end:any): Observable<ApiResponse> {

@@ -94,6 +94,11 @@ export class CustomersListComponent implements OnInit {
         title: 'Active',
         type: 'string',
       },
+      note: {
+        title: 'Note',
+        type: 'string',
+        width: '45%',
+      },
     },
 
   };

@@ -17,22 +17,22 @@ export class ReasonPieComponent implements AfterViewInit, OnDestroy {
   datalabels: any[];
 
   constructor(private theme: NbThemeService,private apiAuth: ApiAuth) {
-    this.loadData(0,0);
+    this.loadData(0,0,0);
   }
 
-  loadData(userId,selectedMonth): void {
+  loadData(userId,selectedMonth,start): void {
     try {
       this.reasons=[];
       this.datalabels=[];
       this.dataPoints=[];
 
-      this.apiAuth.getAttendanceByReasonReport(selectedMonth,userId).subscribe(data => {
+      this.apiAuth.getAttendanceByReasonDailyReport(selectedMonth,userId,start).subscribe(data => {
         this.reports = data.result;
         for (var j=0; j<this.reports.length; j++) {
           let payment = this.reports[j];
           console.log(payment.reasonDesc);
           this.datalabels.push(payment.reasonDesc);
-          this.dataPoints.push(payment.totalHours);
+          this.dataPoints.push(payment.totalHours * 60 + payment.totalMinutes);
 
           this.reasons.push({ value: payment.totalHours, name: payment.reasonDesc });
         }
@@ -136,7 +136,7 @@ export class ReasonPieComponent implements AfterViewInit, OnDestroy {
 
         series: [
           {
-            name: '2018',
+            name: 'Minutes',
             type: 'bar',
             barWidth: '30%',
             data: this.dataPoints,//[50, 5, 200, 334, 390, 330, 220],

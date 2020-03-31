@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LocalDataSource} from "ng2-smart-table";
 import {ApiAuth} from "../../../@core/services/api.auth";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'mobile-attendance',
@@ -49,26 +50,35 @@ export class MobileAttendanceComponent implements OnInit {
       userName: {
         title: 'Employee',
         type: 'string',
+        width: '120px',
       },
-      customerType: {
-        title: 'Type',
-        type: 'string',
-      },
+      // customerType: {
+      //   title: 'Type',
+      //   type: 'string',
+      // },
       customerName: {
-        title: 'Name',
+        title: 'Name & Type',
         type: 'string',
+        valuePrepareFunction: (cell, row) => { return row.customerName + ' - ' + row.customerType },
+        width: '200px',
       },
       reasonDesc: {
         title: 'CheckIn Reason',
         type: 'string',
+        width: '150px',
       },
       checkinNote: {
         title: 'CheckIn Note',
         type: 'string',
+        rowClassFunction: (row) =>{
+            return 'checkinNote';
+        }
       },
       checkoutReasonDesc: {
         title: 'CheckOut Reason',
         type: 'string',
+        class: 'checkinNote',
+        width: '150px',
       },
       checkoutNote: {
         title: 'CheckOut Note',
@@ -77,23 +87,32 @@ export class MobileAttendanceComponent implements OnInit {
       checkinTime: {
         title: 'Checkin Time',
         type: 'string',
+        width: '120px',
+        valuePrepareFunction: (val) => {
+          return this.datePipe.transform(val,'dd.MM.yyyy h:mm:ss a ');
+        }
       },
       checkoutTime: {
         title: 'Checkout Time',
         type: 'string',
+        width: '120px',
+        valuePrepareFunction: (val) => {
+          return this.datePipe.transform(val,'dd.MM.yyyy h:mm:ss a ');
+        }
       },
       visitDuration: {
         title: 'Duration',
         type: 'string',
+        width: '180px',
       },
-      visitDistance: {
-        title: 'Distance',
-        type: 'string',
-      },
+      // visitDistance: {
+      //   title: 'Distance',
+      //   type: 'string',
+      // },
     },
   };
 
-  constructor(private apiAuth: ApiAuth) {
+  constructor(private apiAuth: ApiAuth,private datePipe: DatePipe) {
   }
 
   ngOnInit() {

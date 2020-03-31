@@ -37,3 +37,35 @@ a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
 }
 
 :host /deep/ .customformat{ text-align: right; }
+
+//change col width
+//:host /deep/ ng2-smart-table table tr td{
+//  font-size:0.9em;
+//  word-break: break-all;
+//}
+
+:host {
+  ::ng-deep .customerName .ng2-smart-title {
+    width: 200px;
+  }
+}
+
+.checkinNote {
+  background: rgba(56, 41, 86, 0.5);
+}
+
+/* headers grid color*/
+:host /deep/ ng2-smart-table thead > tr > td  {
+  border: 1px solid grey;
+  background-color:#673ab7;
+}
+
+//:host {
+//  ::ng-deep .checkinNote .ng2-smart-title {
+//    background: rgba(86, 241, 86, 0.5);
+//  }
+//}
+//
+//:host /deep/ .checkinNote {
+//  background: rgba(86, 241, 86, 0.5);
+//}

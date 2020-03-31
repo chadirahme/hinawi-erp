@@ -23,6 +23,10 @@ export class AttendanceBymoveComponent implements OnInit {
   // "monthlyDuration":"0 Hours 00 Minutes","monthlyRate":0.0}],"success":false}
 
   settings = {
+    pager: {
+      display: true,
+      perPage: 50
+    },
     actions: {
       columnTitle: 'Actions',
       add: false,
@@ -31,31 +35,46 @@ export class AttendanceBymoveComponent implements OnInit {
     },
     columns: {
       fromCustomerName: {
-        title: 'Move From'
+        title: 'Move From',
+        width: '200px',
       },
       checkoutTime: {
-        title: 'Move At'
+        title: 'Move At',
+        width: '100px',
+        valuePrepareFunction: (val) => {
+          return this.datePipe.transform(val,'dd.MM.yyyy h:mm:ss a ');
+        }
       },
       checkoutReasonDesc: {
-        title: 'Check Out Reason'
+        title: 'Check Out Reason',
+        width: '150px',
       },
       toCustomerName: {
-        title: 'Arrive To'
+        title: 'Arrive To',
+        width: '200px',
       },
       checkinTime: {
-        title: 'Arrive At'
+        title: 'Arrive At',
+        width: '100px',
+        valuePrepareFunction: (val) => {
+          return this.datePipe.transform(val,'dd.MM.yyyy h:mm:ss a ');
+        }
       },
       reasonDesc: {
-        title: 'Check In Reason'
+        title: 'Check In Reason',
+        width: '150px',
       },
       moveDuration: {
-        title: 'Move Duration'
+        title: 'Move Duration',
+        width: '150px',
       },
       visitDistance: {
-        title: 'Distance'
+        title: 'Distance',
+        width: '100px',
       },
       reportVisitDuration: {
-        title: 'Visit Duration'
+        title: 'Visit Duration',
+       // width: '190px',
       },
     }
   };

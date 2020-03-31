@@ -13,6 +13,8 @@ import { AbsenceReportComponent } from './absence-report/absence-report.componen
 import {NbDatepickerModule} from "@nebular/theme";
 import {DecimalPipe} from "@angular/common";
 import { AttendanceBymoveComponent } from './attendance-bymove/attendance-bymove.component';
+import { AttendanceDetailsComponent } from './attendance-details/attendance-details.component';
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 
 const COMPONENTS = [
   ReportsComponent,
@@ -25,6 +27,7 @@ const MODULES = [
   Ng2SmartTableModule,
   ReportsRoutingModule,
   NbDatepickerModule,
+  NgxDatatableModule
   //ReasonPieComponent
 ];
 
@@ -39,6 +42,7 @@ const MODULES = [
     AttendanceByreasonComponent,
     AbsenceReportComponent,
     AttendanceBymoveComponent,
+    AttendanceDetailsComponent,
     //AttendanceByreasonPiechartComponent, remove from here and add it to PagesSharedModule
   ],
   providers: [

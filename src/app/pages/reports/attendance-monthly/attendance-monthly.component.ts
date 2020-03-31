@@ -14,6 +14,10 @@ export class AttendanceMonthlyComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
   reports: any[];
   settings = {
+    pager: {
+      display: true,
+      perPage: 50
+    },
     actions: {
       columnTitle: 'Actions',
       add: false,
